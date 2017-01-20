@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+use File::Temp qw(tempfile);
+
 ######## STA£E ################################################################
 
 $wersja = "1.8";
@@ -152,7 +154,8 @@ foreach (@we)
     {
 	if ($wy eq "=")
 	{
-	    $temp = "/tmp/konwert-$$";
+	    ($fh, $temp) = tempfile();
+	    close $fh;
 	    open STDOUT, ">$temp" or die "$ja: $temp: $!\n"
 	}
 	elsif (-d _)

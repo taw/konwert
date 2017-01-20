@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+use File::Temp qw(tempfile);
+
 ($katalog = $0) =~ s|/[^/]*$||;
 
 # Konwersja any-test wypisuje tylko oznaczenie rozpoznanego standardu zamiast
@@ -61,8 +63,10 @@ unless ($test)
 	# Musimy przelecieæ tekst dwa razy - raz, ¿eby zliczyæ znaki, i drugi
 	# raz, ¿eby go skonwertowaæ. Podczas pierwszego przebiegu zapamiêtujemy
 	# wiêc test w tymczasowym pliku:
-	open TEMP, "+>/tmp/any-$$";
-	unlink "/tmp/any-$$";
+	($fh, $filename) = tempfile();
+	close $fh;
+	open TEMP, "+>$filename";
+	unlink $filename;
 }
 # Zliczamy wyst±pienia poszczególnych bajtów (w @ile) i znaków d³u¿szych ni¿
 # jeden bajt (w %ile):
