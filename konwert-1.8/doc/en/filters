@@ -1,0 +1,238 @@
+
+	KONWERT FILTERS
+	---------------
+
+
+	CHARACTER ENCODING CONVERSIONS
+
+You can convert text between any two charsets, for example
+`konwert cp437-iso2'.
+
+Characters unavailable in the target charset will be substituted with
+approximations with available ones. The approximations need not be
+single characters.
+
+The following character sets are currently supported:
+
+ascii - 7bit ASCII
+
+utf8 = unicode - Unicode UTF-8
+
+iso1  = isolatin1               - ISO-8859-1 aka ISO Latin 1 (Western European)
+iso2  = isolatin2               - ISO-8859-2 aka ISO Latin 2 (Central European)
+iso3  = isolatin3               - ISO-8859-3 aka ISO Latin 3 (Esperanto)
+iso4  = isolatin4               - ISO-8859-4 aka ISO Latin 4 (Baltic)
+iso5  =             isolatincyr    - ISO-8859-5 (Cyrillic)
+iso6  =             isolatinarabic - ISO-8859-6 (Arabic)
+iso7  =             isolatingreek  - ISO-8859-7 (Greek)
+iso8  =             isolatinhebrew - ISO-8859-8 (Hebrew)
+iso9  = isolatin5 = isolatintur    - ISO-8859-9 aka ISO Latin 5 (Turkish)
+iso10 = isolatin6 = isolatinnordic - ISO-8859-10 aka ISO Latin 6 (Nordic)
+iso12 = isolatin7 = isolatinceltic - ISO-8859-12 aka ISO Latin 7 (Celtic) - 
+iso13 = isolatin8 = isolatinbaltic - ISO-8859-13 (Baltic) - Draft         Draft
+iso14 = isolatin9 = isolatinsami   - ISO-8859-14 (Sámi) - Draft
+iso15                              - ISO-8859-15 - Draft
+
+  koi8r - KOI8-R (Russian)
+  koi8u - KOI8-U (Ukrainian, Byelorussian)
+koi8uni - KOI8-Uni (Cyrillic)
+
+cp1250 = wince = winlatin2 - Windows CP-1250 aka Win Latin 2 (Central European)
+cp1251 = wincyr              - Windows CP-1251 (Cyrillic)
+cp1252 = winwest = winlatin1 - Windows CP-1252 aka Win Latin 1 (Western
+cp1253 = wingr               - Windows CP-1253 (Greek)                European)
+cp1254 = wintur              - Windows CP-1254 (Turkish)
+cp1255 = winhebrew           - Windows CP-1255 (Hebrew)
+cp1256 = winarabic           - Windows CP-1256 (Arabic)
+cp1257 = winbaltic           - Windows CP-1257 (Baltic)
+cp1258 = winviet             - Windows CP-1258 (Vietnamese)
+
+cp437 = doseng              - DOS CP-437 (English)
+cp737 = dosgreek            - DOS CP-737 (Greek)
+cp775 = dosbaltic           - DOS CP-775 (Baltic)
+cp850 = doswest = doslatin1 - DOS CP-850 aka DOS Latin 1 (Western European)
+cp852 = dosce   = doslatin2 - DOS CP-852 aka DOS Latin 2 (Central European)
+cp855 = doscyr              - DOS CP-855 (Cyrillic)
+cp857 = dostur              - DOS CP-857 (Turkish)
+cp860 = dosportugal         - DOS CP-860 (Portugal)
+cp861 = dosiceland          - DOS CP-861 (Icelandic)
+cp862 = doshebrew           - DOS CP-862 (Hebrew)
+cp863 = doscanadfr          - DOS CP-863 (Canadian French)
+cp864 = dosarabic           - DOS CP-864 (Arabic)
+cp865 = dosnordic           - DOS CP-865 (Nordic)
+cp866 = dosrussian          - DOS CP-866 (Russian)
+cp869 = dosgreek2           - DOS CP-869 (Greek2)
+cp874 = dosthai             - DOS CP-874 (Thai)
+
+       mac - Macintosh Roman (Western European)
+     macce - Macintosh Central European
+    maccyr - Macintosh Cyrillic
+  macgreek - Macintosh Greek
+maciceland - Macintosh Icelandic
+    mactur - Macintosh Turkish
+
+        csk,
+   cyfromat,
+        dhn,
+fidomazovia,
+        iea,
+      logic,
+    mazovia,
+   microvex  - DOS charsets for Polish
+
+amigapl,
+    fat,
+    xjp  - Amiga charsets for Polish
+
+kamenicky - DOS charset for Czech and Slovak
+
+wingreek - WinGreek (Windows font-based encoding for ancient Greek)
+
+babelpl - TeX [polish]{babel}: "a"c"e"l"n"o"s"z"r
+ ciachy - TeX \prefixing: /a/c/e/l/n/o/s/x/z
+
+      xmetodo - Esperanto: cx gx hx jx sx ux (vx w)
+      hmetodo - Esperanto: ch gh hh jh sh u
+   antauxcxap - Esperanto: ^c ^g ^h ^j ^s ^u (~u)
+     postcxap - Esperanto: c^ g^ h^ j^ s^ u^ (u~)
+   apostrofoj - Esperanto: c' g' h' j' s' u'
+malapostrofoj - Esperanto: c` g` h` j` s` u`
+
+viscii - VISCII (Vietnamese)
+ viqri - Vietnamese Quoted Readable Implicit
+
+htmldec - SGML/HTML character references (decimal): &#198; &#283; &#8594;
+htmlhex - SGML/HTML character references (hexadecimal): &#xC6; &#x11B; &#x2192;
+htmlent - SGML/HTML character entities (names): &AElig; &ecaron; &rarr;
+   html - All three above (only as input format)
+
+tex - TeX with some LaTeX or AMS-TeX extensions. There is no distinction
+between normal and math mode - you will probably have to insert some $'s
+manually.
+
+mnemonic  - RFC 1345 mnemonics preceded by &
+mnemonic1 - RFC 1345 mnemonics preceded by `
+
+any/LANGUAGE (e.g. any/pl-iso2) - This special input format will detect
+the encoding automatically, basing on the frequencies of characters
+found in text. Every language is associated with a set of possible
+encodings used for it and average frequencies of its letters (excluding
+ASCII letters). The best fitting encoding is used for conversion.
+Currently supported languages are cs (Czech), de (German), el (Greek),
+eo (Esperanto), es (Spanish), fr (French), he (Hebrew), it (Italian),
+pl (Polish), pt (Portuguese), ru (Russian), and sv (Swedish).
+
+varpl - Mixed Polish ISO-8859-2, CP-1250, and UTF-8. If you are reading
+Polish newsgroups I suggest putting it as a filter in your newsreader
+(for speed improvement it's better to call it directly, rather than
+through konwert).
+
+vareo - Mixed various Esperanto encodings.
+
+
+	OPTIONS CONTROLLING THE ABOVE CONVERSIONS
+
+/1 (e.g. `konwert iso2-ascii/1') - Each unavailable character will be
+replaced only with a single approximate char, not string. This is useful
+with the filterm program or with preformatted text. This option is
+automatically turned on when a filter is used as output for filterm.
+
+/html - Text is assumed to be HTML. The characters " & < > resulting
+from other characters' approximations will be properly escaped as &quot;
+&amp; &lt; &gt;. The
+<META http-equiv="content-type" content="text/html; charset=...">
+header will be fixed if present.
+
+/htmldec - Convert META as above. Unavailable characters will be
+encoded in &#Unicode;.
+
+/htmlhex - Convert META as above. Unavailable characters will be
+encoded in hexadecimal &#xUnicode;.
+
+/tex - Unavailable characters will be described in TeX. Characters # $ %
+& \ ^ _ { | } ~ resulting from some characters' approximations will be
+properly escaped into \# \$ \% \& $\backslash$ \^{} \_ \{ $|$ \} \~{}.
+
+/asciichar - Recognizes some ASCII representations of characters, e.g.
+(c) ... 1/2 >=.
+
+/rosyjski - Russian text will be replaced with its Polish phonetic
+transcription.
+
+Some output filters can use the language information for choosing better
+approximations of unavailable letters, for example /de (German):
+ä -> ae instead of a.
+
+
+	OTHER FILTERS
+
+any/LANGUAGE-test - Detects the encoding, but instead of text conversion
+only shows the encoding's name. The additional option /all shows all
+possible encodings, sorted from better to worse ones.
+
+cr, lf, crlf - Force specific end-of-line marker convention.
+cr = Macintosh, lf = Unix and Amiga, crlf = Windows and DOS.
+The input convention is detected automatically.
+
+expand - Expands tabs into spaces (uses the textutils program expand).
+
+unexpand - Compresses spaces into tabs (uses the textutils program
+unexpand).
+
+rmspacesateol - Removes spaces and tabs at end of line.
+
+qp-8bit, 8bit-qp - MIME Quoted Printable encoding: =A3=F3d=BC.
+
+rtf-8bit, 8bit-rtf - Rich Text Format: \'a3\'f3d\'9f.
+
+txt-htmlchar - Escapes " & < > into SGML/HTML entities &quot; &amp; &lt;
+&gt;. Useful for including a text file inside HTML <PRE> </PRE> tags.
+
+htmlchar-txt - Reverse.
+
+rot13 - Guvf vf n qrzbafgengvba bs ebg13.
+
+toupper, tolower - Self-explanatory. Currently ASCII only.
+
+
+	ADDITIONAL FILTERS FOR FILTERM
+
+tyldy (input) - Polish ~a~c~e~l~n~o~s~x~z
+
+lewyap (input) - Polish `a`c`e`l`n`o`s`x`z
+
+boldpl (output) - ASCII with Polish letters shown as bold.
+
+pinectrlchars (output) - Replaces the characters 128..159 shown by the
+Pine (or another program) as ^À..^ß back to the real 128..159.
+
+512bold (output) - Changes the mapping of colors in 512-character mode,
+which restricts the number of colors to eight. The palette is
+dynamically changed to contain the eight most recently used colors.
+When more colors are used at once, some of them display incorrectly.
+
+512bold1 (output) - Changes the mapping of colors in 512-character mode.
+Instead of ignoring the intensity, the following colors are available:
+black, red, green, white, blue, light magenta, light cyan, light gray;
+others are substitutied with approximations. This gives better effect,
+allowing to show the intensity, with the side-effect of belying the hue
+of some colors.
+
+kbdmacros (input) - Keyboard macros. A sequence of keys can be recorded
+with `Esc Ctrl-A SEQUENCE Esc Ctrl-E SHORTCUT' - after which, if you
+press the SHORTCUT, the SEQUENCE will be generated instead. Later such
+assignment can be deleted with `Esc Ctrl-A Esc Ctrl-E SHORTCUT Esc
+Ctrl-E'. Instead of Esc Ctrl- you often may press Ctrl-Alt-. The defined
+shortcuts, together with the above redefinable key combinations used to
+define them, are stored in the ~/.kbdmacros file. Note: when you
+redefine a sequence, all its prefixes will not be passed through
+immediately, but wait until it can be unambiguously told which sequence
+was actually input. This includes escape sequences representing some
+extended keys.
+
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

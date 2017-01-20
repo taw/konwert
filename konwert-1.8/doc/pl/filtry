@@ -1,0 +1,246 @@
+
+	FILTRY KONWERTA
+	---------------
+
+
+	KONWERSJE KODOWAÑ ZNAKÓW
+
+Mo¿na konwertowaæ tekst miêdzy dowolnymi dwoma zestawami znaków, na
+przyk³ad `konwert cp437-iso2'.
+
+Znaki niedostêpne w docelowym zestawie bêd± zast±pione przybli¿eniami
+dostêpnymi znakami. Przybli¿enia nie musz± byæ pojedynczymi znakami.
+
+Filtry obs³uguj± teraz nastêpuj±ce zestawy znaków:
+
+ascii - siedmiobitowe ASCII
+
+utf8 = unicode - Unikod (Unicode) w UTF-8
+
+iso1  = isolatin1          - ISO-8859-1 albo ISO Latin 1 (zachodnioeuropejskie)
+iso2  = isolatin2          - ISO-8859-2 albo ISO Latin 2 (¶rodkowoeuropejskie)
+iso3  = isolatin3          - ISO-8859-3 albo ISO Latin 3 (Esperanto)
+iso4  = isolatin4          - ISO-8859-4 albo ISO Latin 4 (ba³tyckie)
+iso5  =             isolatincyr    - ISO-8859-5 (cyrylica)
+iso6  =             isolatinarabic - ISO-8859-6 (arabskie)
+iso7  =             isolatingreek  - ISO-8859-7 (greckie)
+iso8  =             isolatinhebrew - ISO-8859-8 (hebrajskie)
+iso9  = isolatin5 = isolatintur    - ISO-8859-9 albo ISO Latin 5 (tureckie)
+iso10 = isolatin6 = isolatinnordic - ISO-8859-10 albo ISO Latin 6 (nordyckie)
+iso12 = isolatin7 = isolatinceltic - ISO-8859-12 albo ISO Latin 7 (celtyckie) -
+                                                                          Draft
+iso13 = isolatin8 = isolatinbaltic - ISO-8859-13 albo ISO Latin 8 (ba³tyckie) -
+                                                                          Draft
+iso14 = isolatin9 = isolatinsami  - ISO-8859-14 albo ISO Latin 9 (Sámi) - Draft
+iso15                              - ISO-8859-15
+
+  koi8r - KOI8-R (rosyjskie)
+  koi8u - KOI8-U (ukraiñskie, bia³oruskie)
+koi8uni - KOI8-Uni (cyrylica)
+
+cp1250 = wince   = winlatin2 - Windows CP-1250 albo Win Latin 2
+                                                          (¶rodkowoeuropejskie)
+cp1251 = wincyr              - Windows CP-1251 (cyrylica)
+cp1252 = winwest = winlatin1 - Windows CP-1252 albo Win Latin 1
+                                                         (zachodnioeuropejskie)
+cp1253 = wingr               - Windows CP-1253 (greckie)
+cp1254 = wintur              - Windows CP-1254 (tureckie)
+cp1255 = winhebrew           - Windows CP-1255 (hebrajskie)
+cp1256 = winarabic           - Windows CP-1256 (arabskie)
+cp1257 = winbaltic           - Windows CP-1257 (ba³tyckie)
+cp1258 = winviet             - Windows CP-1258 (wietnamskie)
+
+cp437 = doseng              - DOS CP-437 (angielskie)
+cp737 = dosgreek            - DOS CP-737 (greckie)
+cp775 = dosbaltic           - DOS CP-775 (ba³tyckie)
+cp850 = doswest = doslatin1 - DOS CP-850 albo DOS Latin1 (zachodnioeuropejskie)
+cp852 = dosce   = doslatin2 - DOS CP-852 albo DOS Latin2 (¶rodkowoeuropejskie)
+cp855 = doscyr              - DOS CP-855 (cyrylica)
+cp857 = dostur              - DOS CP-857 (turckie)
+cp860 = dosportugal         - DOS CP-860 (portugalskie)
+cp861 = dosiceland          - DOS CP-861 (islandzkie)
+cp862 = doshebrew           - DOS CP-862 (hebrajskie)
+cp863 = doscanadfr          - DOS CP-863 (kanadyjskie - francuskie)
+cp864 = dosarabic           - DOS CP-864 (arabskie)
+cp865 = dosnordic           - DOS CP-865 (nordyckie)
+cp866 = dosrussian          - DOS CP-866 (rosyjskie)
+cp869 = dosgreek2           - DOS CP-869 (greckie 2)
+cp874 = dosthai             - DOS CP-874 (tajskie)
+
+       mac - Macintosh Roman (zachodnioeuropejskie)
+     macce - Macintosh Central European (¶rodkowoeuropejskie)
+    maccyr - Macintosh Cyrillic (cyrylica)
+  macgreek - Macintosh Greek (greckie)
+maciceland - Macintosh Icelandic (islandzkie)
+    mactur - Macintosh Turkish (tureckie)
+
+        csk,
+   cyfromat,
+        dhn,
+fidomazovia,
+        iea,
+      logic,
+    mazovia,
+   microvex  - DOSowe zestawy znaków do polskiego
+
+amigapl,
+    fat,
+    xjp  - Amigowe zestawy znaków do polskiego
+
+kamenicky - DOSowy zestaw znaków do czeskiego i s³owackiego
+
+wingreek - WinGreek (kodowanie dla staro¿ytnej greki wed³ug windowsowego
+           fontu)
+
+babelpl - TeX [polish]{babel}: "a"c"e"l"n"o"s"z"r
+ ciachy - TeX \prefixing: /a/c/e/l/n/o/s/x/z
+
+      xmetodo - Esperanto: cx gx hx jx sx ux (vx w)
+      hmetodo - Esperanto: ch gh hh jh sh u
+   antauxcxap - Esperanto: ^c ^g ^h ^j ^s ^u (~u)
+     postcxap - Esperanto: c^ g^ h^ j^ s^ u^ (u~)
+   apostrofoj - Esperanto: c' g' h' j' s' u'
+malapostrofoj - Esperanto: c` g` h` j` s` u`
+
+viscii - VISCII (wietnamski)
+ viqri - Vietnamese Quoted Readable Implicit
+
+htmldec - SGMLowe/HTMLowe numery znaków (dziesi±tkowo): &#198; &#283; &#8594;
+htmlhex - SGMLowe/HTMLowe numery znaków (szesnastkowo): &#xC6; &#x11B; &#x2192;
+htmlent - SGMLowe/HTMLowe encje (nazwy znaków): &AElig; &ecaron; &rarr;
+   html - Wszystkie trzy powy¿ej (tylko jako format wej¶ciowy)
+
+tex - TeX wraz z niektórymi rozszerzeniami LaTeXa albo AMS-TeXa. Nie ma
+rozró¿nienia miêdzy normalnym trybem a matematycznym - prawdopodobbie
+bêdziesz musia³ rêcznie podostawiaæ trochê znaków $.
+
+mnemonic  - Mnemoniki RFC 1345 poprzedzone przez &
+mnemonic1 - Mnemoniki RFC 1345 poprzedzone przez `
+
+any/JÊZYK (np. any/pl-iso2) - Ten specjalny format wej¶ciowy rozpozna
+kodowanie automatycznie, na podstawie czêsto¶ci znaków znalezionych w
+tek¶cie. Z ka¿dym jêzykiem jest skojarzony zbiór mo¿liwych kodowañ
+u¿ywanych dla niego i ¶rednie czêsto¶ci jego liter (wy³±czaj±c litery
+ASCII). U¿yte zostanie najlepiej pasuj±ce kodowanie. Filtr obs³uguje
+teraz jêzyki cs (czeski), de (niemiecki), el (grecki), eo (Esperanto),
+es (hiszpañski), fr (francuski), he (hebrajski), it (w³oski),
+pl (polski), pt (portugalski), ru (rosyjski) i sv (szwedzki).
+
+varpl - Wymieszane polskie ISO-8859-2, CP-1250 i UTF-8. W polskich
+warunkach sugerujê podpiêcie tego jako filtr w czytniku newsów (dla
+szybko¶ci lepiej wo³aæ bezpo¶rednio, a nie przez konwerta).
+
+vareo - Wymieszane ró¿ne kodowania Esperanta.
+
+
+	OPCJE KONTROLUJ¡CE POWY¯SZE KONWERSJE
+
+/1 (np. `konwert iso2-ascii/1') - Ka¿dy niedostêpny znak bêdzie
+zast±piony przez pojedynczy przybli¿aj±cy znak, a nie przez napis.
+Przydatne dla programu filterm albo dla preformatowanego tekstu. Ta
+opcja jest w³±czana automatycznie je¶li filtr jest u¿ywany jako wyj¶cie
+filterma.
+
+/html - Zak³ada, ¿e tekst jest HTMLem. Znaki " & < > wynik³e z przybli¿eñ
+innych znaków bêd± prawid³owo wyeskejpowane do &quot; &amp; &lt; &gt;.
+Nag³ówek <META http-equiv="content-type" content="text/html; charset=...">
+bêdzie poprawiony je¶li wyst±pi.
+
+/htmldec - Konwertuje META jak wy¿ej. Niedostêpne znaki bêd± zakodowane
+w &#Unikodzie;.
+
+/htmlhex - Konwertuje META jak wy¿ej. Niedostêpne znaki bêd± zakodowane
+w szesnastkowym &#xUnikodzie;.
+
+/tex - Niedostêpne znaki bêd± opisane w TeXu. Znaki # $ % & \ ^ _ { | }
+~ wynik³e z przybli¿eñ niektórych znaków bêd± prawid³owo wyeskejpowane
+do \# \$ \% \& $\backslash$ \^{} \_ \{ $|$ \} \~{}.
+
+/asciichar - Rozpoznaje niektóre reprezentacje znaków w ASCII, np. (c)
+... 1/2 >=.
+
+/rosyjski - Rosyjski tekst bêdzie oddany w polskiej transkrypcji
+fonetycznej.
+
+Niektóre filtry wyj¶ciowe mog± u¿yæ informacji o jêzyku do lepszego
+przybli¿enia niedostêpnych liter, np. w /de (niemieckim): ä -> ae
+zamiast a.
+
+
+	INNE FILTRY
+
+any/JÊZYK-test - Rozpoznaje kodowanie, ale zamiast konwersji tekstu
+pokazuje tylko nazwê kodowania. Dodatkowa opcja /all pokazuje wszystkie
+mo¿liwe kodowania, posortowane od lepszych do gorszych.
+
+cr, lf, crlf - Wymusza okre¶lon± konwencjê oznaczenia koñców linii.
+cr = Macintosh, lf = Unix i Amiga, crlf = Windows i DOS.
+Konwencja wej¶ciowa jest rozpoznawana automatycznie.
+
+expand - Rozwija tabulacje na spacje (u¿ywa programu expand
+z textutils).
+
+unexpand - Kompresuje spacje na pocz±tku linii do tabulacji (u¿ywa
+programu unexpand z textutils).
+
+rmspacesateol - Usuwa spacje i tabulacje z koñców linii.
+
+qp-8bit, 8bit-qp - Kodowanie MIME Quoted Printable: =A3=F3d=BC.
+
+rtf-8bit, 8bit-rtf - Rich Text Format: \'a3\'f3d\'9f.
+
+txt-htmlchar - Eskejpuje " & < > w SGMLowe/HTMLowe encje &quot; &amp;
+&lt; &gt;. Wygodne do w³±czania pliku tekstowego w HTMLowych tagach
+<PRE> </PRE>.
+
+htmlchar-txt - W drug± stronê.
+
+rot13 - Gb wrfg qrzbafgenpwn ebg13.
+
+toupper, tolower - Zamienia tekst na du¿e / ma³e litery. Na razie tylko
+ASCII.
+
+
+	DODATKOWE FILTRY DLA FILTERMA
+
+tyldy (wej¶cie) - polskie ~a~c~e~l~n~o~s~x~z
+
+lewyap (wej¶cie) - polskie `a`c`e`l`n`o`s`x`z
+
+boldpl (wyj¶cie) - ASCII z polskimi literami wyró¿nionymi przez
+rozja¶nienie.
+
+pinectrlchars (wyj¶cie) - Zamienia znaki 128..159 wy¶wietlane przez
+Pine (albo inny program) jako ^À..^ß z powrotem na prawdziwe 128..159.
+
+512bold (wyj¶cie) - Zmienia mapowanie kolorów w trybie 512-znakowym,
+który ogranicza liczbê kolorów do o¶miu. Paleta jest dynamicznie
+zmieniana i zawiera osiem ostatnio u¿ywanych kolorów. Kiedy wiêcej
+kolorów jest u¿ytych równocze¶nie, niektóre z nich s± wy¶wietlone
+niepoprawnie.
+
+512bold1 (wyj¶cie) - Zmienia mapowanie kolorów w trybie 512-znakowym.
+Zamiast ignorowania rozja¶nienia, dostêpne s± nastêpuj±ce kolory:
+czarny, czerwony, zielony, bia³y, niebieski, jasna magenta, jasny cyjan,
+jasnoszary; pozosta³e s± zastêpowane przybli¿eniami. Daje to lepszy
+efekt, umo¿liwiaj±c pokazanie rozja¶nienia, kosztem przek³amania barwy
+niektórych kolorów.
+
+kbdmacros (wej¶cie) - Makra klawiaturowe. Sekwencjê klawiszy mo¿na
+zapamiêtaæ przez `Esc Ctrl-A ROZWINIÊCIE Esc Ctrl-E SKRÓT Esc Ctrl-E' -
+od tej pory naci¶niêcie SKRÓTU wygeneruje ROZWINIÊCIE. Pó¼niej mo¿na
+skasowaæ skrót przez `Esc Ctrl-A Esc Ctrl-E SKRÓT Esc Ctrl-E'. Czêsto
+zamiast Esc Ctrl- mo¿na nacisn±æ Ctrl-Alt-. Definiowane skróty, wraz z
+definiowalnymi powy¿szymi kombinacjami klawiszy s³u¿±cymi do ich
+definiowania, s± pamiêtane w pliku ~/.kbdmacros. Uwaga: Je¶li
+przedefiniujesz jak±¶ sekwencjê, to wszystkie jej prefiksy nie bêd±
+przepuszczane natychmiast, tylko poczekaj±, a¿ bêdzie mo¿na
+jednoznacznie stwierdziæ, która sekwencja zosta³a wpisana. Dotyczy to
+równie¿ sekwencji z Esc reprezentuj±cych ró¿ne rozszerzone klawisze.
+
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

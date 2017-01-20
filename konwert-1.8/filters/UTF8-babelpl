@@ -1,0 +1,4 @@
+#!/bin/bash -
+
+F=${0##*/}
+ARG="tex $ARG" APPROX= APPROX1= MIME=us-ascii "${0%/*}/../aux/UTF8-charset" -rf "${F#*-}"

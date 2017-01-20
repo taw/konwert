@@ -1,0 +1,134 @@
+#!/bin/bash -
+
+VARIANT_vi='
+	À	A`
+	Á	A'\''
+	Â	A^
+	Ã	A~
+	È	E`
+	Ê	E^
+	Ì	I`
+	Í	I'\''
+	Ò	O`
+	Ó	O'\''
+	Ô	O^
+	Õ	O~
+	Ù	U`
+	Ú	U'\''
+	Ý	Y'\''
+	ã	a~
+	õ	o~
+	ý	y'\''
+' TRS='
+	¤	CUR
+	§	S:
+	©	(c)
+	­	\!
+	®	(R)
+	³	^3
+	¶	P:
+	¹	^1
+	¾	\s3/4
+	Ð	DH
+	Þ	TH
+	ð	dh
+	þ	th
+' TRS1='
+	 	ÿ
+	¡	­
+	¢	›
+	£	œ
+	¤	*
+	¥	
+	¦	|
+	§	S
+	¨	"
+	©	c
+	ª	¦
+	«	®
+	¬	ª
+	­	-
+	®	R
+	¯	-
+	°	ø
+	±	ñ
+	²	ý
+	³	3
+	´	'\''
+	µ	æ
+	¶	P
+	·	ú
+	¸	,
+	¹	1
+	º	§
+	»	¯
+	¼	¬
+	½	«
+	¾	/
+	¿	¨
+	À	A
+	Á	A
+	Â	A
+	Ã	A
+	Ä	Ž
+	Å	
+	Æ	’
+	Ç	€
+	È	E
+	É	
+	Ê	E
+	Ë	E
+	Ì	I
+	Í	I
+	Î	I
+	Ï	I
+	Ð	D
+	Ñ	¥
+	Ò	O
+	Ó	O
+	Ô	O
+	Õ	O
+	Ö	™
+	×	x
+	Ø	O
+	Ù	U
+	Ú	U
+	Û	U
+	Ü	š
+	Ý	Y
+	Þ	T
+	ß	á
+	à	…
+	á	 
+	â	ƒ
+	ã	a
+	ä	„
+	å	†
+	æ	‘
+	ç	‡
+	è	Š
+	é	‚
+	ê	ˆ
+	ë	‰
+	ì	
+	í	¡
+	î	Œ
+	ï	‹
+	ð	d
+	ñ	¤
+	ò	•
+	ó	¢
+	ô	“
+	õ	o
+	ö	”
+	÷	ö
+	ø	o
+	ù	—
+	ú	£
+	û	–
+	ü	
+	ý	y
+	þ	t
+	ÿ	˜
+\[€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ\] þ
+' MIME=cp437 "${0%/*}/../aux/charset-charset" iso1-cp437

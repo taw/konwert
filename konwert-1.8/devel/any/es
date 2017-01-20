@@ -1,0 +1,9 @@
+% 1 1 1 1 1 1 17 11 27 12 33 4
+utf8 Á É Í Ñ Ó Ú á é í ñ ó ú
+cp1252
+cp850
+html &#193; &#201; &#205; &#209; &#211; &#218; &#225; &#233; &#237; &#241; &#243; &#250;
+html &#xC1; &#xC9; &#xCD; &#xD1; &#xD3; &#xDA; &#xE1; &#xE9; &#xED; &#xF1; &#xF3; &#xFA;
+html &Aacute; &Eacute; &Iacute; &Ntilde; &Oacute; &Uacute; &aacute; &eacute; &iacute; &ntilde; &oacute; &uacute;
+mac
+qp-8bit|cp1252 =C1 =C9 =CD =D1 =D3 =DA =E1 =E9 =ED =F1 =F3 =FA

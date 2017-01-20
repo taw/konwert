@@ -1,0 +1,311 @@
+
+	CHANGES IN THE PACKAGE
+	----------------------
+
++ new feature
+! bugfix
+* other change
+
+This list doesn't include some very unimportant changes and improvements.
+
+---------------- version 1.8 (2 Sep 1998) ----------------
+
++ added `~\s ~' in *-tyldy filter
+
++ *-mnemonic1 filter; treatment of mnemonic1 changed from "filterm-only
+  input filter" to "general konwert encoding", the same as mnemonic
+
+* changed \(...\) into \{...\} in trs and UTF8-charset; this is because
+  \(...\) together with \| will have other meaning in the future, and
+  that meaning (multicharacter alternatives) is in all kinds of regexps
+  marked with \(...\|...\) or (...|...); sorry for incompatibility
+
+* removed \{...\} in trs; it was no longer used anywhere, can be
+  emulated with \[...\], and we need \{...\} syntax for another purpose
+
+! hmetodo now uses \? to properly handle multiple h's under filterm
+
++ setting of variables and rules conditionalized by variables in trs
+
+! fixed treatment of reverse attribute in 512bold filter (thanks to Yann
+  Dirson <ydirson@a2points.com>)
+
+! fixed stupid bug in fixtrsutf8 which was giving bad results from rules
+  with several sets of UTF-8 characters in them; rosyjski filter didn't
+  contain such rule
+
+! fixtrsutf8 produces slightly more optimized result, no longer
+  enclosing single characters in \[...\]
+
++ Characters U+10000...U+7FFFFFFF supported by html{dec,hex} formats
+
++ 512bold now considers similarity of colors, throwing away not
+  necessarily the least recently used color, but also sufficiently
+  similar to the new color required; this slightly improves display when
+  too many colors are wanted
+
+! filters designed only for filterm documented in `man filterm' (were
+  not described in man pages)
+
+! ^[[...] Linux Console Private CSI Sequences implemented in 512bold
+
++ new 512bold filter which changes the palette dynamically: colors are
+  not approximated, but when more than 8 are used at one time, some of
+  them display incorrectly; old 512bold renamed into 512bold1, but it
+  will not be developed, and at some time 512bold will be configurable
+  to behave as 512bold1, which will then be dropped
+
+! fixed treatment of ^[[0m and ^[8 in 512bold filter (thanks to Yann
+  Dirson <ydirson@a2points.com>)
+
+! fixed a typo in xmetodo-UTF8
+
++ rtf-8bit and 8bit-rtf (thanks to Ziemek Borowski
+  <ziembor@FAQ-bot.Ziembor.waw.pl>)
+
+! mkcharset-charset creates correct one-to-many tables when a
+  character is represented in the source charset with several characters    
+  looking the same as its approximation in the target charset, but the    
+  single-character approximation is different (e.g. viqri-ascii)
+
++ filterm's option to execute a shell as a login shell (thanks to Yann
+  Dirson <ydirson@a2points.com>)
+
+! mnemonic and mnemonic1 formats updated, basing on glibc-2.0.7 sources
+
+* characters 128...159 of ISO-8859-x mapped into U+0080...U+009F
+
+* iso2cp1250utf8pl-iso2 removed; similar varpl-UTF8 added
+
++ vareo format
+
++ approximations of Vietnamese letters are based on viqri; with /vi
+  option ascii output is the same as viqri
+
++ devel/hex-trs
+
++ viscii, viqri, and enhanced cp1258, which understands combined accents  
+  (from Mark Leisher's <mleisher@crl.nmsu.edu> csets; thanks to Juliusz
+  Chroboczek <jec@dcs.ed.ac.uk>)
+
+! mkcharset-charset properly handles multiple-byte encoding
+
+! empty trs argument is treated as a script rather than a file
+
++ language dependent translations of unavailable characters; mk*-charset
+  rewritten again
+
+* devel/fixmanconfig moved to aux/fixmanconfig to be placed in
+  konwert-*.rpm rather than konwert-devel-*.rpm
+
+* RPM package split into konwert and konwert-devel
+
+---------------- version 1.7 (19 Jul 1998) ----------------
+
++ rmspacesateol filter
+
+! added MIME charset name us-ascii
+
+* rewritten mkUTF8-charset and mkcharset-charset to generate both tables
+  for one-to-one and one-to-many mapping in one pass; mkUTF8-ascii is
+  still run twice because I don't know how to specify one command making
+  multiple targets in a Makefile; this change is not only a speed-up, but
+  also prepares for future language dependent character substitutions
+
+* When /etc/man.config uses -Tascii, during Konwert's installation it
+  proposes fixing it to use -Tlatin1; use `make nofixmanconfig=1' when
+  you don't want it, e.g. in packaging
+
++ Polish man pages
+
++ charset filters automatically use /1 option when used as output for
+  filterm
+
++ alias macroman = mac
+
++ ISO-8859-15 and KOI8-RU (thanks to Juliusz Chroboczek <jec@dcs.ed.ac.uk>)
+
+! man pages were not uninstalled by `make uninstall'
+
+! fixed autodetection of two Esperanto encodings (there were typos in
+  their names in any/eo)
+
+! improved conversion of characters unavailable in the target charset -  
+  now uses a suitable approximation of the replacement character U+FFFD
+  found in UTF8-charset instead of using always `?'
+
+! fixed unnecessary character substitutions listed in UTF8-charset
+  filters for characters directly available (bug in mkUTF8-charset)
+
+! fixed unnecessary one-to-one substitutions listed in charset-charset
+  filters in one-to-many section (bug in mkcharset-charset)
+
++ trs guesses whether an argument without -f or -e is a filename or
+  a script
+
++ `make rpm'
+
++ this CHANGES file, BUGS, and TODO
+
+---------------- version 1.6 (4 Jul 1998) ----------------
+
++ RPM package (thanks to Ziemek Borowski <ziembor@FAQ-bot.Ziembor.waw.pl>)
+
+! fixed UTF8-charset conversions when the set of characters that are    
+  neither available in the target charset nor approximated with ASCII
+  is empty
+
+* changed UTF8-charset: Esperanto letters are now replaced with
+  cx gx hx jx sx ux when unavailable directly
+
++ Esperanto xmetodo, hmetodo, antauxcxap, postcxap, apostrofoj,
+  and malapostrofoj notations
+
++ filters can detect whether they are run by filterm
+
+! htmlent format mangled some ASCII punctuation chars when used as
+  output (thanks to Ziemek Borowski <ziembor@FAQ-bot.Ziembor.waw.pl>)
+
++ added iso3-ascii and iso10-ascii direct filters
+
++ ISO-8859-12,13,14 drafts
+
++ Added Zcaron and zcaron characters to recently changed CP-1252 (thanks
+  to Adam Twardoch <adam.twardoch@euv-frankfurt-o.de>)
+
+! fixed some language errors in English documentation (thanks to Gwidon
+  S. Naskrent <naskrent@hoth.amu.edu.pl>)
+
++ Hebrew and Portugal encoding autodetection (thanks to Gwidon S.
+  Naskrent <naskrent@hoth.amu.edu.pl>)
+
+! fixed charset-charset conversions of characters not mentioned in  
+  UTF8-charset, but available in both charsets (thanks to Gwidon S.
+  Naskrent <naskrent@hoth.amu.edu.pl>)
+
++ English man pages (thanks to Gwidon S. Naskrent
+  <naskrent@hoth.amu.edu.pl>) for konwert, trs and filterm, combining
+  information from several doc/en/* files
+
++ option for showing the detected encoding is improved and documented
+
+* charset tables moved from filters *-UTF8 into data files in
+  aux/charsets to ease future understanding of options by these
+  filters
+
+* machine-independent files moved from $(prefix)/lib to $(prefix)/share
+  (now they are all filters and their auxiliary files except 512bold)
+
++ charset aliases
+
+---------------- version 1.5 (31 May 1998) ----------------
+
++ Debian package (thanks to Yann Dirson <ydirson@a2points.com>)
+
+* scripts for calculating letter frequencies renamed from jakielitery
+  and czestosci into whichletters and frequencies, and documented
+
+* trs is no longer used during build (now it may be possible to
+  cross-compile the package)
+
++ Greek, Esperanto, and Russian in &#Unicode_numbers; are also
+  autodetected
+
+* some files which take long time to build are already included in the
+  distribution and not deleted by `make clean'; `make maintainer-clean'
+  deletes them; this include UTF8-charset and charset-charset filters
+
+! filterm fixed to compile and work properly under glibc
+
+* #!/path substitution separated from the installation process, to ease
+  future building of binary packages
+
+---------------- version 1.4 (28 May 1998) ----------------
+
+* #!/path substitution made with `perl -i' rather than `konwert '(trs)' -O',
+  so it's a bit faster now
+
++ UTF-8 characters added to the iso2cp1250pl-iso2 filter; renamed into
+  iso2cp1250utf8pl-iso2
+
+! fixed html-UTF8 filter, which got broken in version 1.2
+
+! Makefile now uses the perl specified in perl= option also during the
+  build, not only for #!/path sunstitution
+
+* Esperanto letter frequencies recalculated, basing on larger sample
+  texts
+
++ scripts for calculating letter frequencies are included (but not used;
+  they may be useful for other people wanting to contribute frequencies
+  for autodetection of new languages)
+
+* `CXXFLAGS=-Wall -O2 -fomit-frame-pointer -pipe' added to Makefile
+  (thanks to Krzysztof G. Baranowski <kgb@manjak.knm.org.pl>)
+
++ pinectrlchars filter
+
++ expand and unexpand filters (using textutils' programs)
+
++ RFC-1541 mnemonics encoding (mnemonic)
+
++ updated devel/UTF8-charsets to find some one-character approximations
+
++ ability to specify character approximations for use only when some
+  other characters are available (/1 option)
+
++ character-to-one-character-only option for charset conversions
+
++ kbdmacros and 512bold filters, and tyldy, lewyap, and boldpl formats
+  for filterm
+
++ filterm program
+
+* direct charset-charset filters for chosen pairs of charsets to  
+  improve speed (built automatically)
+
+---------------- version 1.3 (18 Apr 1998) ----------------
+
+* a few changes in UTF8-charset and UTF8-tex tables
+
++ Greek, Esperanto, Spanish, French, Italian, and Swedish charset
+  autodetection (thanks to Gwidon S. Naskrent <naskrent@hoth.amu.edu.pl>)
+
+* English and Polish documentation moved into separate subdirs
+
+! fixed some language errors in English documentation (thanks to Gwidon
+  S. Naskrent <naskrent@hoth.amu.edu.pl>)
+
+---------------- version 1.2 (14 Apr 1998) ----------------
+
+* a few changes in UTF8-charset character approximation table
+
++ asciichar option for charset filters
+
+* rosyjski conversion as an option for charset filters rather than as
+  a standalone filter
+
++ general mechanism for adding filters to be applied to the intermediate
+  UTF-8 form of charset conversion (aux/argcharset/*)
+
++ TeX method of representing extended characters; charset filters can
+  use it for unavailable characters
+
+* htmlchar format renamed into html
+
+* internal intermediate U format for charsets renamed into UTF8
+
++ konwert finds a common intermediate format dynamically rather than
+  searching for it according to a predefined list
+
+---------------- version 1.1 (12 Apr 1998) ----------------
+
++ first public release
+
+----------------
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

@@ -1,0 +1,67 @@
+
+	TO DO
+	-----
+
++ UTF-7
+
++ Windows Symbol font
+
+! make a better cp1258 which recognizes combined accents
+
++ make also a conversion _from_ TeX
+
+* translate konwert from perl into C to make it faster
+
++ doc/{en/history,pl/historia} describing why Konwert has been written
+
++ let programs talk in a national language (through gettext)
+
++ ISO-2022
+
++ various far East encodings
+
+! investigate which SGML entities are be not official and should not be
+  used in htmlent's output
+
+* make some testing scripts to ensure that nothing important has got
+  broken
+
++ allow specifying the list of directories scanned for filters in an
+  environment variable or maybe also in a config file
+
+?* it would be convenient if the documentation in various formats
+   (currently txt and man) could be generated from a single source;
+   maybe SGML?
+
++ TeX's babel encodings also for some languages other than Polish
+
++ trs rules that substitute a string and translate it again; or possibly
+  translate some part of the substituted string
+
++ support \- character ranges in fixtrsutf8; use it in rosyjski
+
+?+ some kind of regexps in trs; this would require redesigning the whole
+   trs
+
++ make 512bold's palette configurable
+
+?+ find if there are some conventions for escaping punctuation in viqri
+
+?+ viqri input for filterm
+
++ something like `|' regexp in trs, which expands similarly to
+  fixtrsutf8, duplicating a rule using several variants in the given
+  place
+
+?+ macros in trs
+
+! preserve hard links, using md5
+
++ allow passing escaped + - / in filters' arguments
+
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

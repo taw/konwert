@@ -1,0 +1,576 @@
+.TH KONWERT 1 "30 Jul 1998" "Konwert" "Linux User's Manual"
+.SH NAME
+konwert \- interface for various character encoding conversions
+.SH SYNOPSIS
+.B konwert
+.I FILTER
+.RI [ FILE ].\|.\|.\|
+.RB [ \-o
+.I DEST
+|
+.BR \-O ]
+.SH DESCRIPTION
+Konwert allows filtering multiple files through multiple filters.
+It filters the specified
+.IR FILE s,
+or stdin if none are given.
+.PP
+Simple
+.I FILTER
+is the name of an executable file from the directory
+.I ~/.konwert/filters
+or the system-wide one, normally
+.IR /usr/share/konwert/filters .
+Such program itself filters stdin to stdout.
+.PP
+The filtering rule can be more complex:
+.PP
+.B konwert
+.IB FILTER1 + FILTER2
+means
+.B konwert
+.I FILTER1
+|
+.B konwert
+.IR FILTER2 .
+.PP
+.B konwert
+.IB FORMAT1 \- FORMAT2\fR,
+unless such filter exists, tries to find a common
+.IR FORMAT3 ,
+such that both filters
+.IB FORMAT1 \- FORMAT3
+and
+.IB FORMAT3 \- FORMAT1
+do exist.
+.PP
+.B konwert
+.IB FILTER / ARG /\fR.\|.\|.\|
+passes arguments to the filter. Arguments can also be specified here:
+.IB FORMAT1 / ARGS \- FORMAT2\fR.
+The meaning of arguments depends on the particular filter.
+.PP
+.B konwert
+.BI '( "COMMAND ARGS\fR.\|.\|.\|" )'
+executes this arbitrary shell command. This is useful with
+.B \-o
+or
+.B \-O
+options. The command cannot contain the string
+.BR )+ ,
+which will terminate this filter's specification.
+.SS OPTIONS
+.TP 10
+\fB\-o\fP \fIDEST\fP
+output goes to this file/directory instead of stdout
+.TP
+.B \-O
+every input file is replaced with its translation
+.TP
+.B \-\-help
+display help and exit
+.TP
+.B \-\-version
+output version information and exit
+.PP
+Redirecting output to one of the source files with either
+.B \-o
+or
+.B >
+instead of
+.B \-O
+will corrupt it! Option
+.B \-O
+creates a temporary file in
+.I /tmp
+and later copies it back onto the source.
+.SH CHARACTER ENCODING CONVERSIONS
+You can convert text between any two charsets, for example
+.B konwert
+.BR cp437\-iso2 .
+.PP
+Characters unavailable in the target charset will be substituted with
+approximations with available ones. The approximations need not be
+single characters.
+.PP
+The following character sets are currently supported:
+.TP
+.B ascii
+7bit ASCII
+.TP 16
+.B utf8\fR = \fPunicode
+Unicode UTF-8
+.TP 7
+.PD 0
+.B iso1\fR = \fPisolatin1
+ISO-8859-1 aka ISO Latin 1 (Western European)
+.TP
+.B iso2\fR = \fPisolatin2
+ISO-8859-2 aka ISO Latin 2 (Central European)
+.TP
+.B iso3\fR = \fPisolatin3
+ISO-8859-3 aka ISO Latin 3 (Esperanto)
+.TP
+.B iso4\fR = \fPisolatin4
+ISO-8859-4 aka ISO Latin 4 (Baltic)
+.TP
+.B iso5\fR = \fPisolatincyr
+ISO-8859-5 (Cyrillic)
+.TP
+.B iso6\fR = \fPisolatinarabic
+ISO-8859-6 (Arabic)
+.TP
+.B iso7\fR = \fPisolatingreek
+ISO-8859-7 (Greek)
+.TP
+.B iso8\fR = \fPisolatinhebrew
+ISO-8859-8 (Hebrew)
+.TP
+.B iso9\fR = \fPisolatin5\fR = \fPisolatintur
+ISO-8859-9 aka ISO Latin 5 (Turkish)
+.TP
+.B iso10\fR = \fPisolatin6\fR = \fPisolatinnordic
+ISO-8859-10 aka ISO Latin 6 (Nordic)
+.TP
+.B iso12\fR = \fPisolatin7\fR = \fPisolatinceltic
+ISO-8859-12 aka ISO Latin 6 (Celtic) - Draft
+.TP
+.B iso13\fR = \fPisolatin8\fR = \fPisolatinbaltic
+ISO-8859-13 aka ISO Latin 6 (Baltic) - Draft
+.TP
+.B iso14\fR = \fPisolatin9\fR = \fPisolatinsami
+ISO-8859-14 aka ISO Latin 6 (Sámi) - Draft
+.TP
+.B iso15
+ISO-8859-15 - Draft
+.PD
+.TP 9
+.PD 0
+.B koi8r
+KOI8-R (Russian)
+.TP
+.B koi8u
+KOI8-U (Ukrainian, Byelorussian)
+.TP
+.B koi8uni
+KOI8-Uni (Cyrillic)
+.PD
+.TP 30
+.PD 0
+.B cp1250\fR = \fPwince\fR = \fPwinlatin2
+Windows CP-1250 aka Win Latin 2 (Central European)
+.TP
+.B cp1251\fR = \fPwincyr
+Windows CP-1251 (Cyrillic)
+.TP
+.B cp1252\fR = \fPwinwest\fR = \fPwinlatin1
+Windows CP-1252 aka Win Latin 1 (Western European)
+.TP
+.B cp1253\fR = \fPwingr
+Windows CP-1253 (Greek)
+.TP
+.B cp1254\fR = \fPwintur
+Windows CP-1254 (Turkish)
+.TP
+.B cp1255\fR = \fPwinhebrew
+Windows CP-1255 (Hebrew)
+.TP
+.B cp1256\fR = \fPwinarabic
+Windows CP-1256 (Arabic)
+.TP
+.B cp1257\fR = \fPwinbaltic
+Windows CP-1257 (Baltic)
+.TP
+.B cp1258\fR = \fPwinviet
+Windows CP-1258 (Vietnamese)
+.PD
+.TP 29
+.PD 0
+.B cp437\fR = \fPicmeng
+DOS CP-437 (English)
+.TP
+.B cp737\fR = \fPdosgreek
+DOS CP-737 (Greek)
+.TP
+.B cp775\fR = \fPdosbaltic
+DOS CP-775 (Baltic)
+.TP
+.B cp850\fR = \fPdoswest\fR = \fPdoslatin1
+DOS CP-850 aka DOS Latin 1 (Western European)
+.TP
+.B cp852\fR = \fPdosce\fR = \fPdoslatin2
+DOS CP-852 aka DOS Latin 2 (Central European)
+.TP
+.B cp855\fR = \fPdoscyr
+DOS CP-855 (Cyrillic)
+.TP
+.B cp857\fR = \fPdostur
+DOS CP-857 (Turkish)
+.TP
+.B cp860\fR = \fPdosportugal
+DOS CP-860 (Portugal)
+.TP
+.B cp861\fR = \fPdosiceland
+DOS CP-861 (Icelandic)
+.TP
+.B cp862\fR = \fPdoshebrew
+DOS CP-862 (Hebrew)
+.TP
+.B cp863\fR = \fPdoscanadfr
+DOS CP-863 (Canadian French)
+.TP
+.B cp864\fR = \fPdosarabic
+DOS CP-864 (Arabic)
+.TP
+.B cp865\fR = \fPdosnordic
+DOS CP-865 (Nordic)
+.TP
+.B cp866\fR = \fPdosrussian
+DOS CP-866 (Russian)
+.TP
+.B cp869\fR = \fPdosgreek2
+DOS CP-869 (Greek2)
+.TP
+.B cp874\fR = \fPdosthai
+DOS CP-874 (Thai)
+.PD
+.TP 12
+.PD 0
+.B mac
+Macintosh Roman (Western European)
+.TP
+.B macce
+Macintosh Central European
+.TP
+.B maccyr
+Macintosh Cyrillic
+.TP
+.B macgreek
+Macintosh Greek
+.TP
+.B maciceland
+Macintosh Icelandic
+.TP
+.B mactur
+Macintosh Turkish
+.PD
+.TP 13
+.PD 0
+.BR csk ,
+.TP
+.BR cyfromat ,
+.TP
+.BR dhn ,
+.TP
+.BR fidomazovia ,
+.TP
+.BR iea ,
+.TP
+.BR logic ,
+.TP
+.BR mazovia ,
+.TP
+.B microvex
+DOS charsets for Polish
+.PD
+.TP
+.PD 0
+.BR amigapl ,
+.TP
+.BR fat ,
+.TP 9
+.B xjp
+Amiga charsets for Polish
+.PD
+.TP 11
+.B kamenicky
+DOS charset for Czech and Slovak
+.TP 10
+.B wingreek
+WinGreek (Windows font-based encoding for ancient Greek)
+.TP 9
+.PD 0
+.B babelpl
+TeX [polish]{babel}:
+.I \&"a"c"e"l"n"o"s"z"r
+.TP
+.B ciachy
+TeX \\prefixing:
+.I /a/c/e/l/n/o/s/x/z
+.PD
+.TP 15
+.PD 0
+.B xmetodo
+Esperanto:
+.I cx gx hx jx sx ux
+.RI ( vx\ w )
+.TP
+.B hmetodo
+Esperanto:
+.I ch gh hh jh sh u
+.TP
+.B antauxcxap
+Esperanto:
+.I ^c ^g ^h ^j ^s ^u
+.RI ( ~u )
+.TP
+.B postcxap
+Esperanto:
+.I c^ g^ h^ j^ s^ u^
+.RI ( u~ )
+.TP
+.B apostrofoj
+Esperanto:
+.I c' g' h' j' s' u'
+.TP
+.B malapostrofoj
+Esperanto:
+.I c` g` h` j` s` u`
+.PD
+.TP
+.PD 0
+.TP 8
+.B viscii
+VISCII (Vietnamese)
+.TP
+.B viqri
+Vietnamese Quoted Readable Implicit
+.PD
+.TP 9
+.PD 0
+.B htmldec
+SGML/HTML character references (decimal):
+.I &#198; &#283; &#8594;
+.TP
+.B htmlhex
+SGML/HTML character references (hexadecimal):
+.I &#xC6; &#x11B; &#x2192;
+.TP
+.B htmlent
+SGML/HTML character entities (names):
+.I &AElig; &ecaron &rarr;
+.TP
+.B html
+All three above (only as input format)
+.PD
+.TP 7
+.B tex
+TeX with some LaTeX or AMS-TeX extensions. There is no
+distinction between normal and math mode - you will probably have to
+insert some
+.IR $ 's
+manually.
+.TP 11
+.PD 0
+.B mnemonic
+RFC 1345 mnemonics preceded by
+.I &
+.TP
+.B mnemonic1
+RFC 1345 mnemonics preceded by
+.I `
+.PD
+.TP 7
+\fBany/\fILANGUAGE\fR (e.g. \fBany/pl-iso2\fP)
+This special input format will detect the encoding automatically, basing
+on the frequencies of characters found in text. Every language is
+associated with a set of possible encodings used for it and average
+frequencies of its letters (excluding ASCII letters). The best fitting
+encoding is used for conversion. Currently supported languages are
+.B cs
+(Czech),
+.B de
+(German),
+.B el
+(Greek),
+.B eo
+(Esperanto),
+.B es
+(Spanish),
+.B fr
+(French),
+.B he
+(Hebrew),
+.B it
+(Italian),
+.B pl
+(Polish),
+.B pt
+(Portuguese),
+.B ru
+(Russian), and
+.B sv
+(Swedish).
+.PD
+.TP 7
+.B varpl
+Mixed Polish ISO-8859-2, CP-1250, and UTF-8. If you are reading Polish
+newsgroups I suggest putting it as a filter in your newsreader (for
+speed improvement it's better to call it directly, rather than through
+konwert).
+.TP
+.B vareo
+Mixed various Esperanto encodings.
+.SH OPTIONS CONTROLLING THE ABOVE CONVERSIONS
+.TP
+\fB/1\fP (e.g. \fBkonwert iso2-ascii/1\fP)
+Each unavailable character will be replaced only with a single
+approximate char, not string. This is useful with the filterm program or
+with preformatted text. This option is automatically turned on when a
+filter is used as output for filterm.
+.TP
+.B /html
+Text is assumed to be HTML. The characters
+.I \&" & < >
+resulting from other characters' approximations will be properly escaped
+as
+.I &quot; &amp; &lt;
+.IR &gt; .
+The
+.I <META http-equiv="content-type" content="text/html; charset=.\|.\|.\|">
+header will be fixed if present.
+.TP
+.B /htmldec
+Convert META as above. Unavailable characters will be
+encoded in &#Unicode;.
+.TP
+.B /htmlhex
+Convert META as above. Unavailable characters will be
+encoded in hexadecimal &#xUnicode;.
+.TP
+.B /tex
+Unavailable characters will be described in TeX. Characters
+.I # $ % & \\\\ ^ _ { | } ~
+resulting from some characters' approximations will be
+properly escaped into
+.I \\\\# \\\\$ \\\\% \\\\& $\\\\backslash$ \\\\^{} \\\\_ \\\\{ $|$ \\\\}
+.IR \\\\\\\\~{} .
+.TP
+.B /asciichar
+Recognizes some ASCII representations of characters, e.g.\|
+.I (c) .\|.\|.\| 1/2
+.IR >= .
+.TP
+.B /rosyjski
+Russian text will be replaced with its Polish phonetic transcription.
+.PP
+Some output filters can use the language information for choosing better
+approximations of unavailable letters, for example
+.B /de
+(German):
+.I \(:a
+\(->
+.I ae
+instead of
+.IR a .
+.SH OTHER FILTERS
+.TP
+.B any/\fILANGUAGE\fP-test
+Detects the encoding, but instead of text conversion only shows the
+encoding's name. The additional option
+.B /all
+shows all possible encodings, sorted from better to worse ones.
+.TP
+.PD 0
+.B cr
+.TP
+.B lf
+.TP
+.B crlf
+.PD
+Force specific end-of-line marker convention.
+.B
+cr
+= Macintosh,
+.B lf
+= Unix and Amiga,
+.B crlf
+= Windows and DOS.
+The input convention is detected automatically.
+.TP
+.B expand
+Expands tabs into spaces (uses the textutils program expand).
+.TP
+.B unexpand
+Compresses spaces into tabs (uses the textutils program unexpand).
+.TP
+.B rmspacesateol
+Removes spaces and tabs at end of line.
+.TP
+.PD 0
+.B qp-8bit
+.TP
+.B 8bit-qp
+.PD
+MIME Quoted Printable encoding:
+.IR =A3=F3d=BC .
+.TP
+.PD 0
+.B rtf-8bit
+.TP
+.B 8bit-rtf
+.PD
+Rich Text Format:
+.IR \\\\\\\\'a3\\\\\\\\'f3d\\\\\\\\'9f .
+.TP
+.B txt-htmlchar
+Escapes
+.I \&" & < >
+into SGML/HTML entities
+.I &quot; &amp; &lt;
+.IR &gt; .
+Useful for including a text file inside HTML <PRE> </PRE> tags.
+.TP
+.B htmlchar-txt
+Reverse.
+.TP
+.B rot13
+Guvf vf n qrzbafgengvba bs ebg13.
+.TP
+.PD 0
+.B toupper
+.TP
+.B tolower
+.PD
+Self-explanatory. Currently ASCII only.
+.SH FILES
+.TP
+.PD 0
+.I /usr/share/konwert/filters/*
+.TP
+.I ~/.konwert/filters/*
+.PD
+.SH "SEE ALSO"
+.BR trs (1),
+.BR filterm (1)
+.SH BUGS
+APPLE character in mac* charsets, and CH and ch characters in koi8cs are
+not preserved in conversion even when they are available. Also they
+don't respect the /1 option. Reason: they are not in Unicode.
+.SH COPYRIGHT
+Konwert is a package for conversion between various character encodings.
+.PP
+Copyright (c) 1998 Marcin 'Qrczak' Kowalczyk
+.PP
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+.PP
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+.PP
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+.SH AUTHOR
+.ft CW
+.nf
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \\__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-
+.fi
+.ft R

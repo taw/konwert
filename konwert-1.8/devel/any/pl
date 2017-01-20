@@ -1,0 +1,28 @@
+% 1 1 1 1 1 1 1 1 1 17 11 15 18 2 13 11 2 15
+utf8 Ą Ć Ę Ł Ń Ó Ś Ź Ż ą ć ę ł ń ó ś ź ż
+amigapl
+babelpl "A "C "E "L "N "O "S "Z "R "a "c "e "l "n "o "s "z "r
+ciachy /A /C /E /L /N /O /S /X /Z /a /c /e /l /n /o /s /x /z
+cp1250
+cp852
+csk
+cyfromat
+dhn
+fat
+fidomazovia
+html &#260; &#262; &#280; &#321; &#323; &#211; &#346; &#377; &#379; &#261; &#263; &#281; &#322; &#324; &#243; &#347; &#378; &#380;
+html &#x104; &#x106; &#x118; &#x141; &#x143; &#xD3; &#x15A; &#x179; &#x17B; &#x105; &#x107; &#x119; &#x142; &#x144; &#xF3; &#x15B; &#x17A; &#x17C;
+html &Aogon; &Cacute; &Eogon; &Lstrok; &Nacute; &Oacute; &Sacute; &Zacute; &Zdot; &aogon; &cacute; &eogon; &lstrok; &nacute; &oacute; &sacute; &zacute; &zdot;
+htmliso1-iso1|cp1250 &#165; &#198; &#202; &#163; &#209; &#211; &#140; &#143; &#175; &#185; &#230; &#234; &#179; &#241; &#243; &#156; &#159; &#191;
+htmliso1-iso1|cp1250 &yen; &AElig; &Ecirc; &pound; &Ntilde; &Oacute; &#140; &#143; &macr; &sup1; &aelig; &ecirc; &sup3; &ntilde; &oacute; &#156; &#159; &iquest;
+htmliso1-iso1|iso2 &#161; &#198; &#202; &#163; &#209; &#211; &#166; &#172; &#175; &#177; &#230; &#234; &#179; &#241; &#243; &#182; &#188; &#191;
+htmliso1-iso1|iso2 &iexcl; &AElig; &Ecirc; &pound; &Ntilde; &Oacute; &brvbar; &not; &macr; &plusmn; &aelig; &ecirc; &sup3; &ntilde; &oacute; &para; &frac14; &iquest;
+iea
+iso2
+logic
+macce
+mazovia
+microvex
+qp-8bit|cp1250 =A5 =C6 =CA =A3 =D1 =D3 =8C =8F =AF =B9 =E6 =EA =B3 =F1 =F3 =9C =9F =BF
+qp-8bit|iso2 =A1 =C6 =CA =A3 =D1 =D3 =A6 =AC =AF =B1 =E6 =EA =B3 =F1 =F3 =B6 =BC =BF
+xjp

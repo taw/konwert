@@ -1,0 +1,124 @@
+#!/bin/bash -
+
+VARIANT_hr='
+	Ð	DJ
+	ð	dj
+' VARIANT_vi='
+	¥	I~
+	µ	i~
+	Á	A'\''
+	Â	A^
+	Ã	A~
+	Í	I'\''
+	Ð	DD
+	Ô	O^
+	Ú	U'\''
+	Ý	U~
+	á	a'\''
+	â	a^
+	ã	a~
+	í	i'\''
+	ð	dd
+	ô	o^
+	ú	u'\''
+	ý	u~
+' TRS='
+' TRS1='
+	 	ÿ
+	¡	µ
+	¢	k
+	£	Š
+	¤	Ÿ
+	¥	I
+	¦	ê
+	§	õ
+	¨	"
+	©	¾
+	ª	í
+	«	•
+	¬	T
+	­	ð
+	®	Ï
+	¯	-
+	°	ø
+	±	Ð
+	²	,
+	³	‹
+	´	'\''
+	µ	i
+	¶	ë
+	·	^
+	¸	,
+	¹	Õ
+	º	‰
+	»	…
+	¼	t
+	½	N
+	¾	Ø
+	¿	N
+	À	 
+	Á	A
+	Â	A
+	Ã	A
+	Ä	Ž
+	Å	
+	Æ	’
+	Ç	½
+	È	¶
+	É	
+	Ê	·
+	Ë	E
+	Ì	¸
+	Í	I
+	Î	I
+	Ï	¡
+	Ð	D
+	Ñ	î
+	Ò	â
+	Ó	è
+	Ô	O
+	Õ	å
+	Ö	™
+	×	ž
+	Ø	
+	Ù	Æ
+	Ú	U
+	Û	U
+	Ü	š
+	Ý	U
+	Þ	Ç
+	ß	á
+	à	ƒ
+	á	a
+	â	a
+	ã	a
+	ä	„
+	å	†
+	æ	‘
+	ç	Ô
+	è	Ñ
+	é	‚
+	ê	Ò
+	ë	e
+	ì	Ó
+	í	i
+	î	i
+	ï	Œ
+	ð	d
+	ñ	ì
+	ò	“
+	ó	é
+	ô	o
+	õ	ä
+	ö	”
+	÷	ö
+	ø	›
+	ù	Ö
+	ú	u
+	û	u
+	ü	
+	ý	u
+	þ	×
+	ÿ	.
+\[€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ\] þ
+' MIME=cp775 "${0%/*}/../aux/charset-charset" iso4-cp775

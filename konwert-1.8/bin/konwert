@@ -1,0 +1,174 @@
+#!/usr/bin/perl
+
+######## STA£E ################################################################
+
+$wersja = "1.8";
+@filters = ("$ENV{HOME}/.konwert/filters", "/usr/share/konwert/filters");
+
+######## INICJALIZACJA ########################################################
+
+($ja = $0) =~ s|^.*/(.*?)$|$1|;
+
+######## OPIS U¯YCIA ##########################################################
+
+sub uzycie
+{
+    print { $_[0] ? STDERR : STDOUT } <<EOF;
+Usage: $ja FILTER [FILE]... [-o DEST | -O]
+This is an interface for conversion between various character encodings.
+
+$ja allows filtering multiple files through multiple filters.
+It filters the specified FILEs, or stdin if none are given.
+
+  -o DEST     output goes to this file/directory instead of stdout
+  -O          every input file is replaced with its translation
+  --help      display this help and exit
+  --version   output version information and exit
+
+Simple FILTER is the name of an executable file from one of the
+following directories:
+  @filters
+which itself filters stdin to stdout.
+
+The filtering rule can be more complex:
+
+`$ja FILTER1+FILTER2' means `$ja FILTER1 |$ja FILTER2'.
+
+`$ja FORMAT1-FORMAT2', unless such filter exists, tries to find
+a common FORMAT3, such that both filters FORMAT1-FORMAT3 and
+FORMAT3-FORMAT1 do exist.
+
+`$ja FILTER/ARG/...' passes arguments to the filter. Arguments can
+also be specified here: FORMAT1/ARGS-FORMAT2.
+
+`$ja '(COMMAND ARGS...)'' executes this arbitrary shell command.
+EOF
+    exit $_[0]
+}
+
+######## ANALIZA ARGUMENTÓW WYWO£ANIA #########################################
+
+# Nie u¿ywam ¿adnych modu³ów getopt itd., bo s± zbyt wolne.
+
+$wy = "-";   # Domy¶lnie wynik pójdzie na stdout
+if (@ARGV == 1)
+{
+    if ($ARGV[0] eq "--help") { uzycie }
+    if ($ARGV[0] eq "--version") { print "konwert, version $wersja\n"; exit; }
+}
+while (@ARGV)
+{
+    if ($ARGV[0] =~ /^-(.+)$/)   # Jaka¶ opcja
+    {
+	shift @ARGV;
+	&{${
+	{
+	    "-" => sub
+	    {
+		push @we, @ARGV;
+		return;
+	    },
+	    "o" => sub
+	    {
+		@ARGV or die "$ja: option requires an argument -- $1\n";
+		$wy = shift @ARGV;
+	    },
+	    "O" => sub
+	    {
+		$wy = "=";
+	    }
+	}}{$1} or sub { die "$ja: illegal option -- $1\n" } };
+    }
+    else { push @we, shift @ARGV }
+}
+@we or uzycie 1;
+
+######## ANALIZA Z£O¯ONEGO FILTRU #############################################
+
+sub jest
+{
+    foreach (@filters)
+    {
+	if (-x "$_/$_[0]" && !-d _)
+	{
+	    $_[0] = "$_/$_[0]";
+	    return 1;
+	}
+    }
+    0;
+}
+
+$filtr = join "|", map
+{
+    s/^\+//;
+    if (/^\(.*\)$/) { $_ }
+    else
+    {
+	my @formaty = split /-/;
+	$arg = join "", map { s|^(.*?)(/.*)|$1| and $2 } @formaty;
+	$arg =~ s|^/||;
+	$arg =~ s|/| |g;
+	$_ = join "-", @formaty;
+	if (jest $_) { @formaty = $_ }
+	else
+	{
+	    if (@formaty >= 2)
+	    {
+		my @uni1 = ();
+		my @uni2 = ();
+		foreach (@filters)
+		{
+		    opendir DIR, $_ or next;
+		    foreach (readdir DIR)
+		    {
+			/^\Q$formaty[0]\E-(.*)$/ and push @uni1, $1;
+			/^(.*)-\Q$formaty[$#formaty]\E$/ and push @uni2, $1;
+			    # Nie wiedzieæ czemu perl ¼le rozumie
+			    # $formaty[-1] w wyra¿eniu regularnym
+		    }
+		    closedir DIR;
+		}
+		my $uni = (sort grep { $f = $_; grep { $_ eq $f } @uni2 } @uni1)[0];
+		defined $uni or die "$ja: unknown filter -- $formaty[0]-$formaty[-1]\n";
+		$formaty[0]  = "$formaty[0]-$uni";
+		$formaty[-1] = "$uni-$formaty[-1]";
+	    }
+	    foreach (@formaty) { jest $_ or die "$ja: unknown filter -- $_\n" }
+	}
+        $arg =~ s/(?=\W)/\\/g;
+	foreach (@formaty) { $_ = "ARG=$arg $_" }
+	join "|", @formaty;
+    }
+} ("+" . shift @we) =~ /\+(?:\(.*?\)|.*?)(?:$|(?=\+))/g;
+@we or @we = "-";
+
+######## W£A¦CIWA KONWERSJA ###################################################
+
+if ($wy ne "=" && !-d $wy) { open STDOUT, ">$wy" or die "$ja: $wy: $!\n" }
+foreach (@we)
+{
+    open STDIN, "<$_" or die "$ja: $_: $!\n";
+    if ($_ ne "-")
+    {
+	if ($wy eq "=")
+	{
+	    $temp = "/tmp/konwert-$$";
+	    open STDOUT, ">$temp" or die "$ja: $temp: $!\n"
+	}
+	elsif (-d _)
+	{
+	    (my $we = $_) =~ s|^.*/||;
+	    open STDOUT, ">$wy/$we" or die "$ja: $wy/$we: $!\n"
+	}
+    }
+    system $filtr and die "$ja: error executing filter\n";
+    if ($_ ne "-" && $wy eq "=")
+    {
+	open STDIN, "<$temp" or die "$ja: $temp: $!\n";
+	open STDOUT, ">$_" or die "$ja: $_: $!\n";
+	unlink $temp;
+	print while (<STDIN>);
+    }
+}
+
+###############################################################################

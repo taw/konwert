@@ -1,0 +1,40 @@
+#!/bin/bash -
+
+if [ "$FILTERM" = in ]
+then
+trs -e '
+	\e[\[CGHJSU\]\{H	H\?h=0
+	\e[\[CGHJSU\]\{h	h\?h=0
+	\e[[\[CGHJSU\]\{H	H\?h=0
+	\e[[\[CGHJSU\]\{h	h\?h=0
+	C\{\[Hh\]		\177Ĉ\?h=1
+	G\{\[Hh\]		\177Ĝ\?h=1
+	H\{\[Hh\]\?h=0		\177Ĥ\?h=1
+	J\{\[Hh\]		\177Ĵ\?h=1
+	S\{\[Hh\]		\177Ŝ\?h=1
+	\[AE\]\{U		Ŭ
+	H			H\?h=0
+	c\{h			\177ĉ\?h=1
+	g\{h			\177ĝ\?h=1
+	h\{h\?h=0		\177ĥ\?h=1
+	j\{h			\177ĵ\?h=1
+	s\{h			\177ŝ\?h=1
+	\[AEae\]\{u		ŭ
+	h			h\?h=0
+'
+else
+trs -e '
+	C\[Hh\]		Ĉ
+	G\[Hh\]		Ĝ
+	H\[Hh\]		Ĥ
+	J\[Hh\]		Ĵ
+	S\[Hh\]		Ŝ
+	\[AE\]\{U	Ŭ
+	ch		ĉ
+	gh		ĝ
+	hh		ĥ
+	jh		ĵ
+	sh		ŝ
+	\[AEae\]\{u	ŭ
+'
+fi

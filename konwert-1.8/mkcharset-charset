@@ -1,0 +1,821 @@
+$(srcfiltersdir)/iso1-cp1252: \
+$(srccharsetsdir)/iso1 \
+$(srccharsetsdir)/cp1252\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso1-cp437: \
+$(srccharsetsdir)/iso1 \
+$(srccharsetsdir)/cp437\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso1-cp850: \
+$(srccharsetsdir)/iso1 \
+$(srccharsetsdir)/cp850\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso1-mac: \
+$(srccharsetsdir)/iso1 \
+$(srccharsetsdir)/mac\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso1-ascii: \
+$(srccharsetsdir)/iso1 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1252-iso1: \
+$(srccharsetsdir)/cp1252 \
+$(srccharsetsdir)/iso1\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1252-cp437: \
+$(srccharsetsdir)/cp1252 \
+$(srccharsetsdir)/cp437\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1252-cp850: \
+$(srccharsetsdir)/cp1252 \
+$(srccharsetsdir)/cp850\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1252-mac: \
+$(srccharsetsdir)/cp1252 \
+$(srccharsetsdir)/mac\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1252-ascii: \
+$(srccharsetsdir)/cp1252 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp437-iso1: \
+$(srccharsetsdir)/cp437 \
+$(srccharsetsdir)/iso1\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp437-cp1252: \
+$(srccharsetsdir)/cp437 \
+$(srccharsetsdir)/cp1252\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp437-cp850: \
+$(srccharsetsdir)/cp437 \
+$(srccharsetsdir)/cp850\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp437-mac: \
+$(srccharsetsdir)/cp437 \
+$(srccharsetsdir)/mac\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp437-ascii: \
+$(srccharsetsdir)/cp437 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp850-iso1: \
+$(srccharsetsdir)/cp850 \
+$(srccharsetsdir)/iso1\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp850-cp1252: \
+$(srccharsetsdir)/cp850 \
+$(srccharsetsdir)/cp1252\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp850-cp437: \
+$(srccharsetsdir)/cp850 \
+$(srccharsetsdir)/cp437\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp850-mac: \
+$(srccharsetsdir)/cp850 \
+$(srccharsetsdir)/mac\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp850-ascii: \
+$(srccharsetsdir)/cp850 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/mac-iso1: \
+$(srccharsetsdir)/mac \
+$(srccharsetsdir)/iso1\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/mac-cp1252: \
+$(srccharsetsdir)/mac \
+$(srccharsetsdir)/cp1252\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/mac-cp437: \
+$(srccharsetsdir)/mac \
+$(srccharsetsdir)/cp437\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/mac-cp850: \
+$(srccharsetsdir)/mac \
+$(srccharsetsdir)/cp850\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/mac-ascii: \
+$(srccharsetsdir)/mac \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso2-cp1250: \
+$(srccharsetsdir)/iso2 \
+$(srccharsetsdir)/cp1250\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso2-cp852: \
+$(srccharsetsdir)/iso2 \
+$(srccharsetsdir)/cp852\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso2-macce: \
+$(srccharsetsdir)/iso2 \
+$(srccharsetsdir)/macce\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso2-ascii: \
+$(srccharsetsdir)/iso2 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1250-iso2: \
+$(srccharsetsdir)/cp1250 \
+$(srccharsetsdir)/iso2\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1250-cp852: \
+$(srccharsetsdir)/cp1250 \
+$(srccharsetsdir)/cp852\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1250-macce: \
+$(srccharsetsdir)/cp1250 \
+$(srccharsetsdir)/macce\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1250-ascii: \
+$(srccharsetsdir)/cp1250 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp852-iso2: \
+$(srccharsetsdir)/cp852 \
+$(srccharsetsdir)/iso2\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp852-cp1250: \
+$(srccharsetsdir)/cp852 \
+$(srccharsetsdir)/cp1250\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp852-macce: \
+$(srccharsetsdir)/cp852 \
+$(srccharsetsdir)/macce\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp852-ascii: \
+$(srccharsetsdir)/cp852 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/macce-iso2: \
+$(srccharsetsdir)/macce \
+$(srccharsetsdir)/iso2\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/macce-cp1250: \
+$(srccharsetsdir)/macce \
+$(srccharsetsdir)/cp1250\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/macce-cp852: \
+$(srccharsetsdir)/macce \
+$(srccharsetsdir)/cp852\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/macce-ascii: \
+$(srccharsetsdir)/macce \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso3-ascii: \
+$(srccharsetsdir)/iso3 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso4-iso13: \
+$(srccharsetsdir)/iso4 \
+$(srccharsetsdir)/iso13\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso4-cp1257: \
+$(srccharsetsdir)/iso4 \
+$(srccharsetsdir)/cp1257\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso4-cp775: \
+$(srccharsetsdir)/iso4 \
+$(srccharsetsdir)/cp775\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso4-ascii: \
+$(srccharsetsdir)/iso4 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso13-iso4: \
+$(srccharsetsdir)/iso13 \
+$(srccharsetsdir)/iso4\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso13-cp1257: \
+$(srccharsetsdir)/iso13 \
+$(srccharsetsdir)/cp1257\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso13-cp775: \
+$(srccharsetsdir)/iso13 \
+$(srccharsetsdir)/cp775\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso13-ascii: \
+$(srccharsetsdir)/iso13 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1257-iso4: \
+$(srccharsetsdir)/cp1257 \
+$(srccharsetsdir)/iso4\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1257-iso13: \
+$(srccharsetsdir)/cp1257 \
+$(srccharsetsdir)/iso13\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1257-cp775: \
+$(srccharsetsdir)/cp1257 \
+$(srccharsetsdir)/cp775\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1257-ascii: \
+$(srccharsetsdir)/cp1257 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp775-iso4: \
+$(srccharsetsdir)/cp775 \
+$(srccharsetsdir)/iso4\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp775-iso13: \
+$(srccharsetsdir)/cp775 \
+$(srccharsetsdir)/iso13\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp775-cp1257: \
+$(srccharsetsdir)/cp775 \
+$(srccharsetsdir)/cp1257\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp775-ascii: \
+$(srccharsetsdir)/cp775 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso5-koi8r: \
+$(srccharsetsdir)/iso5 \
+$(srccharsetsdir)/koi8r\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso5-cp1251: \
+$(srccharsetsdir)/iso5 \
+$(srccharsetsdir)/cp1251\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso5-cp866: \
+$(srccharsetsdir)/iso5 \
+$(srccharsetsdir)/cp866\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso5-maccyr: \
+$(srccharsetsdir)/iso5 \
+$(srccharsetsdir)/maccyr\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso5-ascii: \
+$(srccharsetsdir)/iso5 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/koi8r-iso5: \
+$(srccharsetsdir)/koi8r \
+$(srccharsetsdir)/iso5\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/koi8r-cp1251: \
+$(srccharsetsdir)/koi8r \
+$(srccharsetsdir)/cp1251\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/koi8r-cp866: \
+$(srccharsetsdir)/koi8r \
+$(srccharsetsdir)/cp866\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/koi8r-maccyr: \
+$(srccharsetsdir)/koi8r \
+$(srccharsetsdir)/maccyr\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/koi8r-ascii: \
+$(srccharsetsdir)/koi8r \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1251-iso5: \
+$(srccharsetsdir)/cp1251 \
+$(srccharsetsdir)/iso5\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1251-koi8r: \
+$(srccharsetsdir)/cp1251 \
+$(srccharsetsdir)/koi8r\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1251-cp866: \
+$(srccharsetsdir)/cp1251 \
+$(srccharsetsdir)/cp866\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1251-maccyr: \
+$(srccharsetsdir)/cp1251 \
+$(srccharsetsdir)/maccyr\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1251-ascii: \
+$(srccharsetsdir)/cp1251 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp866-iso5: \
+$(srccharsetsdir)/cp866 \
+$(srccharsetsdir)/iso5\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp866-koi8r: \
+$(srccharsetsdir)/cp866 \
+$(srccharsetsdir)/koi8r\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp866-cp1251: \
+$(srccharsetsdir)/cp866 \
+$(srccharsetsdir)/cp1251\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp866-maccyr: \
+$(srccharsetsdir)/cp866 \
+$(srccharsetsdir)/maccyr\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp866-ascii: \
+$(srccharsetsdir)/cp866 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/maccyr-iso5: \
+$(srccharsetsdir)/maccyr \
+$(srccharsetsdir)/iso5\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/maccyr-koi8r: \
+$(srccharsetsdir)/maccyr \
+$(srccharsetsdir)/koi8r\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/maccyr-cp1251: \
+$(srccharsetsdir)/maccyr \
+$(srccharsetsdir)/cp1251\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/maccyr-cp866: \
+$(srccharsetsdir)/maccyr \
+$(srccharsetsdir)/cp866\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/maccyr-ascii: \
+$(srccharsetsdir)/maccyr \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso6-cp1256: \
+$(srccharsetsdir)/iso6 \
+$(srccharsetsdir)/cp1256\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso6-cp864: \
+$(srccharsetsdir)/iso6 \
+$(srccharsetsdir)/cp864\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso6-ascii: \
+$(srccharsetsdir)/iso6 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1256-iso6: \
+$(srccharsetsdir)/cp1256 \
+$(srccharsetsdir)/iso6\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1256-cp864: \
+$(srccharsetsdir)/cp1256 \
+$(srccharsetsdir)/cp864\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1256-ascii: \
+$(srccharsetsdir)/cp1256 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp864-iso6: \
+$(srccharsetsdir)/cp864 \
+$(srccharsetsdir)/iso6\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp864-cp1256: \
+$(srccharsetsdir)/cp864 \
+$(srccharsetsdir)/cp1256\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp864-ascii: \
+$(srccharsetsdir)/cp864 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso7-cp1253: \
+$(srccharsetsdir)/iso7 \
+$(srccharsetsdir)/cp1253\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso7-cp737: \
+$(srccharsetsdir)/iso7 \
+$(srccharsetsdir)/cp737\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso7-macgreek: \
+$(srccharsetsdir)/iso7 \
+$(srccharsetsdir)/macgreek\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso7-ascii: \
+$(srccharsetsdir)/iso7 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1253-iso7: \
+$(srccharsetsdir)/cp1253 \
+$(srccharsetsdir)/iso7\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1253-cp737: \
+$(srccharsetsdir)/cp1253 \
+$(srccharsetsdir)/cp737\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1253-macgreek: \
+$(srccharsetsdir)/cp1253 \
+$(srccharsetsdir)/macgreek\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1253-ascii: \
+$(srccharsetsdir)/cp1253 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp737-iso7: \
+$(srccharsetsdir)/cp737 \
+$(srccharsetsdir)/iso7\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp737-cp1253: \
+$(srccharsetsdir)/cp737 \
+$(srccharsetsdir)/cp1253\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp737-macgreek: \
+$(srccharsetsdir)/cp737 \
+$(srccharsetsdir)/macgreek\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp737-ascii: \
+$(srccharsetsdir)/cp737 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/macgreek-iso7: \
+$(srccharsetsdir)/macgreek \
+$(srccharsetsdir)/iso7\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/macgreek-cp1253: \
+$(srccharsetsdir)/macgreek \
+$(srccharsetsdir)/cp1253\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/macgreek-cp737: \
+$(srccharsetsdir)/macgreek \
+$(srccharsetsdir)/cp737\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/macgreek-ascii: \
+$(srccharsetsdir)/macgreek \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso8-cp1255: \
+$(srccharsetsdir)/iso8 \
+$(srccharsetsdir)/cp1255\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso8-cp862: \
+$(srccharsetsdir)/iso8 \
+$(srccharsetsdir)/cp862\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso8-ascii: \
+$(srccharsetsdir)/iso8 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1255-iso8: \
+$(srccharsetsdir)/cp1255 \
+$(srccharsetsdir)/iso8\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1255-cp862: \
+$(srccharsetsdir)/cp1255 \
+$(srccharsetsdir)/cp862\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1255-ascii: \
+$(srccharsetsdir)/cp1255 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp862-iso8: \
+$(srccharsetsdir)/cp862 \
+$(srccharsetsdir)/iso8\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp862-cp1255: \
+$(srccharsetsdir)/cp862 \
+$(srccharsetsdir)/cp1255\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp862-ascii: \
+$(srccharsetsdir)/cp862 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso9-cp1254: \
+$(srccharsetsdir)/iso9 \
+$(srccharsetsdir)/cp1254\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso9-cp857: \
+$(srccharsetsdir)/iso9 \
+$(srccharsetsdir)/cp857\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso9-mactur: \
+$(srccharsetsdir)/iso9 \
+$(srccharsetsdir)/mactur\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso9-ascii: \
+$(srccharsetsdir)/iso9 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1254-iso9: \
+$(srccharsetsdir)/cp1254 \
+$(srccharsetsdir)/iso9\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1254-cp857: \
+$(srccharsetsdir)/cp1254 \
+$(srccharsetsdir)/cp857\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1254-mactur: \
+$(srccharsetsdir)/cp1254 \
+$(srccharsetsdir)/mactur\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1254-ascii: \
+$(srccharsetsdir)/cp1254 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp857-iso9: \
+$(srccharsetsdir)/cp857 \
+$(srccharsetsdir)/iso9\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp857-cp1254: \
+$(srccharsetsdir)/cp857 \
+$(srccharsetsdir)/cp1254\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp857-mactur: \
+$(srccharsetsdir)/cp857 \
+$(srccharsetsdir)/mactur\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp857-ascii: \
+$(srccharsetsdir)/cp857 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/mactur-iso9: \
+$(srccharsetsdir)/mactur \
+$(srccharsetsdir)/iso9\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/mactur-cp1254: \
+$(srccharsetsdir)/mactur \
+$(srccharsetsdir)/cp1254\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/mactur-cp857: \
+$(srccharsetsdir)/mactur \
+$(srccharsetsdir)/cp857\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/mactur-ascii: \
+$(srccharsetsdir)/mactur \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/iso10-ascii: \
+$(srccharsetsdir)/iso10 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1258-viscii: \
+$(srccharsetsdir)/cp1258 \
+$(srccharsetsdir)/viscii\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1258-viqri: \
+$(srccharsetsdir)/cp1258 \
+$(srccharsetsdir)/viqri\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/cp1258-ascii: \
+$(srccharsetsdir)/cp1258 \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/viscii-cp1258: \
+$(srccharsetsdir)/viscii \
+$(srccharsetsdir)/cp1258\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/viscii-viqri: \
+$(srccharsetsdir)/viscii \
+$(srccharsetsdir)/viqri\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/viscii-ascii: \
+$(srccharsetsdir)/viscii \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/viqri-cp1258: \
+$(srccharsetsdir)/viqri \
+$(srccharsetsdir)/cp1258\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/viqri-viscii: \
+$(srccharsetsdir)/viqri \
+$(srccharsetsdir)/viscii\
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)
+$(srcfiltersdir)/viqri-ascii: \
+$(srccharsetsdir)/viqri \
+$(srcdeveldir)/UTF8-charset \
+$(srcdeveldir)/mkcharset-charset
+	$(mkcharset-charset)

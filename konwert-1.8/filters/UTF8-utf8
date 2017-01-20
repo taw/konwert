@@ -1,0 +1,30 @@
+#!/bin/bash -
+
+FORMAT=
+POPRAWKI=
+for A in $ARG
+do
+	case "$A" in
+	(html|htmldec|htmlhex) FORMAT=html;;
+	(*)
+		if [ -x "${0%/*}/../aux/argcharset/$A" ]
+		then
+			POPRAWKI=${POPRAWKI:+$POPRAWKI |}${0%/*}/../aux/argcharset/$A
+		fi
+	esac
+done
+
+if [ "$POPRAWKI" ]
+then
+	"$SHELL" -c "$POPRAWKI"
+else
+	cat
+fi |
+case "$FORMAT" in
+(html)
+	"${0%/*}/../aux/fixmeta" utf-8
+	;;
+(*)
+	cat
+	;;
+esac

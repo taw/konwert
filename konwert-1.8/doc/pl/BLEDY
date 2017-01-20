@@ -1,0 +1,32 @@
+
+	B£ÊDY
+	-----
+
+`make uninstall' usuwa ca³e katalogi share/konwert i lib/konwert, nawet
+je¶li tam s± jakie¶ nie nasze pliki. Nie jest ³atwo zbudowaæ jawnej
+listy plików do skasowania.
+
+Znak APPLE i zestawach mac* oraz znaki CH i ch w koi8cs nie s±
+zachowywane przy konwersji nawet kiedy s± dostêpne. Równie¿ nie
+przestrzegaj± opcji /1. Powód: nie ma ich w Unikodzie.
+
+Twarde linki powinny byæ u¿yte je¶li wiele plików uwspólnia tê sam±
+tre¶æ. Owszem, s± u¿yte w plikach ¼ród³owych, ale nie s± zachowywane
+podczas instalacji.
+
+mkUTF8-ascii by³by uruchamiany tylko raz do wygenerowania zarówno
+UTF8-ascii, jak i UTF8-ascii1, gdybym wiedzia³, jak opisaæ w Makefile
+jedn± komendê tworz±c± wiele plików.
+
+Filtr 512bold nie jest doskona³y. Niektóre sekwencje eskejpowe mog± nie
+byæ poprawnie emulowane. Dodatkowo, kolory zmieniane na raty oraz
+nieu¿yte niepotrzebnie zajmuj± cenne miejsce o¶miu kolorów.
+
+fixtrsutf8 nie obs³uguje zakresów `\-'.
+
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

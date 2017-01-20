@@ -1,0 +1,43 @@
+
+	FILTERM
+	-------
+
+U¿ycie: filterm WEJ¦CIE WYJ¦CIE [KOMENDA [ARGUMENTY]]
+Wykonuje podan± KOMENDÊ (domy¶lnie - szela), filtruj±c wej¶cie lub
+wyj¶cie terminala.
+
+Program mo¿e pomóc np. gdy nasz terminal nie potrafi wy¶wietlaæ znaków
+spoza ASCII albo wprowadzaæ ich z klawiatury. Równie¿ u³atwia pisanie
+ró¿nych filtrów terminala.
+
+WEJ¦CIE i WYJ¦CIE s± nazwami filtrów konwerta - s± przekazywane
+konwertowi jako pierwszy argument. `filterm - WYJ¦CIE' filtruje tylko
+wyj¶cie, a `filterm WEJ¦CIE -' tylko wej¶cie.
+
+Komenda `-' uruchamia szela jako login-szela.
+
+Dodatkowo dostêpne s± nastêpuj±ce standardowe opcje:
+  --help      wy¶wietla ten opis i wychodzi
+  --version   wy¶wietla informacjê o wersji i wychodzi
+
+W odró¿nieniu od `konwert WEJ¦CIE |KOMENDA |konwert WYJ¦CIE' komenda
+jest wykonywana na pseudo-terminalu, wiêc pe³noekranowe programy
+dzia³aj± poprawnie.
+
+Filtry musz± wysy³aæ znaki jak tylko otrzymaj± wszystko co trzeba na
+wej¶ciu, bez buforowania. Skrypty trs'a siê nadaj±, ale skrypty seda,
+awka albo tr'a - nie. W C mo¿na u¿ywaæ read(), getchar(), fread()
+i write(), a putchar() i fwrite() tylko razem z fflush(stdout). W C++:
+cin.get(), cout.put() i cout <<. W perlu: sysread, getc, read
+i syswrite, a print tylko z $| = 1.
+
+Filtr wej¶ciowy bêdzie mia³ ustawion± zmienn± ¶rodowiskow± FILTERM=in,
+a wyj¶ciowy - FILTERM=out. W ten sposób niektóre filtry mog± trochê
+zmieniæ zachowanie, kiedy s³u¿± filtermowi.
+
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

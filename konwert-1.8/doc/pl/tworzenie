@@ -1,0 +1,223 @@
+
+	TWORZENIE FILTRÓW KONWERTA ORAZ JAK TO DZIA£A
+	---------------------------------------------
+
+Instalacja okre¶la bazowy katalog Konwerta, domy¶lnie /usr/local. Pliki
+danych Konwerta i pomocnicze skrypty s± instalowane w jego podkatalogu
+share/konwert, który jest podzielony jak nastêpuje:
+
+filters - Pliki wykonywalne z tego katalogu s± atomowymi filtrami
+programu konwert. Wiêkszo¶æ z nich jest skryptami trsa, basha albo perla
+albo ich kombinacjami.
+
+aux - Dane i pomocnicze skrypty u¿ywane przez niektóre filtry. Nie s±
+wo³ane bezpo¶rednio przez konwerta.
+
+devel - Pliki ¼ród³owe filtrów i skrypty s³u¿±ce do budowania z nich
+tych filtrów. Nie s± potrzebne do normalnego u¿ywania programu konwert,
+ale s± przydatne do budowania nowych tablic konwersji, wiêc s±
+instalowane równie¿.
+
+Katalog lib/konwert zawiera pliki binarne, które nie powinny znale¼æ siê
+w katalogu share. Zamiast nich w share/konwert s± miêkkie linki do nich.
+
+konwert przekazuje swoim filtrom argumenty przez zmienn± ¶rodowiskow±
+ARG, a nie jako normalne argumenty programu. Jest tak poniewa¿ wiêkszo¶æ
+filtrów potraktowa³aby te argumenty jako pliki ¼ród³owe do
+przet³umaczenia zamiast standardowego wej¶cia. Argumenty te s±
+oddzielone spacjami (w wywo³aniu konwerta s± oddzielone znakami `/').
+
+Obejrzyj Makefile ¿eby zobaczyæ, jak s± budowane konkretne filtry.
+Wiêcej szczegó³ów jest poni¿ej.
+
+Ogólna zasada jest taka, ¿e Makefile nie ma zapisanych w sobie na sta³e
+nazw filtrów. Zawiera on tylko regu³y ich budowania, a w³a¶ciwe listy
+przetwarzanych plików s± tworzone dynamicznie, na podstawie zawarto¶ci
+odpowiednich katalogów ¼ród³owych.
+
+Kiedy mówimy o konwersjach zestawów znaków, format U konwerta oznacza
+UTF-8 (Unikod). Ka¿dy zestaw znaków ma filtr konwertuj±cy go na UTF-8
+i z powrotem. Wiêkszo¶æ konwersji na UTF-8 to proste skrypty trsa.
+
+Trs nie wymaga okre¶lonego rozmieszczenia s³ów w swoim skrypcie - musz±
+one tylko byæ oddzielone odstêpami. Inne narzêdzia zarz±dzaj±ce
+tablicami konwersji wymagaj± jednak¿e, ¿eby regu³y by³y umieszczane w
+oddzielnych liniach; ka¿da regu³a sk³ada siê z pojedynczego znaku TAB,
+napisu do przet³umaczenia, drugiego znaku TAB i napisu zastêpuj±cego
+poprzedni.
+
+
+	SCALANIE TABLIC KONWERSJI
+
+Wiele zestawów znaków bazuje na innych, zmieniaj±c tylko kilka liter.
+Tablice konwersji tych zestawów na UTF-8 s± tworzone przez scalenie
+definicji zmienionych liter z oryginaln± tablic±.
+
+Te ró¿nice s± zapisane w plikach w katalogach devel/mergewith*, gdzie *
+okre¶la bazowy zestaw znaków. Na przyk³ad devel/mergewithcp437/mazovia-UTF8
+zawiera litery mazovii ró¿ni±ce siê od cp437. Skrypt devel/mergetrs
+³±czy ze sob± dwie tablice albo wiêcej. Tablice wymienione wcze¶niej
+maj± pierwszeñstwo (jest ono wa¿ne tylko kiedy te tablice s± pó¼niej
+odwracane).
+
+
+	TRS I UTF-8
+
+Trsowe okre¶lenie zbioru mo¿liwych znaków przez \[...\] wymaga, ¿eby te
+znaki by³y pojedynczymi bajtami. Niestety w UTF-8 znaki mog± byæ
+zapisane w kilku bajtach. Skrypt devel/fixtrsutf8 upraszcza
+przygotowanie w³a¶ciwych skryptów trsa konwertuj±cych UTF-8, nawet je¶li
+u¿ywaj± \[...\].
+
+Przyjmuje on niby-trsowy skrypt zawieraj±cy znaki UTF-8 wewn±trz \[...\]
+i produkuje skrypt który bêdzie jednak dzia³a³. Wyrzuca on wspólne
+przedrostki przed \[...\], powielaj±c linie w razie potrzeby. Wynikowy
+plik nie jest poprawnym UTF-8, ale dzia³a z trsem.
+
+
+	KONWERSJE Z UTF-8
+
+Konwersje z UTF-8 s± budowane zupe³nie automatycznie, na podstawie
+konwersji odwrotnej i jednej du¿e tablicy opisuj±cej mo¿liwo¶ci
+zast±pienia znaków innymi. Tablica ta mówi, ¿e je¶li dany znak jest
+niedostêpny, to powinien byæ zast±piony takim a takim (albo napisem);
+je¶li tamten wci±¿ jest niedostêpny, to jeszcze innym; itd. Ostatnia
+mo¿liwo¶æ to zawsze ASCII, o którym zak³adamy, ¿e jest zawsze dostepne
+(konwersje na zestawy znaków nie oparte na ASCII nie mog± byæ tworzone
+w ten sposób). Tablica owa jest pamiêtana w pliku devel/UTF8-charset
+i jest ca³kowicie w UTF-8.
+
+Przybli¿enie mo¿e mieæ do³±czone `\}' z ci±giem znaków. Bêdzie wtedy
+u¿yte tylko je¶li wszystkie te znaki bêd± dostêpne, mimo ¿e nie
+wystêpuj± we w³a¶ciwym przybli¿eniu. Niektóre znaki wymagaj± bowiem
+ró¿nych przybli¿eñ w zale¿no¶ci od dostêpno¶ci innych znaków.
+
+Najczê¶ciej niedostêpne znaki s± zamieniane przybli¿eniami ASCII,
+zamiast ró¿nymi o¶miobitowymi napisami. Tablica konwersji z UTF-8 jest
+wiêc konstruowana z trzech czê¶ci:
+
+* Znaki ca³kowicie dostêpne w docelowym zestawie (nie licz±c ASCII).
+  Tablica ta jest czytana z pliku zajmuj±cego siê konwersj± odwrotn±
+  (na UTF-8).
+
+* Znaki, które powinny byæ zast±pione jakimi¶ o¶miobitowymi napisami.
+  Te i tylko te znaki s± zapisane we w³a¶ciwym filtrze z UTF-8.
+
+* Znaki przybli¿ane przez ASCII. Ta tablica jest w aux/UTF8-ascii. Opisuje
+  ona równie¿ znaki z poprzednich czê¶ci (poniewa¿ jest jedna dla
+  wszystkich zestawów), ale jest ³adowana po nich, wiêc t³umaczenia tych
+  samych znaków maj± ni¿szy priorytet. Ta tablica jest pierwsz±
+  i ostatni± kolumn± pliku devel/UTF8-charset.
+
+Skrypt aux/UTF8-charset jest u¿ywany przez prawie wszystkie konwersje
+z UTF-8. Obs³uguje on argumenty przekazane przez konwerta w zmiennej
+ARG i sk³ada odpowiednie tablice razem. W³a¶ciwe filtry z UTF-8 wo³aj±
+go tylko z pewnymi argumentami.
+
+Katalog aux/argcharset zawiera kilka wspólnych filtrów, przez które jest
+przepuszczany konwertowany tekst, je¶li przeka¿emy odpowiedni argument
+filtrowi UTF8-charset (argument jest nazw± pliku z tego katalogu).
+
+
+	BEZPO¦REDNIE KONWERSJE MIÊDZY ZESTAWAMI ZNAKÓW
+
+Pomiêdzy niektórymi parami zestawów znaków s± bezpo¶rednie konwersje,
+oprócz konwersji przez tymczasowy format UTF-8. Daje to przyspieszenie
+konwersji (i nic wiêcej).
+
+Filtry takie s± tworzone automatycznie. W pliku devel/charset-charset
+zapisane s± tylko nazwy zestawów znaków, pomiêdzy którymi bêd± tworzone
+konwersje. Z linijki zawieraj±cej wiêcej ni¿ jedno s³owo tworzone s±
+kombinacje ka¿dy z ka¿dym, przy czym s³owa zaczynaj±ce siê albo koñcz±ce
+na `-' s± brane pod uwagê tylko w jednym kierunku. Na przyk³ad je¶li
+mamy:
+
+iso2 cp1250 cp852 -ascii
+
+to zostan± utworzone konwersje iso2-cp1250, iso2-cp852, iso2-ascii,
+cp1250-iso2, cp1250-cp852, cp1250-ascii, cp852-iso2, cp852-cp1250
+i cp852-ascii. Przyk³adowa konwersja cp1250-iso2 zostanie utworzona na
+podstawie tabel charsets/cp1250-UTF8, charsets/iso2-UTF8
+i devel/UTF8-charset.
+
+Utworzone w ten sposób filtry u¿ywaj± wspólnego skryptu
+aux/charset-charset. Je¶li w¶ród argumentów konwersji bêd± takie, które
+wymagaj± po¶redniej postaci UTF-8, to konwersja odbêdzie siê tak jak
+pomiêdzy formatami nie posiadaj±cymi bezpo¶redniej konwersji.
+
+
+	ROZPOZNAWANIE ZESTAWÓW ZNAKÓW - KONWERSJA `any'
+
+Specjalny format wej¶ciowy any/JÊZYK (np. any/pl) rozpozna kodowanie
+automatycznie, na podstawie czêsto¶ci znaków znalezionych w tek¶cie.
+Z ka¿dym jêzykiem jest skojarzony zbiór mo¿liwych kodowañ u¿ywanych dla
+niego i ¶rednie czêsto¶ci jego liter (wy³±czaj±c litery ASCII).
+
+Oczekiwane czêsto¶ci znaków ka¿dego kodowania s± mno¿one przez
+odpowiednie czêsto¶ci z konwertowanego tekstu i dodawane razem.
+Kodowanie z najwiekszym wynikiem jest wtedy u¿ywane do konwersji.
+
+Skrypt filters/any-UTF8 pobiera informacje o jêzyku z odpowiedniego
+pliku aux/any/* (próbuj±c ka¿dy argument z ARG jako kod jezyka - zbiór
+dostêpnych jêzyków jest wyznaczony przez zawarto¶æ tego katalogu).
+
+Format tych plików jest prosty: Ka¿da linia sk³ada siê z oddzielonych
+odstêpami nazwy kodowania (jak w filters/*-UTF8) i reprezentacji ka¿dego
+znaku w tym kodowaniu. `-' zamiast niego oznacza, ¿e ten znak nie bêdzie
+brany pod uwagê. Reprezentacje te s± u¿ywane tylko do rozpoznania
+kodowania - ostatecznie normalna konwersja jest wykonywana przez
+filters/*-UTF8.
+
+Specjalne kodowanie o nazwie `%' zawiera tylko czêsto¶ci tych znaków
+(niekoniecznie w procentach).
+
+Nazwa kodowania mo¿e sk³adaæ siê z kilku konwersji oddzielonych przez
+`|'. Do ostatniej bêdzie do³±czone `-UTF8' i ka¿da zostanie wziêta
+z katalogu filters.
+
+iso1 nie jest tutaj u¿ywane, bo jest podzbiorem cp1252.
+
+Pliki ¼ród³owe dla aux/any/* znaduj± siê w katalogu devel/any. Jedyna
+ró¿nica jest taka, ¿e niektóre nazwy kodowañ mog± byæ wypisane bez
+reprezentacji znaków. Drugim kodowaniem, po tym specjalnym `%', musi byæ
+utf8, i zostanie ono u¿yte do uzupe³nienia tamtych opisów kodowañ.
+
+Maj±c przyk³adowe teksty w jakim¶ jêzyku, do zrobienia tych statystyk
+mo¿emy u¿yæ skryptów devel/whichletters i devel/frequencies. Tekst musi
+byæ w jakim¶ o¶miobitowym kodowaniu (np. ISO-8859-x, ale nie UTF-8 ani
+SGMLowe encje). `whichletters pliki... >l' wyszukuje znaki o kodach
+128..255. Mo¿emy je teraz przejrzeæ usuwaj±c ewentualne ¶mieci. Dalej
+`frequencies l pliki... | konwert X-utf8 >f', gdzie X jest oznaczeniem
+odpowiedniego kodowania, i dopisujemy co trzeba.
+
+Konwersja filter/htmlchariso1-iso1 jest wewnêtrznie u¿ywana przez
+niektóre automatycznie rozpoznawane konwersje. Jest ona podobna do
+htmlchar-iso1, ale idzie bezpo¶rednio do iso1 pomijaj±c utf8
+i konwertuje równie¿ &#128;...&#159;, które b³êdnie s± u¿ywane przez
+niektóre edytory HTMLa do reprezentacji rozszerzonych znaków z kodowañ
+innych ni¿ ISO-8859-1.
+
+Filtr obs³uguje teraz jêzyki cs (czeski), de (niemiecki), el (grecki),
+eo (Esperanto), es (hiszpañski), fr (francuski), he (hebrajski),
+it (w³oski), pl (polski), pt (portugalski), ru (rosyjski)
+i sv (szwedzki).
+
+
+	ALIASY
+
+Niektóre zestawy znaków s± dostêpne pod wieloma nazwami, np. cp1250 albo
+wince. Jest to zaimplementowane przez twarde linki tworzone podczas
+instalacji, na podstawie informacji z pliku devel/aliases.
+
+
+	TWORZENIE TABLIC KONWERSJI Z INNYCH FORMATÓW
+
+Skrypt devel/hex-trs konwertuje tablicê z formatu ftp.unicode.org na format
+trs. Nie jest tutaj u¿ywany, ale za³±czony dla wygody.
+
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

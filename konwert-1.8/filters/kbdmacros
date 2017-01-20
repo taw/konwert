@@ -1,0 +1,143 @@
+#!/usr/bin/perl
+
+$konfig = "$ENV{HOME}/.kbdmacros";
+
+sub dodaj
+{
+	my ($co, $ile) = @_;
+	while ($co ne "")
+	{
+		chop $co;
+		$dalej{$co} += $ile or delete $dalej{$co};
+	}
+}
+
+sub zeruj
+{
+	undef %dalej;
+	undef %jest;
+	undef %trs;
+	foreach (map {chr} 0..255)
+	{
+		dodaj ($_, 1);
+		$jest{$_} = "TRS";
+		$trs{$_} = $_;
+	}
+}
+
+sub eskejpuj
+{
+	my ($s) = @_;
+	$s =~ s/[\000-\040\\\177-\377]/sprintf "\\%03o", ord $&/eg;
+	return $s;
+}
+
+sub odeskejpuj
+{
+	my ($s) = @_;
+	$s =~ s/\\(\d{1,3})/chr oct $1/eg;
+	return $s;
+}
+
+sub zapisz
+{
+	open KONFIG, ">$konfig" or return;
+	foreach (sort keys %jest)
+	{
+		print KONFIG eskejpuj ($_), "\t",
+		&{${{
+			TRS => sub {eskejpuj $trs{$_}},
+			START => sub {"\\START"},
+			STOP => sub {"\\STOP"}
+		}}{$jest{$_}}}, "\n"
+		unless $jest{$_} eq "TRS" && length $_ eq 1 && $_ eq $trs{$_};
+	}
+	close KONFIG;
+}
+
+sub odczytaj
+{
+	zeruj;
+	if (open KONFIG, $konfig)
+	{
+		while (<KONFIG>)
+		{
+			if (/^\s*(\S+)\s+(\S+)\s*$/)
+			{
+				my $co = odeskejpuj $1;
+				dodaj ($co, 1);
+				$jest{$co} =
+					$2 eq "\\START" ? "START" :
+					$2 eq "\\STOP" ? "STOP" :
+					(($trs{$co} = odeskejpuj $2), "TRS");
+			}
+		}
+		close KONFIG;
+	}
+	else
+	{
+		dodaj ("\e\1", 1); $jest{"\e\1"} = "START";
+		dodaj ("\e\5", 1); $jest{"\e\5"} = "STOP";
+	}
+}
+
+sub zapamietaj
+{
+	odczytaj;
+	if ($nazwa ne "")
+	{
+		if ($rozwiniecie ne "")
+		{
+			dodaj ($nazwa, 1) unless $jest{$nazwa};
+			$jest{$nazwa} = "TRS";
+			$trs{$nazwa} = $rozwiniecie;
+		}
+		elsif (length $nazwa > 1)
+		{
+			dodaj ($nazwa, -1) if $jest{$nazwa};
+			delete $jest{$nazwa};
+			delete $trs{$nazwa};
+		}
+		else
+		{
+			$trs{$nazwa} = $nazwa;
+		}
+		$nazwa = "";
+	}
+	$rozwiniecie = "";
+	zapisz;
+}
+
+odczytaj;
+zapisz;
+
+$tryb = "NORMALNY";
+$| = 1;
+while (1)
+{
+	$in .= $wprzod ne "" ? chop $wprzod : getc
+		while $dalej{$in} && ($wprzod ne "" || !eof STDIN);
+	last if $in eq "";
+	$wprzod .= chop $in until $jest{$in};
+	&{${{
+		NORMALNY =>
+		{
+			TRS => sub {print $trs{$in}},
+			START => sub {$tryb = ZAPAMIETUJ},
+			STOP => sub {}
+		},
+		ZAPAMIETUJ =>
+		{
+			TRS => sub {print $trs{$in}; $rozwiniecie .= $trs{$in}},
+			START => sub {$rozwiniecie = ""},
+			STOP => sub {$tryb = NAZWIJ}
+		},
+		NAZWIJ =>
+		{
+			TRS => sub {$nazwa .= $in},
+			START => sub {zapamietaj; $tryb = "ZAPAMIETUJ"},
+			STOP => sub {zapamietaj; $tryb = "NORMALNY"}
+		}
+	}}{$tryb}{$jest{$in}}};
+	$in = "";
+}

@@ -1,0 +1,50 @@
+#!/usr/bin/perl -n
+
+sub bajt ($)
+{
+	my ($a) = @_;
+
+	$a < 040 || $a == 0177 ?
+		sprintf "\\%o", $a
+	:
+	$a == ord "\\" || $a == ord "#" ?
+		"\\" . chr ($a)
+	:
+	chr ($a);
+}
+
+sub utf8 ($)
+{
+	my ($b) = @_;
+
+	$b < 0x20 || $b == 0x7F ?
+		sprintf "\\x%02X", $b
+	:
+	$b == ord "\\" || $b == ord "#" ?
+		"\\" . chr ($b)
+	:
+	$b < 0x80 ?
+		chr ($b)
+	:
+	$b < 0x800 ?
+		chr (0xC0 | $b >> 6 & 0x1F) .
+		chr (0x80 | $b & 0x3F)
+	:
+		chr (0xE0 | $b >> 12 & 0x0F) .
+		chr (0x80 | $b >> 6 & 0x3F) .
+		chr (0x80 | $b & 0x3F),
+}
+
+if (/^\s*0x([0-9A-Fa-f]{2})\s+0x([0-9A-Fa-f]{4})/)
+{
+	print "\t", bajt hex $1, "\t", utf8 hex $2, "\n"
+	unless hex $1 == hex $2 && hex $1 < 0x80;
+}
+elsif (/^\s*0x([0-9A-Fa-f]{2})\s+0x([0-9A-Fa-f]{2})\s+0x([0-9A-Fa-f]{4})/)
+{
+	print "\t", bajt hex $1, bajt hex $2, "\t", utf8 hex $3, "\n";
+}
+elsif (/^\s*(\S+)\s+0x([0-9A-Fa-f]+)/)
+{
+	print "\t$1\t", utf8 hex $2, "\n";
+}

@@ -1,0 +1,32 @@
+
+	BUGS
+	----
+
+`make uninstall' deletes the whole share/konwert and lib/konwert
+directories, even if there are some files there that are not ours.
+It's not easy to build the explicit list of files to be deleted.
+
+APPLE character in mac* charsets, and CH and ch characters in koi8cs are
+not preserved in conversion even when they are available. Also they
+don't respect the /1 option. Reason: they are not in Unicode.
+
+Hard links should be used when several files share the same body,
+differing their behaviour by their name. They are used in source
+files, but later they are not preserved by the installation.
+
+mkUTF8-ascii would be run once for generating both UTF8-ascii and
+UTF8-ascii1 if I knew how to specify one command making multiple
+targets in a Makefile.
+
+512bold filter is not perfect. Some escape sequences may be emulated
+incorrectly. Additionally, colors changed in multiple steps or not used
+unnecessarily allocate some of the eight colors.
+
+fixtrsutf8 doesn't support `\-' ranges.
+
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

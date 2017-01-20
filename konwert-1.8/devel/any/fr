@@ -1,0 +1,9 @@
+% 1 1 1 1 1 1 1 1 1 1 1 1 1 16 3 1 56 14 6 1 3 1 3 1 2 2
+utf8 √Ä √Ç √á √â √à √ä √ã √é √è √î ≈í √π √ª √† √¢ √ß √© √® √™ √´ √Æ √Ø √¥ ≈ì √π √ª
+cp1252
+cp850 ∑ ∂ Ä ê ‘ “ ” ◊ ÿ ‚ OE ó ñ Ö É á Ç ä à â å ã ì oe ó ñ
+html &#192; &#194; &#199; &#201; &#200; &#202; &#203; &#206; &#207; &#212; &#338; &#249; &#251; &#224; &#226; &#231; &#233; &#232; &#234; &#235; &#238; &#239; &#244; &#339; &#249; &#251;
+html &#xC0; &#xC2; &#xC7; &#xC9; &#xC8; &#xCA; &#xCB; &#xCE; &#xCF; &#xD4; &#x152; &#xF9; &#xFB; &#xE0; &#xE2; &#xE7; &#xE9; &#xE8; &#xEA; &#xEB; &#xEE; &#xEF; &#xF4; &#x153; &#xF9; &#xFB;
+html &Agrave; &Acirc; &Ccedil; &Eacute; &Egrave; &Ecirc; &Euml; &Icirc; &Iuml; &Ocirc; &OElig; &ugrave; &ucirc; &agrave; &acirc; &ccedil; &eacute; &egrave; &ecirc; &euml; &icirc; &iuml; &ocirc; &oelig; &ugrave; &ucirc;
+mac
+qp-8bit|cp1252 =C0 =C2 =C7 =C9 =C8 =CA =CB =CE =CF =D4 =8C =F9 =FB =E0 =E2 =E7 =E9 =E8 =EA =EB =EE =EF =F4 =9C =F9 =FB

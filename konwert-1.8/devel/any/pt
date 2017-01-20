@@ -1,0 +1,9 @@
+% 1 1 1 1 1 1 1 1 1 1 1 1 80 17 41 5 28 43 16 29 9 25 8 1
+utf8 Ã À Á Â É Ç Ê Í Ô Ó Ú Ü ã à á â é ç ê í ô ó ú ü
+cp1252
+cp850
+html &#195; &#192; &#193; &#194; &#201; &#199; &#202; &#205; &#212; &#211; &#218; &#220; &#227; &#224; &#225; &#226; &#233; &#231; &#234; &#237; &#244; &#243; &#250; &#252;
+html &#xC3; &#xC0; &#xC1; &#xC2; &#xC9; &#xC7; &#xCA; &#xCD; &#xD4; &#xD3; &#xDA; &#xDC; &#xE3; &#xE0; &#xE1; &#xE2; &#xE9; &#xE7; &#xEA; &#xED; &#xF4; &#xF3; &#xFA; &#xFC;
+html &Atilde; &Agrave; &Aacute; &Acirc; &Eacute; &Ccedil; &Ecirc; &Iacute; &Ocirc; &Oacute; &Uacute; &Uuml; &atilde; &agrave; &aacute; &acirc; &eacute; &ccedil; &ecirc; &iacute; &ocirc; &oacute; &uacute; &uuml;
+mac
+qp-8bit|cp1252 =C3 =C0 =C1 =C2 =C9 =C7 =CA =CD =D4 =D3 =DA =DC =E3 =E0 =E1 =E2 =E9 =E7 =EA =ED =F4 =F3 =FA =FC

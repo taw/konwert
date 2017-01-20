@@ -1,0 +1,577 @@
+.TH KONWERT 1 "30 Jul 1998" "Konwert" "Podrêcznik u¿ytkownika Linuxa"
+.SH NAZWA
+konwert \- interfejs do ró¿nych konwersji kodowañ znaków
+.SH U¯YCIE
+.B konwert
+.I FILTR
+.RI [ PLIK ].\|.\|.\|
+.RB [ \-o
+.I WYNIK
+|
+.BR \-O ]
+.SH OPIS
+Konwert pozwala filtrowaæ wiele plików przez wiele filtrów. Filtruje
+podane
+.IR PLIKI ,
+albo stdin je¶li ¿adnych nie okre¶lono.
+.PP
+Prosty
+.I FILTR
+jest nazw± pliku wykonywalnego z katalogu
+.I ~/.konwert/filters
+albo z ogólnosystemowego, normalnie
+.IR /usr/share/konwert/filters .
+Taki program sam filtruje stdin na stdout.
+.PP
+Regu³a filtrowania mo¿e byæ bradziej skomplikowana:
+.PP
+.B konwert
+.IB FILTR1 + FILTR2
+znaczy
+.B konwert
+.I FILTR1
+|
+.B konwert
+.IR FILTR2 .
+.PP
+.B konwert
+.IB FORMAT1 \- FORMAT2\fR,
+o ile taki filtr nie istnieje, próbuje znale¼æ wspólny
+.IR FORMAT3 ,
+taki ¿e oba filtry
+.IB FORMAT1 \- FORMAT3
+i
+.IB FORMAT3 \- FORMAT1
+istniej±.
+.PP
+.B konwert
+.IB FILTR / ARG /\fR.\|.\|.\|
+przekazuje filtrowi argumenty. Argumenty mog± byæ te¿ podane tutaj:
+.IB FORMAT1 / ARG \- FORMAT2\fR.
+Znaczenie arguentów zale¿y od konkretnego filtru.
+.PP
+.B konwert
+.BI '( "KOMENDA ARG\fR.\|.\|.\|" )'
+wykonuje dane polecenie szela. Jest to przydatne z opcjami
+.B \-o
+albo
+.BR \-O .
+Komenda nie mo¿e zawieraæ ³añcucha
+.BR )+ ,
+który zakoñczy specyfikacjê tego filtru.
+.SS OPCJE
+.TP 10
+\fB\-o\fP \fIWYNIK\fP
+wyj¶cie idzie do tego pliku/katalogu zamiast na stdout
+.TP
+.B \-O
+ka¿dy plik ¼ród³owy jest zastêpowany swoim t³umaczeniem
+.TP
+.B \-\-help
+wy¶wietla opis i wychodzi
+.TP
+.B \-\-version
+wy¶wietla informacjê o wersji i wychodzi
+.PP
+Przekierowanie wyj¶cia do jednego z plików ¼ród³owych przez
+.B \-o
+albo
+.B >
+zamiast
+.B \-O
+zniszczy ten plik! Opcja
+.B \-O
+tworzy tymczasowy plik w
+.I /tmp
+i pó¼niej kopiuje go z powrotem na ¼ród³o.
+.SH KONWERSJE KODOWAÑ ZNAKÓW
+Mo¿na konwertowaæ tekst miêdzy dowolnymi dwoma zestawami znaków, na
+przyk³ad
+.B konwert
+.BR cp437\-iso2 .
+.PP
+Znaki niedostêpne w docelowym zestawie bêd± zast±pione przybli¿eniami
+dostêpnymi znakami. Przybli¿enia nie musz± byæ pojedynczymi znakami.
+.PP
+Filtry obs³uguj± teraz nastêpuj±ce zestawy znaków:
+.TP
+.B ascii
+siedmiobitowe ASCII
+.TP 16
+.B utf8\fR = \fPunicode
+Unikod (Unicode) w UTF-8
+.TP 7
+.PD 0
+.B iso1\fR = \fPisolatin1
+ISO-8859-1 albo ISO Latin 1 (zachodnioeuropejskie)
+.TP
+.B iso2\fR = \fPisolatin2
+ISO-8859-2 albo ISO Latin 2 (¶rodkowoeuropejskie)
+.TP
+.B iso3\fR = \fPisolatin3
+ISO-8859-3 albo ISO Latin 3 (Esperanto)
+.TP
+.B iso4\fR = \fPisolatin4
+ISO-8859-4 albo ISO Latin 4 (ba³tyckie)
+.TP
+.B iso5\fR = \fPisolatincyr
+ISO-8859-5 (cyrylica)
+.TP
+.B iso6\fR = \fPisolatinarabic
+ISO-8859-6 (arabskie)
+.TP
+.B iso7\fR = \fPisolatingreek
+ISO-8859-7 (greckie)
+.TP
+.B iso8\fR = \fPisolatinhebrew
+ISO-8859-8 (hebrajskie)
+.TP
+.B iso9\fR = \fPisolatin5\fR = \fPisolatintur
+ISO-8859-9 albo ISO Latin 5 (tureckie)
+.TP
+.B iso10\fR = \fPisolatin6\fR = \fPisolatinnordic
+ISO-8859-10 albo ISO Latin 6 (nordyckie)
+.TP
+.B iso12\fR = \fPisolatin7\fR = \fPisolatinceltic
+ISO-8859-12 albo ISO Latin 6 (celtyckie) - Draft
+.TP
+.B iso13\fR = \fPisolatin8\fR = \fPisolatinbaltic
+ISO-8859-13 albo ISO Latin 6 (ba³tyckie) - Draft
+.TP
+.B iso14\fR = \fPisolatin9\fR = \fPisolatinsami
+ISO-8859-14 albo ISO Latin 6 (Sámi) - Draft
+.TP
+.B iso15
+ISO-8859-15 - Draft
+.PD
+.TP 9
+.PD 0
+.B koi8r
+KOI8-R (rosyjskie)
+.TP
+.B koi8u
+KOI8-U (ukraiñskie, bia³oruskie)
+.TP
+.B koi8uni
+KOI8-Uni (cyrylica)
+.PD
+.TP 30
+.PD 0
+.B cp1250\fR = \fPwince\fR = \fPwinlatin2
+Windows CP-1250 albo Win Latin 2 (¶rodkowoeuropejskie)
+.TP
+.B cp1251\fR = \fPwincyr
+Windows CP-1251 (cyrylica)
+.TP
+.B cp1252\fR = \fPwinwest\fR = \fPwinlatin1
+Windows CP-1252 albo Win Latin 1 (zachodnioeuropejskie)
+.TP
+.B cp1253\fR = \fPwingr
+Windows CP-1253 (greckie)
+.TP
+.B cp1254\fR = \fPwintur
+Windows CP-1254 (tureckie)
+.TP
+.B cp1255\fR = \fPwinhebrew
+Windows CP-1255 (hebrajskie)
+.TP
+.B cp1256\fR = \fPwinarabic
+Windows CP-1256 (arabskie)
+.TP
+.B cp1257\fR = \fPwinbaltic
+Windows CP-1257 (ba³tytckie)
+.TP
+.B cp1258\fR = \fPwinviet
+Windows CP-1258 (wietnamskie)
+.PD
+.TP 29
+.PD 0
+.B cp437\fR = \fPicmeng
+DOS CP-437 (angielskie)
+.TP
+.B cp737\fR = \fPdosgreek
+DOS CP-737 (greckie)
+.TP
+.B cp775\fR = \fPdosbaltic
+DOS CP-775 (ba³tyckie)
+.TP
+.B cp850\fR = \fPdoswest\fR = \fPdoslatin1
+DOS CP-850 aka DOS Latin 1 (zachodnioeuropejskie)
+.TP
+.B cp852\fR = \fPdosce\fR = \fPdoslatin2
+DOS CP-852 aka DOS Latin 2 (¶rodkowoeuropejskie)
+.TP
+.B cp855\fR = \fPdoscyr
+DOS CP-855 (cyrylica)
+.TP
+.B cp857\fR = \fPdostur
+DOS CP-857 (tureckie)
+.TP
+.B cp860\fR = \fPdosportugal
+DOS CP-860 (portugalskie)
+.TP
+.B cp861\fR = \fPdosiceland
+DOS CP-861 (islandzkie)
+.TP
+.B cp862\fR = \fPdoshebrew
+DOS CP-862 (hebrajskie)
+.TP
+.B cp863\fR = \fPdoscanadfr
+DOS CP-863 (kanadyjskie - francuskie)
+.TP
+.B cp864\fR = \fPdosarabic
+DOS CP-864 (arabskie)
+.TP
+.B cp865\fR = \fPdosnordic
+DOS CP-865 (nordyckie)
+.TP
+.B cp866\fR = \fPdosrussian
+DOS CP-866 (rosyjskie)
+.TP
+.B cp869\fR = \fPdosgreek2
+DOS CP-869 (greckie 2)
+.TP
+.B cp874\fR = \fPdosthai
+DOS CP-874 (tajskie)
+.PD
+.TP 12
+.PD 0
+.B mac
+Macintosh Roman (zachodnioeuropejskie)
+.TP
+.B macce
+Macintosh Central European (wschodnioeuropejskie)
+.TP
+.B maccyr
+Macintosh Cyrillic (cyrylica)
+.TP
+.B macgreek
+Macintosh Greek (greckie)
+.TP
+.B maciceland
+Macintosh Icelandic (islandzkie)
+.TP
+.B mactur
+Macintosh Turkish (tureckie)
+.PD
+.TP 13
+.PD 0
+.BR csk ,
+.TP
+.BR cyfromat ,
+.TP
+.BR dhn ,
+.TP
+.BR fidomazovia ,
+.TP
+.BR iea ,
+.TP
+.BR logic ,
+.TP
+.BR mazovia ,
+.TP
+.B microvex
+DOSowe zestawy znaków do polskiego
+.PD
+.TP
+.PD 0
+.BR amigapl ,
+.TP
+.BR fat ,
+.TP 9
+.B xjp
+Amigowe zestawy znaków do polskiego
+.PD
+.TP 11
+.B kamenicky
+DOSowy zestaw znaków do czeskiego i s¥owackiego
+.TP 10
+.B wingreek
+WinGreek (kodowanie dla staro¿ytnej greki wed³ug windowsowego fontu)
+.TP 9
+.PD 0
+.B babelpl
+TeX [polish]{babel}:
+.I \&"a"c"e"l"n"o"s"z"r
+.TP
+.B ciachy
+TeX \\prefixing:
+.I /a/c/e/l/n/o/s/x/z
+.PD
+.TP 15
+.PD 0
+.B xmetodo
+Esperanto:
+.I cx gx hx jx sx ux
+.RI ( vx\ w )
+.TP
+.B hmetodo
+Esperanto:
+.I ch gh hh jh sh u
+.TP
+.B antauxcxap
+Esperanto:
+.I ^c ^g ^h ^j ^s ^u
+.RI ( ~u )
+.TP
+.B postcxap
+Esperanto:
+.I c^ g^ h^ j^ s^ u^
+.RI ( u~ )
+.TP
+.B apostrofoj
+Esperanto:
+.I c' g' h' j' s' u'
+.TP
+.B malapostrofoj
+Esperanto:
+.I c` g` h` j` s` u`
+.PD
+.TP
+.PD 0
+.TP 8
+.B viscii
+VISCII (wietnamski)
+.TP
+.B viqri
+Vietnamese Quoted Readable Implicit
+.PD
+.TP 9
+.PD 0
+.B htmldec
+SGMLowe/HTMLowe numery znaków (dziesi±tkowo):
+.I &#198; &#283; &#8594;
+.TP
+.B htmlhex
+SGMLowe/HTMLowe numery znaków (szesnastkowo)
+.I &#xC6; &#x11B; &#x2192;
+.TP
+.B htmlent
+SGMLowe/HTMLowe encje (nazwy znaków):
+.I &AElig; &ecaron &rarr;
+.TP
+.B html
+Wszystkie trzy powy¿ej (tylko jako format wej¶ciowy)
+.PD
+.TP 7
+.B tex
+TeX wraz z niektórymi rozszerzeniami LaTeXa albo AMS-TeXa. Nie ma
+rozró¿nienia miêdzy normalnym trybem a matematycznym - prawdopodobbie
+bêdziesz musia³ rêcznie podostawiaæ trochê znaków
+.IR $ .
+.TP 11
+.PD 0
+.B mnemonic
+Mnemoniki RFC 1345 poprzedzone przez
+.I &
+.TP
+.B mnemonic1
+Mnemoniki RFC 1345 poprzedzone przez
+.I `
+.PD
+.TP 7
+\fBany/\fIJÊZYK\fR (np. \fBany/pl-iso2\fP)
+Ten specjalny format wej¶ciowy rozpozna kodowanie automatycznie, na
+podstawie czêsto¶ci znaków znalezionych w tek¶cie. Z ka¿dym jêzykiem
+jest skojarzony zbiór mo¿liwych kodowañ u¿ywanych dla niego i ¶rednie
+czêsto¶ci jego liter (wy³±czaj±c litery ASCII). U¿yte zostanie najlepiej
+pasuj±ce kodowanie. Filtr obs³uguje teraz jêzyki
+.B cs
+(czeski),
+.B de
+(niemiecki),
+.B el
+(grecki),
+.B eo
+(Esperanto),
+.B es
+(hiszpañski),
+.B fr
+(francuski),
+.B he
+(hebrajski),
+.B it
+(w³oski),
+.B pl
+(polski),
+.B pt
+(portugalski),
+.B ru
+(rosyjski) i
+.B sv
+(szwedzki).
+.PD
+.TP 7
+.B varpl
+Wymieszane polskie ISO-8859-2, CP-1250 i UTF-8. W polskich warunkach
+sugerujê podpiêcie tego jako filtr w czytniku newsów (dla szybko¶ci
+lepiej wo³aæ bezpo¶rednio, a nie przez konwerta).
+.TP
+.B vareo
+Wymieszane ró¿ne kodowania Esperanta.
+.SH OPCJE KONTROLUJ¡CE POWY¯SZE KONWERSJE
+.TP
+\fB/1\fP (np. \fBkonwert iso2-ascii/1\fP)
+Ka¿dy niedostêpny znak bêdzie zast±piony przez pojedynczy przybli¿aj±cy
+znak, a nie przez napis. Przydatne dla programu filterm albo dla
+preformatowanego tekstu. Ta opcja jest automatycznie w³±czana je¶li
+filtr jest u¿ywany jako wyj¶cie filterma.
+.TP
+.B /html
+Zak³ada, ¿e tekst jest HTMLem. Znaki
+.I \&" & < >
+wynik³e z przybli¿eñ innych znaków bêd± prawid³owo wyeskejpowane do
+.I &quot; &amp; &lt;
+.IR &gt; .
+Nag³ówek
+.I <META http-equiv="content-type" content="text/html; charset=.\|.\|.\|">
+bêdzie poprawiony je¶li wyst±pi.
+.TP
+.B /htmldec
+Konwertuje META jak wy¿ej. Niedostêpne znaki bêd± zakodowane
+w &#Unikodzie;.
+.TP
+.B /htmlhex
+Konwertuje META jak wy¿ej. Niedostêpne znaki bêd± zakodowane
+w szesnastkowym &#xUnikodzie;.
+.TP
+.B /tex
+Niedostêpne znaki bêd± opisane w TeXu. Znaki
+.I # $ % & \\\\ ^ _ { | } ~
+wynik³e z przybli¿eñ niektórych znaków bêd± prawid³owo wyeskejpowane do
+.I \\\\# \\\\$ \\\\% \\\\& $\\\\backslash$ \\\\^{} \\\\_ \\\\{ $|$ \\\\}
+.IR \\\\\\\\~{} .
+.TP
+.B /asciichar
+Rozpoznaje niektóre reprezentacje znaków w ASCII, np.\|
+.I (c) .\|.\|.\| 1/2
+.IR >= .
+.TP
+.B /rosyjski
+Rosyjski tekst bêdzie oddany w polskiej transkrypcji fonetycznej.
+.PP
+Niektóre filtry wyj¶ciowe mog± u¿yæ informacji o jêzyku do lepszego
+przybli¿enia niedostêpnych liter, np. w
+.B /de
+(niemieckim):
+.I \(:a
+\(->
+.I ae
+zamiast
+.IR a .
+.SH INNE FILTRY
+.TP
+.B any/\fIJÊZYK\fP-test
+Rozpoznaje kodowanie, ale zamiast konwersji tekstu pokazuje tylko nazwê
+kodowania. Dodatkowa opcja
+.B /all
+pokazuje wszystkie mo¿liwe kodowania, posortowane od lepszych do
+gorszych.
+.TP
+.PD 0
+.B cr
+.TP
+.B lf
+.TP
+.B crlf
+.PD
+Wymusza okre¶lon± konwencjê oznaczenia koñców linii.
+.B
+cr
+= Macintosh,
+.B lf
+= Unix i Amiga,
+.B crlf
+= Windows i DOS.
+Konwencja wej¶ciowa jest rozpoznawana automatycznie.
+.TP
+.B expand
+Rozwija tabulacje na spacje (u¿ywa programu expand z textutils).
+.TP
+.B unexpand
+Kompresuje spacje na pocz±tku linii do tabulacji (u¿ywa programu
+unexpand z textutils).
+.TP
+.B rmspacesateol
+Usuwa spacje i tabulacje z koñców linii.
+.TP
+.PD 0
+.B qp-8bit
+.TP
+.B 8bit-qp
+.PD
+Kodowanie MIME Quoted Printable:
+.IR =A3=F3d=BC .
+.TP
+.PD 0
+.B rtf-8bit
+.TP
+.B 8bit-rtf
+.PD
+Rich Text Format:
+.IR \\\\\\\\'a3\\\\\\\\'f3d\\\\\\\\'9f .
+.TP
+.B txt-htmlchar
+Eskejpuje
+.I \&" & < >
+w SGMLowe/HTMLowe encje
+.I &quot; &amp; &lt;
+.IR &gt; .
+Wygodne do w³±czania pliku tekstowego w HTMLowych tagach <PRE> </PRE>.
+.TP
+.B htmlchar-txt
+W drug± stronê.
+.TP
+.B rot13
+Gb wrfg qrzbafgenpwn ebg13.
+.TP
+.PD 0
+.B toupper
+.TP
+.B tolower
+.PD
+Zamienia tekst na du¿e / ma³e litery. Na razie tylko ASCII.
+.SH PLIKI
+.TP
+.PD 0
+.I /usr/share/konwert/filters/*
+.TP
+.I ~/.konwert/filters/*
+.PD
+.SH "ZOBACZ TE¯"
+.BR trs (1),
+.BR filterm (1)
+.SH B£ÊDY
+Znak APPLE i zestawach mac* oraz znaki CH i ch w koi8cs nie s±
+zachowywane przy konwersji nawet kiedy s± dostêpne. Równie¿ nie
+przestrzegaj± opcji /1. Powód: nie ma ich w Unikodzie.
+.SH COPYRIGHT
+Konwert jest pakietem s³u¿±cym do konwersji miêdzy ró¿nymi kodowaniami
+znaków.
+.PP
+Copyright (c) 1998 Marcin 'Qrczak' Kowalczyk
+.PP
+Niniejszy program jest oprogramowaniem wolnodostêpnym; mo¿esz go
+rozprowadzaæ dalej i/lub modyfikowaæ na warunkach Powszechnej Licencji
+Publicznej GNU, wydanej przez Fundacjê Wolnodostêpnego Oprogramowania
+- wed³ug wersji 2-giej tej Licencji lub której¶ z pó¼niejszych wersji.
+.PP
+Niniejszy program rozpowszechniany jest z nadziej±, i¿ bêdzie on
+u¿yteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domy¶lnej
+gwarancji PRZYDATNO¦CI HANDLOWEJ albo PRZYDATNO¦CI DO OKRE¦LONYCH
+ZASTOSOWAÑ. W celu uzyskania bli¿szych informacji - Powszechna
+Licencja Publiczna GNU.
+.PP
+Z pewno¶ci± wraz z niniejszym programem otrzyma³e¶ te¿ egzemplarz
+Powszechnej Licencji Publicznej GNU; je¶li nie - napisz do Free
+Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+MA  02111-1307  USA
+.SH AUTOR
+.ft CW
+.nf
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \\__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-
+.fi
+.ft R

@@ -1,0 +1,67 @@
+#!/bin/bash -
+
+VARIANT_bg='
+	Щ	SHT
+	щ	sht
+' VARIANT_de='
+	Ä	AE
+	Ö	OE
+	Ü	UE
+	ä	ae
+	ö	oe
+	ü	ue
+' VARIANT_hr='
+	Đ	DJ
+	đ	dj
+' VARIANT_vi='
+	À	A`
+	Á	A'\''
+	Â	A^
+	Ã	A~
+	È	E`
+	É	E'\''
+	Ê	E^
+	Ì	I`
+	Í	I'\''
+	Ò	O`
+	Ô	O^
+	Õ	O~
+	Ù	U`
+	Ú	U'\''
+	Ý	Y'\''
+	à	a`
+	á	a'\''
+	â	a^
+	ã	a~
+	è	e`
+	é	e'\''
+	ê	e^
+	ì	i`
+	í	i'\''
+	ò	o`
+	ô	o^
+	õ	o~
+	ù	u`
+	ú	u'\''
+	ý	y'\''
+	Ă	A(
+	ă	a(
+	Đ	DD
+	đ	dd
+	Ĩ	I~
+	ĩ	i~
+	Ũ	U~
+	ũ	u~
+' VARIANT1_bg='
+	Ъ	Y
+	ъ	y
+' VARIANT1_ua='
+	И	Y
+	и	y
+' APPROX='
+' APPROX1='
+	Ǿ	�
+	ǿ	�
+	Ћ	�
+	ћ	�
+' REPLACE='?' MIME=x-fat "${0%/*}/../aux/UTF8-charset" -rf "${0%/*}/../aux/charsets/fat"

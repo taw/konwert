@@ -1,0 +1,13 @@
+% 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 9 2 5 2 3 9 1 2 8 2 4 4 4 7 11 3 6 6 7 3 1 1 1 2 1 1 1 2 2 1 1 2
+utf8 А Б В Г Д Е Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я а б в г д е ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я
+cp1251
+cp866
+html &#1040; &#1041; &#1042; &#1043; &#1044; &#1045; &#1046; &#1047; &#1048; &#1049; &#1050; &#1051; &#1052; &#1053; &#1054; &#1055; &#1056; &#1057; &#1058; &#1059; &#1060; &#1061; &#1062; &#1063; &#1064; &#1065; &#1066; &#1067; &#1068; &#1069; &#1070; &#1071; &#1072; &#1073; &#1074; &#1075; &#1076; &#1077; &#1078; &#1079; &#1080; &#1081; &#1082; &#1083; &#1084; &#1085; &#1086; &#1087; &#1088; &#1089; &#1090; &#1091; &#1092; &#1093; &#1094; &#1095; &#1096; &#1097; &#1098; &#1099; &#1100; &#1101; &#1102; &#1103;
+html &#x410; &#x411; &#x412; &#x413; &#x414; &#x415; &#x416; &#x417; &#x418; &#x419; &#x41A; &#x41B; &#x41C; &#x41D; &#x41E; &#x41F; &#x420; &#x421; &#x422; &#x423; &#x424; &#x425; &#x426; &#x427; &#x428; &#x429; &#x42A; &#x42B; &#x42C; &#x42D; &#x42E; &#x42F; &#x430; &#x431; &#x432; &#x433; &#x434; &#x435; &#x436; &#x437; &#x438; &#x439; &#x43A; &#x43B; &#x43C; &#x43D; &#x43E; &#x43F; &#x440; &#x441; &#x442; &#x443; &#x444; &#x445; &#x446; &#x447; &#x448; &#x449; &#x44A; &#x44B; &#x44C; &#x44D; &#x44E; &#x44F;
+html &Acy; &Bcy; &Vcy; &Gcy; &Dcy; &IEcy; &ZHcy; &Zcy; &Icy; &Jcy; &Kcy; &Lcy; &Mcy; &Ncy; &Ocy; &Pcy; &Rcy; &Scy; &Tcy; &Ucy; &Fcy; &KHcy; &TScy; &CHcy; &SHcy; &SHCHcy; &HARDcy; &Ycy; &SOFTcy; &Ecy; &YUcy; &YAcy; &acy; &bcy; &vcy; &gcy; &dcy; &iecy; &zhcy; &zcy; &icy; &jcy; &kcy; &lcy; &mcy; &ncy; &ocy; &pcy; &rcy; &scy; &tcy; &ucy; &fcy; &khcy; &tscy; &chcy; &shcy; &shchcy; &hardcy; &ycy; &softcy; &ecy; &yucy; &yacy;
+iso5
+koi8r
+maccyr
+qp-8bit|cp1251 =C0 =C1 =C2 =C3 =C4 =C5 =C6 =C7 =C8 =C9 =CA =CB =CC =CD =CE =CF =D0 =D1 =D2 =D3 =D4 =D5 =D6 =D7 =D8 =D9 =DA =DB =DC =DD =DE =DF =E0 =E1 =E2 =E3 =E4 =E5 =E6 =E7 =E8 =E9 =EA =EB =EC =ED =EE =EF =F0 =F1 =F2 =F3 =F4 =F5 =F6 =F7 =F8 =F9 =FA =FB =FC =FD =FE =FF
+qp-8bit|iso5 =B0 =B1 =B2 =B3 =B4 =B5 =B6 =B7 =B8 =B9 =BA =BB =BC =BD =BE =BF =C0 =C1 =C2 =C3 =C4 =C5 =C6 =C7 =C8 =C9 =CA =CB =CC =CD =CE =CF =D0 =D1 =D2 =D3 =D4 =D5 =D6 =D7 =D8 =D9 =DA =DB =DC =DD =DE =DF =E0 =E1 =E2 =E3 =E4 =E5 =E6 =E7 =E8 =E9 =EA =EB =EC =ED =EE =EF
+qp-8bit|koi8r =E1 =E2 =F7 =E7 =E4 =E5 =F6 =FA =E9 =EA =EB =EC =ED =EE =EF =F0 =F2 =F3 =F4 =F5 =E6 =E8 =E3 =FE =FB =FD =FF =F9 =F8 =FC =E0 =F1 =C1 =C2 =D7 =C7 =C4 =C5 =D6 =DA =C9 =CA =CB =CC =CD =CE =CF =D0 =D2 =D3 =D4 =D5 =C6 =C8 =C3 =DE =DB =DD =DF =D9 =D8 =DC =C0 =D1

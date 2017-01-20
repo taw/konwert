@@ -1,0 +1,196 @@
+.TH FILTERM 1 "30 Jul 1998" "Konwert" "Linux User's Manual"
+.SH NAME
+filterm \- filter terminal input and/or output
+.SH SYNOPSIS
+.B filterm
+.I INPUT OUTPUT
+.RI [ COMMAND
+.RI [ ARGS ]]
+.SH DESCRIPTION
+Execute the specified
+.I COMMAND
+(default is the shell), filtering terminal input and/or output.
+.PP
+It can help e.g. when our terminal is unable to display non-ASCII
+characters or to enter them from the keyboard. It also makes writing
+various terminal filters easier.
+.PP
+.I INPUT
+and
+.I OUTPUT
+are names of konwert's filters \- they are passed as the first argument
+to the
+.BR konwert (1)
+program.
+.B filterm \-
+.I OUTPUT
+filters only output, and
+.B filterm
+.I INPUT
+.B \-
+only input.
+.PP
+The command 
+.B -
+executes the shell as a login shell.
+.PP
+It differs from
+.B konwert
+.I INPUT
+.B |
+.I COMMAND
+.B |
+.B konwert
+.I OUTPUT
+in that the command is executed on a pseudo-terminal, so full-screen
+programs work correctly.
+.PP
+The filters have to output the characters as soon as they receive all
+necessary input, without buffering.
+.BR trs (1)
+scripts are OK, but
+.BR sed (1)
+or
+.BR awk (1)
+or
+.BR tr (1)
+scripts are not. In C you may use
+.BR read() ,
+.BR getchar() ,
+.BR fread() ,
+and
+.BR write() ,
+but
+.B putchar()
+and
+.B fwrite()
+only together with
+.BR fflush(stdout) .
+In C++:
+.BR cin.get() ,
+.BR cout.put() ,
+and
+.BR "cout <<" .
+In perl:
+.BR sysread ,
+.BR getc ,
+.BR read ,
+and
+.BR syswrite ,
+but
+.B print
+only with
+.BR "$| = 1" .
+.PP
+The input filter will have set the environment variable
+.BR FILTERM=in ,
+and the output one \-
+.BR FILTERM=out .
+This way some filters can slightly alter their behaviour when working
+for filterm.
+.SS OPTIONS
+.TP 10
+.B \-\-help
+display help and exit
+.TP
+.B \-\-version
+output version information and exit
+.SH FILTERS FOR FILTERM
+See
+.BR konwert (1).
+Additionally the following konwert's filters are designed only for
+filterm:
+.TP
+\fBtyldy\fP (input)
+Polish
+.I ~a~c~e~l~n~o~s~x~z
+.TP
+\fBlewyap\fP (input)
+Polish
+.I `a`c`e`l`n`o`s`x`z
+.TP
+\fBboldpl\fP (output)
+ASCII with Polish letters shown as bold.
+.TP
+\fBpinectrlchars\fP (output)
+Replaces the characters
+.I 128..159
+shown by the Pine (or another program) as
+.I ^À..^ß
+back to the real
+.IR 128..159 .
+.TP
+\fB512bold\fP (output)
+Changes the mapping of colors in 512-character mode, which restricts the
+number of colors to eight. The palette is dynamically changed to contain
+the eight most recently used colors. When more colors are used at once,
+some of them display incorrectly.
+.TP
+\fB512bold1\fP (output)
+Changes the mapping of colors in 512-character mode. Instead of ignoring
+the intensity, the following colors are available: black, red, green,
+white, blue, light magenta, light cyan, light gray; others are
+substitutied with approximations. This gives better effect, allowing to
+show the intensity, with the side-effect of belying the hue of some
+colors.
+.TP
+\fBkbdmacros\fP (input)
+Keyboard macros. A sequence of keys can be recorded with
+.B Esc Ctrl-A
+.I SEQUENCE
+.B Esc Ctrl-E
+.I SHORTCUT
+\- after which, if you press the
+.IR SHORTCUT ,
+the
+.I SEQUENCE
+will be generated instead. Later such assignment can be deleted with
+.B Esc Ctrl-A Esc Ctrl-E
+.I SHORTCUT
+.B Esc
+.BR Ctrl-E .
+Instead of
+.B Esc Ctrl-
+you often may press
+.BR Ctrl-Alt- .
+The defined shortcuts, together with the above redefinable key
+combinations used to define them, are stored in the
+.I ~/.kbdmacros
+file. Note: when you redefine a sequence, all its prefixes will not be
+passed through immediately, but wait until it can be unambiguously told
+which sequence was actually input. This includes escape sequences
+representing some extended keys.
+.SH "SEE ALSO"
+.BR konwert (1)
+.SH BUGS
+512bold filter is not perfect. Some escape sequences may be emulated
+incorrectly. Additionally, colors changed in multiple steps or not used
+unnecessarily allocate some of the eight colors.
+.SH COPYRIGHT
+filterm filters terminal input and/or output. It forms part of the
+konwert package.
+.PP
+Copyright (c) 1998 Marcin 'Qrczak' Kowalczyk
+.PP
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+.PP
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+.PP
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+.SH AUTHOR
+.ft CW
+.nf
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \\__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-
+.fi
+.ft R

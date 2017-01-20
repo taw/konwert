@@ -1,0 +1,4 @@
+#!/usr/bin/perl
+
+while (<>) {foreach (split //) {$jest{$_}++ if ord $_ >= 128}}
+print +(sort {$jest{$b} <=> $jest{$a}} keys %jest), "\n";

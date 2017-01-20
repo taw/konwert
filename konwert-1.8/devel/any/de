@@ -1,0 +1,9 @@
+% 1 1 1 27 12 34 28
+utf8 Ä Ö Ü ä ö ü ß
+cp1252
+cp437
+html &#196; &#214; &#220; &#228; &#246; &#252; &#223;
+html &#xC4; &#xD6; &#xDC; &#xE4; &#xF6; &#xFC; &#xDF;
+html &Auml; &Ouml; &Uuml; &auml; &ouml; &uuml; &szlig;
+mac
+qp-8bit|cp1252 =C4 =D6 =DC =E4 =F6 =FC =DF

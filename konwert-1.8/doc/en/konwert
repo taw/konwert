@@ -1,0 +1,45 @@
+
+	KONWERT
+	-------
+
+Usage: konwert FILTER [FILE]... [-o DEST | -O]
+This is an interface for various character encoding conversions.
+
+Konwert allows filtering multiple files through multiple filters.
+It filters the specified FILEs, or stdin if none are given.
+
+  -o DEST     output goes to this file/directory instead of stdout
+  -O          every input file is replaced with its translation
+  --help      display this help and exit
+  --version   output version information and exit
+
+Redirecting output to one of the source files with either -o or >
+instead of -O will corrupt it! Option -O creates a temporary file in
+/tmp and later copies it back onto the source.
+
+Simple FILTER is the name of an executable file from the directory
+~/.konwert/filters or the system-wide one, normally
+/usr/share/konwert/filters. Such program itself filters stdin to stdout.
+
+The filtering rule can be more complex:
+
+`konwert FILTER1+FILTER2' means `konwert FILTER1 |konwert FILTER2'.
+
+`konwert FORMAT1-FORMAT2', unless such filter exists, tries to find
+a common FORMAT3, such that both filters FORMAT1-FORMAT3 and
+FORMAT3-FORMAT1 do exist.
+
+`konwert FILTER/ARG/...' passes arguments to the filter. Arguments can
+also be specified here: FORMAT1/ARGS-FORMAT2. The meaning of arguments
+depends on the filter.
+
+`konwert '(COMMAND ARGS...)'' executes this arbitrary shell command.
+This is useful with -o or -O options. The command cannot contain the
+string `)+', which will terminate this filter's specification.
+
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

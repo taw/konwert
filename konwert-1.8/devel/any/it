@@ -1,0 +1,9 @@
+% 1 1 1 1 1 1 1 1 1 13 14 14 2 21 7 15 1 17
+utf8 À È É Ë Ì Ï Ò Ó Ù à è é ë ì ï ò ó ù
+cp1252
+cp850
+html &#192; &#200; &#201; &#203; &#204; &#207; &#210; &#211; &#217; &#224; &#232; &#233; &#235; &#236; &#239; &#242; &#243; &#249;
+html &#xC0; &#xC8; &#xC9; &#xCB; &#xCC; &#xCF; &#xD2; &#xD3; &#xD9; &#xE0; &#xE8; &#xE9; &#xEB; &#xEC; &#xEF; &#xF2; &#xF3; &#xF9;
+html &Agrave; &Egrave; &Eacute; &Euml; &Igrave; &Iuml; &Ograve; &Oacute; &Ugrave; &agrave; &egrave; &eacute; &euml; &igrave; &iuml; &ograve; &oacute; &ugrave;
+mac
+qp-8bit|cp1252 =C0 =C8 =C9 =CB =CC =CF =D2 =D3 =D9 =E0 =E8 =E9 =EB =EC =EF =F2 =F3 =F9

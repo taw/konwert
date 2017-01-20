@@ -1,0 +1,95 @@
+#!/bin/bash -
+
+TRS='
+	¢	DJ
+	©	‹œ
+	ª	œ
+	«	TSH
+	­	\!
+	¯	DZ
+	ò	dj
+	ù	«ì
+	ú	­ì
+	û	tsh
+	ý	S:
+	ÿ	dz
+' TRS1='
+	 	ÿ
+	¡	ð
+	¢	D
+	£	ƒ
+	¤	ò
+	¥	S
+	¦	I
+	§	ô
+	¨	J
+	©	‹
+	ª	
+	«	C
+	¬	Š
+	­	-
+	®	ö
+	°	€
+	±	
+	²	‚
+	³	ƒ
+	´	„
+	µ	…
+	¶	†
+	·	‡
+	¸	ˆ
+	¹	‰
+	º	Š
+	»	‹
+	¼	Œ
+	½	
+	¾	Ž
+	¿	
+	À	
+	Á	‘
+	Â	’
+	Ã	“
+	Ä	”
+	Å	•
+	Æ	–
+	Ç	—
+	È	˜
+	É	™
+	Ê	š
+	Ë	›
+	Ì	œ
+	Í	
+	Î	ž
+	Ï	Ÿ
+	Ð	 
+	Ñ	¡
+	Ò	¢
+	Ó	£
+	Ô	¤
+	Õ	¥
+	Ö	¦
+	×	§
+	Ø	¨
+	Ù	©
+	Ú	ª
+	Û	«
+	Ü	¬
+	Ý	­
+	Þ	®
+	ß	¯
+	ð	ü
+	ò	d
+	ó	£
+	ô	ó
+	õ	s
+	ö	i
+	÷	õ
+	ø	j
+	ù	«
+	ú	­
+	û	c
+	ü	ª
+	ý	S
+	þ	÷
+\[€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ¯ÿ\] þ
+' MIME=cp866 "${0%/*}/../aux/charset-charset" iso5-cp866

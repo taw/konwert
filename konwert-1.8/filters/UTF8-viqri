@@ -1,0 +1,45 @@
+#!/bin/bash -
+
+VARIANT_bg='
+	Щ	SHT
+	щ	sht
+' VARIANT_de='
+	Ä	AE
+	Ö	OE
+	Ü	UE
+	ä	ae
+	ö	oe
+	ü	ue
+' VARIANT1_bg='
+	Ъ	Y
+	ъ	y
+' VARIANT1_ua='
+	И	Y
+	и	y
+' APPROX='
+	Ǻ	A'\''A
+	ǻ	a'\''a
+	Ǽ	A'\''E
+	ǽ	a'\''e
+' APPROX1='
+	Ð	DD
+	Ǻ	A'\''
+	ǻ	a'\''
+	Ǽ	A'\''
+	ǽ	a'\''
+	Ǿ	O'\''
+	ǿ	o'\''
+	Ђ	DD
+	Э	E`
+	Я	A^
+	э	e`
+	я	a^
+	ђ	dd
+	Ṍ	O~
+	ṍ	o~
+	Ṏ	O~
+	ṏ	o~
+	Ṹ	U~
+	ṹ	u~
+	ẩ	a^
+' REPLACE='?' MIME=x-viqri "${0%/*}/../aux/UTF8-charset" -rf "${0%/*}/../aux/charsets/viqri"

@@ -1,0 +1,65 @@
+#!/bin/bash -
+
+if [ "$FILTERM" = in ]
+then
+trs -e '
+	\e[\[CGHJSUV\]\{X	X
+	\e[\[CGHJSUV\]\{x	x
+	\e[[\[CGHJSUV\]\{X	X
+	\e[[\[CGHJSUV\]\{x	x
+	C\{\[Xx\]		\177Ĉ
+	CX\{X			\177CX
+	Cx\{X			\177Cx
+	G\{\[Xx\]		\177Ĝ
+	GX\{X			\177GX
+	Gx\{x			\177Gx
+	H\{\[Xx\]		\177Ĥ
+	HX\{X			\177HX
+	Hx\{x			\177Hx
+	J\{\[Xx\]		\177Ĵ
+	JX\{X			\177JX
+	Jx\{x			\177Jx
+	S\{\[Xx\]		\177Ŝ
+	SX\{X			\177SX
+	Sx\{x			\177Sx
+	\[UV\]\{\[Xx\]		\177Ŭ
+	UX\{X			\177UX
+	Ux\{x			\177Ux
+	VX\{X			\177VX
+	Vx\{x			\177Vx
+	\[AE\]\{W		Ŭ
+	\[AE\]W\{W		\177W
+	c\{x			\177ĉ
+	cx\{x			\177cx
+	g\{x			\177ĝ
+	gx\{x			\177gx
+	h\{x			\177ĥ
+	hx\{x			\177hx
+	j\{x			\177ĵ
+	jx\{x			\177jx
+	s\{x			\177ŝ
+	sx\{x			\177sx
+	\[uv\]\{x		\177ŭ
+	ux\{x			\177ux
+	vx\{x			\177vx
+	\[AEae\]\{w		ŭ
+	\[AEae\]w\{w		\177w
+'
+else
+trs -e '
+	C\[Xx\]		Ĉ
+	G\[Xx\]		Ĝ
+	H\[Xx\]		Ĥ
+	J\[Xx\]		Ĵ
+	S\[Xx\]		Ŝ
+	\[UV\]\[Xx\]	Ŭ
+	\[AE\]\{W	Ŭ
+	cx		ĉ
+	gx		ĝ
+	hx		ĥ
+	jx		ĵ
+	sx		ŝ
+	\[uv\]x		ŭ
+	\[AEae\]\{w	ŭ
+'
+fi

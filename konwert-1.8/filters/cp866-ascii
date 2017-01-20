@@ -1,0 +1,163 @@
+#!/bin/bash -
+
+VARIANT_bg='
+	™	SHT
+	é	sht
+' VARIANT1_bg='
+	š	Y
+	ê	y
+' VARIANT1_ua='
+	ˆ	Y
+	¨	y
+' TRS='
+	†	ZH
+	•	KH
+	–	TS
+	—	CH
+	˜	SH
+	™	SHCH
+		YU
+	Ÿ	YA
+	¦	zh
+	å	kh
+	æ	ts
+	ç	ch
+	è	sh
+	é	shch
+	î	yu
+	ï	ya
+	ò	YE
+	ó	ye
+	û	SQRT\s
+	ü	No.
+	ı	CUR
+' TRS1='
+	€	A
+		B
+	‚	V
+	ƒ	G
+	„	D
+	…	E
+	†	Z
+	‡	Z
+	ˆ	I
+	‰	J
+	Š	K
+	‹	L
+	Œ	M
+		N
+		O
+		P
+		R
+	‘	S
+	’	T
+	“	U
+	”	F
+	•	H
+	–	C
+	—	C
+	˜	S
+	™	S
+	š	"
+	›	Y
+	œ	'\''
+		E
+		U
+	Ÿ	A
+	 	a
+	¡	b
+	¢	v
+	£	g
+	¤	d
+	¥	e
+	¦	z
+	§	z
+	¨	i
+	©	j
+	ª	k
+	«	l
+	¬	m
+	­	n
+	®	o
+	¯	p
+	°	\#
+	±	\#
+	²	\#
+	³	|
+	´	|
+	µ	|
+	¶	|
+	·	+
+	¸	+
+	¹	|
+	º	|
+	»	+
+	¼	+
+	½	+
+	¾	+
+	¿	+
+	À	+
+	Á	-
+	Â	-
+	Ã	|
+	Ä	-
+	Å	|
+	Æ	|
+	Ç	|
+	È	+
+	É	+
+	Ê	=
+	Ë	=
+	Ì	|
+	Í	=
+	Î	|
+	Ï	=
+	Ğ	-
+	Ñ	=
+	Ò	-
+	Ó	+
+	Ô	+
+	Õ	+
+	Ö	+
+	×	|
+	Ø	|
+	Ù	+
+	Ú	+
+	Û	\#
+	Ü	_
+	İ	[
+	Ş	]
+	ß	"
+	à	r
+	á	s
+	â	t
+	ã	u
+	ä	f
+	å	h
+	æ	c
+	ç	c
+	è	s
+	é	s
+	ê	"
+	ë	y
+	ì	'\''
+	í	e
+	î	u
+	ï	a
+	ğ	E
+	ñ	e
+	ò	E
+	ó	e
+	ô	I
+	õ	i
+	ö	U
+	÷	u
+	ø	o
+	ù	*
+	ú	.
+	û	V
+	ü	\#
+	ı	*
+	ş	\#
+	ÿ	\s
+' MIME=us-ascii "${0%/*}/../aux/charset-charset" cp866-ascii

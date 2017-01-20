@@ -1,0 +1,45 @@
+utf8		unicode
+	
+iso1		isolatin1
+iso2		isolatin2
+iso3		isolatin3
+iso4		isolatin4
+iso5		isolatincyr
+iso6		isolatinarabic
+iso7		isolatingreek
+iso8		isolatinhebrew
+iso9		isolatin5	isolatintur
+iso10		isolatin6	isolatinnordic
+#iso11		isolatinthai
+iso12           isolatin7	isolatinceltic
+iso13		isolatin8	isolatinbaltic
+iso14		isolatin9	isolatinsami
+	
+cp1250		wince		winlatin2
+cp1251		wincyr
+cp1252		winwest		winlatin1
+cp1253		wingr
+cp1254		wintur
+cp1255		winhebrew
+cp1256		winarabic
+cp1257		winbaltic
+cp1258		winviet
+	
+cp437		doseng
+cp737		dosgreek
+cp775		dosbaltic
+cp850		doswest		doslatin1
+cp852		dosce		doslatin2
+cp855		doscyr
+cp857		dostur
+cp860		dosportugal
+cp861		dosiceland
+cp862		doshebrew
+cp863		doscanadfr
+cp864		dosarabic
+cp865		dosnordic
+cp866		dosrussian
+cp869		dosgreek2
+cp874		dosthai
+
+mac		macroman

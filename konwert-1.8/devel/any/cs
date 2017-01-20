@@ -1,0 +1,17 @@
+% 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 17 7 1 9 9 24 1 1 9 7 1 1 5 7 7
+utf8 Á Č Ď É Ě Í Ň Ó Ř Š Ť Ú Ů Ý Ž á č ď é ě í ň ó ř š ť ú ů ý ž
+cp1250
+cp852
+html &#193; &#268; &#270; &#201; &#282; &#205; &#327; &#211; &#344; &#352; &#356; &#218; &#366; &#221; &#381; &#225; &#269; &#271; &#233; &#283; &#237; &#328; &#243; &#345; &#353; &#357; &#250; &#367; &#253; &#382;
+html &#xC1; &#x10C; &#x10E; &#xC9; &#x11A; &#xCD; &#x147; &#xD3; &#x158; &#x160; &#x164; &#xDA; &#x16E; &#xDD; &#x17D; &#xE1; &#x10D; &#x10F; &#xE9; &#x11B; &#xED; &#x148; &#xF3; &#x159; &#x161; &#x165; &#xFA; &#x16F; &#xFD; &#x17E;
+html &Aacute; &Ccaron; &Dcaron; &Eacute; &Ecaron; &Iacute; &Ncaron; &Oacute; &Rcaron; &Scaron; &Tcaron; &Uacute; &Uring; &Yacute; &Zcaron; &aacute; &ccaron; &dcaron; &eacute; &ecaron; &iacute; &ncaron; &oacute; &rcaron; &scaron; &tcaron; &uacute; &uring; &yacute; &zcaron;
+htmliso1-iso1|cp1250 &#165; &#198; &#202; &#163; &#209; &#211; &#140; &#143; &#175; &#185; &#230; &#234; &#179; &#241; &#243; &#156; &#159; &#191;
+htmliso1-iso1|cp1250 &yen; &AElig; &Ecirc; &pound; &Ntilde; &Oacute; &#140; &#143; &macr; &sup1; &aelig; &ecirc; &sup3; &ntilde; &oacute; &#156; &#159; &iquest;
+htmliso1-iso1|iso2 &#161; &#198; &#202; &#163; &#209; &#211; &#166; &#172; &#175; &#177; &#230; &#234; &#179; &#241; &#243; &#182; &#188; &#191;
+htmliso1-iso1|iso2 &iexcl; &AElig; &Ecirc; &pound; &Ntilde; &Oacute; &brvbar; &not; &macr; &plusmn; &aelig; &ecirc; &sup3; &ntilde; &oacute; &para; &frac14; &iquest;
+iso2
+kamenicky
+koi8cs
+macce
+qp-8bit|cp1250 =C1 =C8 =CF =C9 =CC =CD =D2 =D3 =D8 =8A =8D =DA =D9 =DD =8E =E1 =E8 =EF =E9 =EC =ED =F2 =F3 =F8 =9A =9D =FA =F9 =FD =9E
+qp-8bit|iso2 =C1 =C8 =CF =C9 =CC =CD =D2 =D3 =D8 =A9 =AB =DA =D9 =DD =AE =E1 =E8 =EF =E9 =EC =ED =F2 =F3 =F8 =B9 =BB =FA =F9 =FD =BE

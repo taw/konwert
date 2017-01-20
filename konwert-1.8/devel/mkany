@@ -1,0 +1,26 @@
+#!/usr/bin/perl
+
+print scalar <>;
+print $_ = <>;
+chomp;
+@utf8 = split;
+shift @utf8;
+foreach (@utf8) {$utf8{$_} = $_}
+
+while (<>)
+{
+	/^(\S+)$/ or print, next;
+	$charset = $1;
+	($plik = $0) =~ s(/[^/]*$)(/../aux/charsets/$charset);
+	open CHARSET, $plik or next;
+	print $charset;
+	%charset = ();
+	while (<CHARSET>)
+	{
+		$charset{$2} = $1
+			if /^\s*(\S+)\s+(\S+)\s*$/
+			&& defined $utf8{$2} && !defined $charset{$2};
+	}
+	foreach (@utf8) {print " $charset{$_}"}
+	print "\n";
+}

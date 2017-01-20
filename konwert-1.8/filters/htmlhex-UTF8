@@ -1,0 +1,42 @@
+#!/usr/bin/perl -p
+
+s/&#x([0-9A-Fa-f]+);/
+$h = hex ($1);
+$h < 0x80 ?
+	$h == ord "\"" ? "&quot;" :
+	$h == ord "&" ? "&amp;" :
+	$h == ord "<" ? "&lt;" :
+	$h == ord ">" ? "&gt;" :
+	chr ($h)
+:
+$h < 0x800 ?
+	chr (0xC0 | $h >> 6 & 0x1F) .
+	chr (0x80 | $h & 0x3F)
+:
+$h < 0x10000 ?
+	chr (0xE0 | $h >> 12 & 0x0F) .
+	chr (0x80 | $h >> 6 & 0x3F) .
+	chr (0x80 | $h & 0x3F)
+:
+$h < 0x200000 ?
+	chr (0xF0 | $h >> 18 & 0x07) .
+	chr (0x80 | $h >> 12 & 0x3F) .
+	chr (0x80 | $h >> 6 & 0x3F) .
+	chr (0x80 | $h & 0x3F)
+:
+$h < 0x4000000 ?
+	chr (0xF8 | $h >> 24 & 0x03) .
+	chr (0x80 | $h >> 18 & 0x3F) .
+	chr (0x80 | $h >> 12 & 0x3F) .
+	chr (0x80 | $h >> 6 & 0x3F) .
+	chr (0x80 | $h & 0x3F)
+:
+$h < 0x80000000 ?
+	chr (0xFC | $h >> 30 & 0x01) .
+	chr (0x80 | $h >> 24 & 0x3F) .
+	chr (0x80 | $h >> 18 & 0x3F) .
+	chr (0x80 | $h >> 12 & 0x3F) .
+	chr (0x80 | $h >> 6 & 0x3F) .
+	chr (0x80 | $h & 0x3F)
+:
+$&/eg;

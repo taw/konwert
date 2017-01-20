@@ -1,0 +1,198 @@
+.TH FILTERM 1 "30 Jul 1998" "Konwert" "Podrêcznik u¿ytkownika Linuxa"
+.SH NAZWA
+filterm \- filtrowanie wej¶cia lub wyj¶cia terminala
+.SH U¯YCIE
+.B filterm
+.I WEJ¦CIE WYJ¦CIE
+.RI [ KOMENDA
+.RI [ ARGUMENTY ]]
+.SH OPIS
+Wykonuje podan±
+.I KOMENDÊ
+(domy¶lnie - szela), filtruj±c wej¶cie lub wyj¶cie terminala.
+.PP
+Program mo¿e pomóc np. gdy nasz terminal nie potrafi wy¶wietlaæ znaków
+spoza ASCII albo wprowadzaæ ich z klawiatury. Równie¿ u³atwia pisanie
+ró¿nych filtrów terminala.
+.PP
+.I WEJ¦CIE
+i
+.I WYJ¦CIE
+s± nazwami filtrów konwerta \- s± przekazywane
+.BR konwert owi(1)
+jako pierwszy argument.
+.B filterm \-
+.I WYJ¦CIE
+filtruje tylko wyj¶cie, a
+.B filterm
+.I WEJ¦CIE
+.B \-
+tylko wej¶cie.
+.PP
+Komenda
+.B -
+uruchamia szela jako login-szela.
+.PP
+W odró¿nieniu od
+.B konwert
+.I WEJ¦CIE
+.B |
+.I KOMENDA
+.B |
+.B konwert
+.I WYJ¦CIE
+komenda jest wykonywana na pseudo-terminalu, wiêc pe³noekranowe programy
+dzia³aj± poprawnie.
+.PP
+Filtry musz± wysy³aæ znaki jak tylko otrzymaj± wszystko co trzeba na
+wej¶ciu, bez buforowania. Skrypty
+.BR trs 'a(1)
+siê nadaj±, ale skrypty
+.BR sed 'a(1),
+.BR awk 'a(1)
+albo
+.BR tr 'a(1)
+\- nie. W C mo¿na u¿ywaæ
+.BR read() ,
+.BR getchar() ,
+.B fread()
+i
+.BR write() ,
+a
+.B putchar()
+i
+.B fwrite()
+tylko razem z
+.BR fflush(stdout) .
+W C++:
+.BR cin.get() ,
+.B cout.put()
+i
+.BR "cout <<" .
+W perlu:
+.BR sysread ,
+.BR getc ,
+.BR read
+i
+.BR syswrite ,
+a
+.B print
+tylko z
+.BR "$| = 1" .
+.PP
+Filtr wej¶ciowy bêdzie mia³ ustawion± zmienn± ¶rodowiskow±
+.BR FILTERM=in ,
+a wyj¶ciowy \-
+.BR FILTERM=out .
+W ten sposób niektóre filtry mog± trochê zmieniæ zachowanie, kiedy s³u¿±
+filtermowi.
+.SS OPCJE
+.TP 10
+.B \-\-help
+wy¶wietla opis i wychodzi
+.TP
+.B \-\-version
+wy¶wietla informacjê o wersji i wychodzi
+.SH FILTRY DLA FILTERMA
+Zobacz
+.BR konwert (1).
+Dodatnowo nastêpuj±ce filtry konwerta s± zaprojektowane tylko dla
+filterma:
+.TP
+\fBtyldy\fP (wej¶cie)
+polskie
+.I ~a~c~e~l~n~o~s~x~z
+.TP
+\fBlewyap\fP (wej¶cie)
+polskie
+.I `a`c`e`l`n`o`s`x`z
+.TP
+\fBboldpl\fP (wyj¶cie)
+ASCII z polskimi literami wyró¿nionymi przez rozja¶nienie.
+.TP
+\fBpinectrlchars\fP (wyj¶cie)
+Zamienia znaki
+.I 128..159
+wy¶wietlane przez Pine (albo inny program) jako
+.I ^À..^ß
+z powrotem na prawdziwe
+.IR 128..159 .
+.TP
+\fB512bold\fP (wyj¶cie)
+Zmienia mapowanie kolorów w trybie 512-znakowym, który ogranicza liczbê
+kolorów do o¶miu. Paleta jest dynamicznie zmieniana i zawiera osiem
+ostatnio u¿ywanych kolorów. Kiedy wiêcej kolorów jest u¿ytych
+równocze¶nie, niektóre z nich s± wy¶wietlone niepoprawnie.
+.TP
+\fB512bold1\fP (wyj¶cie)
+Zmienia mapowanie kolorów w trybie 512-znakowym. Zamiast ignorowania
+rozja¶nienia, dostêpne s± nastêpuj±ce kolory: czarny, czerwony, zielony,
+bia³y, niebieski, jasna magenta, jasny cyjan, jasnoszary; pozosta³e s±
+zastêpowane przybli¿eniami. Daje to lepszy efekt, umo¿liwiaj±c pokazanie
+rozja¶nienia, kosztem przek³amania barwy niektórych kolorów.
+.TP
+\fBkbdmacros\fP (wej¶cie)
+Makra klawiaturowe. Sekwencjê klawiszy mo¿na zapamiêtaæ przez
+.B Esc Ctrl-A
+.I ROZWINIÊCIE
+.B Esc Ctrl-E
+.I SKRÓT
+.B Esc Ctrl-E
+\- od tej pory naci¶niêcie
+.I SKRÓTU
+wygeneruje
+.IR ROZWINIÊCIE .
+Pó¼niej mo¿na skasowaæ skrót przez
+.B Esc Ctrl-A Esc Ctrl-E
+.I SKRÓT
+.B Esc
+.BR Ctrl-E .
+Czêsto zamiast
+.B Esc Ctrl-
+mo¿na nacisn±æ
+.BR Ctrl-Alt- .
+Definiowane skróty, wraz z definiowalnymi powy¿szymi kombinacjami
+klawiszy s³u¿±cymi do ich definiowania, s± pamiêtane w pliku
+.IR ~/.kbdmacros .
+Uwaga: Je¶li przedefiniujesz jak±¶ sekwencjê, to wszystkie jej prefiksy
+nie bêd± przepuszczane natychmiast, tylko poczekaj±, a¿ bêdzie mo¿na
+jednoznacznie stwierdziæ, która sekwencja zosta³a wpisana. Dotyczy to
+równie¿ sekwencji z
+.B Esc
+reprezentuj±cych ró¿ne rozszerzone klawisze.
+.SH "ZOBACZ TE¯"
+.BR konwert (1)
+.SH B£ÊDY
+Filtr 512bold nie jest doskona³y. Niektóre sekwencje eskejpowe mog± nie
+byæ poprawnie emulowane. Dodatkowo, kolory zmieniane na raty oraz
+nieu¿yte niepotrzebnie zajmuj± cenne miejsce o¶miu kolorów.
+.SH COPYRIGHT
+Konwert jest pakietem s³u¿±cym do konwersji miêdzy ró¿nymi kodowaniami
+znaków.
+.PP
+Copyright (c) 1998 Marcin 'Qrczak' Kowalczyk
+.PP
+Niniejszy program jest oprogramowaniem wolnodostêpnym; mo¿esz go
+rozprowadzaæ dalej i/lub modyfikowaæ na warunkach Powszechnej Licencji
+Publicznej GNU, wydanej przez Fundacjê Wolnodostêpnego Oprogramowania
+- wed³ug wersji 2-giej tej Licencji lub której¶ z pó¼niejszych wersji.
+.PP
+Niniejszy program rozpowszechniany jest z nadziej±, i¿ bêdzie on
+u¿yteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domy¶lnej
+gwarancji PRZYDATNO¦CI HANDLOWEJ albo PRZYDATNO¦CI DO OKRE¦LONYCH
+ZASTOSOWAÑ. W celu uzyskania bli¿szych informacji - Powszechna
+Licencja Publiczna GNU.
+.PP
+Z pewno¶ci± wraz z niniejszym programem otrzyma³e¶ te¿ egzemplarz
+Powszechnej Licencji Publicznej GNU; je¶li nie - napisz do Free
+Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+MA  02111-1307  USA
+.SH AUTOR
+.ft CW
+.nf
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \\__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-
+.fi
+.ft R

@@ -1,0 +1,104 @@
+
+	TWORZENIE PAKIETU
+	-----------------
+
+
+        ¬RÓD£A TABEL
+
+O, jest ich wiele... Nie pamiêtam wszystkich.
+
+Wiele unikodowych tabel zestawów znaków, w³±czaj±c SGMLowe/HTMLowe
+encje, zosta³o ¶ci±gniêtych z <ftp://ftp.unicode.org/Public/MAPPINGS/>.
+
+Wiele tabel polskich zestawów znaków pochodzi od konwertera polskich
+liter ConvPL kravietZa <kravietz@pipeta.chemia.pk.edu.pk>.
+Kodowanie Kamenickich wzi±³em z konwertera czeskich liter cs2cs
+Ferdinanda Prantla, Jr. <prantl@aip1.fsv.cvut.cz>.
+
+Algorytm rozpoznawania zestawów znaków pochodzi od narzêdzia
+rozpoznaj±cego zestaw polskich znaków QueryPL kravietZa.
+
+Czêsto¶ci liter jêzyka polskiego zosta³y wyliczone na podstawie JTZ
+<http://www.jtz.org.pl/>, polskiego t³umaczenia linuksowych HOWTO
+(1893 kB), czeskiego - Czech-HOWTO (75 kB), Esperanta -
+<http://www.esperanto.mv.ru/> (4708 kB), a niemieckiego i rosyjskiego
+- na podstawie przypadkowych tekstów w tych jêzykach znalezionych
+Altavist± <http://altavista.digital.com/> (po 60 kB).
+
+Czêsto¶ci liter nastêpuj±cych jêzyków przys³a³ Gwidon S. Naskrent
+<naskrent@hoth.amu.edu.pl>: francuskiego - Cancide, de Voltaire (190
+kB), w³oskiego - La Divina Commedia di Dante (550 kB), hiszpañskiego
+i szwedzkiego - /usr/dict/*.words z Debiana (po 800 kB), hebrajskiego -
+Seforim haDivrei z <ftp://ftp.shamash.org/> (140 kB), Esperanta -
+Psau^moj z Biblii Zamenhoffa (450 kB).
+
+Przybli¿enia wielu unikodowych liter wzoruj± siê na obrazkach liter
+znalezionych na <http://charts.unicode.org/charts.html>. Niektóre by³y
+równie¿ zainspirowane tabelami konwersji Lynxa.
+
+viscii, viqri i rozszerzone cp1258 zosta³y wziête z csets Marka Leishera
+<mleisher@crl.nmsu.edu>.
+
+mnemonic i mnemonic1 zosta³y wziête ze ¼róde³ glibc-2.0.7
+
+
+	PODZIÊKOWANIA
+
+Podziêkowania dla Grzegorza Grudziñskiego <gsg@lipa.mimuw.edu.pl> za
+spêdzenie du¿ej ilo¶ci czasu odpowiadaj±c na moje g³upie pytania.
+
+Podziêkowania dla Gwidona S. Naskrenta <naskrent@hoth.amu.edu.pl> za
+dyskusje o zestawach znaków, kodowaniach, fontach itd., raporty b³êdów,
+poprawianie mojego angielskiego, przys³anie czêsto¶ci liter w kilku
+jêzykach oraz strony manuala.
+
+Podziêkowania dla Yanna Dirsona <ydirson@a2points.com> za dyskusje,
+raporty b³êdów, pomoc i zapakowanie Konwerta w pakiet Debiana.
+
+Podziêkowania dla Adama Twardocha <adam.twardoch@euv-frankfurt-o.de> za
+dyskusje o zestawach znaków, kodowaniach, fontach itd.
+
+Podziêkowania dla Ziemka Borowskiego <ziembor@FAQ-bot.Ziembor.waw.pl> za
+pomoc w zapakowanie Konwerta do RPMa i wytkniêcie b³êdów.
+
+Podziêkowania dla Juliusza Chroboczka <jec@dcs.ed.ac.uk> za ISO-8859-15,
+KOI8-RU i csets Marka Leishera <mleisher@crl.nmsu.edu>.
+
+Pomys³ filterma wzi±³ siê z podobnego programu Piotra Pi±tkowskiego
+<kompas@uci.agh.edu.pl> o nazwie ttyconv albo ogonki
+<http://www.agh.edu.pl/ogonki/ttyconv.html>. Kod obs³ugi
+pseudo-terminala wyci±gn±³em z linuksowego programu script. Pomog³a mi
+równie¿ ksi±¿ka W. Richarda Stevensa "UNIX Network Programming".
+
+Podziêkowania dla subskrybentów grup news:pl.comp.ogonki
+i news:pl.comp.os.linux za dyskusje i pomoc.
+
+Podziêkowania dla autorów Linuxa, programów cat, bash, dosemu, gcc,
+grep, gzip, inn, less, lynx, make, mc, perl, pine, pppd, rpm, sed,
+sendmail, sort, suck, tar, uniq, wget... ¯ycie bez nich by³oby o wiele
+ciê¿sze.
+
+
+	JAK MÓG£BY¦ MI POMÓC?
+
+Bêdê wdziêczny za podsy³anie raportów o b³êdach, usprawnieñ i innych
+sugestii o trsie, skryptach, tabelach i innych danych - zw³aszcza
+devel/UTF8-charset, devel/UTF8-tex, devel/any and devel/mime.
+
+Je¶li ¿yczysz sobie obs³ugi nowego zestawu znaków, proszê mi o tym
+powiedzieæ - ale tylko je¶li wiesz, ¿e ten zestaw znaków jest u¿ywany
+albo mo¿na napotkaæ teksty w nim zakodowane. Mam wystarczaj±c± ilo¶æ
+tabel setek dziwnych nigdy nie napotkanych zestawów znaków, ale nie
+wiem, które z nich s± sensowne.
+
+Je¶li ¿yszycz sobie obs³ugi nowego jêzyka dla konwersji `any', proszê
+powiedzieæ mi, jak mogê zdobyæ czêsto¶ci ich liter (URLe d³ugich tekstów
+w tym jêzyku s± mile widziane) i jakie zestawy znaków s± do tego jêzyka
+u¿ywane.
+
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

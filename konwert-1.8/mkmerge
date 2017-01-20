@@ -1,0 +1,14 @@
+$(patsubst $(srcdeveldir)/mergewithcp437/%,$(srccharsetsdir)/%, \
+$(wildcard $(srcdeveldir)/mergewithcp437/*)): \
+$(srccharsetsdir)/%: \
+$(srcdeveldir)/mergewithcp437/% \
+$(srccharsetsdir)/cp437 \
+$(srcdeveldir)/mergetrs
+	$(perl) $(srcdeveldir)/mergetrs $< $(srccharsetsdir)/cp437 >$@
+$(patsubst $(srcdeveldir)/mergewithiso1/%,$(srccharsetsdir)/%, \
+$(wildcard $(srcdeveldir)/mergewithiso1/*)): \
+$(srccharsetsdir)/%: \
+$(srcdeveldir)/mergewithiso1/% \
+$(srccharsetsdir)/iso1 \
+$(srcdeveldir)/mergetrs
+	$(perl) $(srcdeveldir)/mergetrs $< $(srccharsetsdir)/iso1 >$@

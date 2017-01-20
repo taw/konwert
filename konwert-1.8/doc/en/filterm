@@ -1,0 +1,43 @@
+
+	FILTERM
+	-------
+
+Usage: filterm INPUT OUTPUT [COMMAND [ARGS]]
+Execute the specified COMMAND (default is the shell), filtering terminal
+input and/or output.
+
+It can help e.g. when our terminal is unable to display non-ASCII
+characters or to enter them from the keyboard. It also makes writing
+various terminal filters easier.
+
+INPUT and OUTPUT are names of konwert's filters - they are passed as
+the first argument to the konwert program. `filterm - OUTPUT' filters
+only output, and `filterm INPUT -' only input.
+
+The command `-' executes the shell as a login shell.
+
+In addition, the following standard options are recognized:
+  --help      display this help and exit
+  --version   output version information and exit
+
+It differs from `konwert INPUT |COMMAND |konwert OUTPUT' in that the
+command is executed on a pseudo-terminal, so full-screen programs work
+correctly.
+
+The filters have to output the characters as soon as they receive all
+necessary input, without buffering. trs scripts are OK, but sed or awk
+or tr scripts are not. In C you may use read(), getchar(), fread(), and
+write(), but putchar() and fwrite() only together with fflush(stdout).
+In C++: cin.get(), cout.put(), and cout <<. In perl: sysread, getc,
+read, and syswrite, but print only with $| = 1.
+
+The input filter will have set the environment variable FILTERM=in,
+and the output one - FILTERM=out. This way some filters can slightly
+alter their behaviour when working for filterm.
+
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

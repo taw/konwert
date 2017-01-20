@@ -1,0 +1,132 @@
+#!/bin/bash -
+
+VARIANT_bg='
+	Щ	SHT
+	щ	sht
+' VARIANT_de='
+	Ä	AE
+	Ö	OE
+	Ü	UE
+	ä	ae
+	ö	oe
+	ü	ue
+' VARIANT_hr='
+	Đ	DJ
+	đ	dj
+' VARIANT_vi='
+	À	A`
+	Á	A'\''
+	Â	A^
+	Ã	A~
+	È	E`
+	É	E'\''
+	Ê	E^
+	Ì	I`
+	Í	I'\''
+	Ò	O`
+	Ó	O'\''
+	Ô	O^
+	Õ	O~
+	Ù	U`
+	Ú	U'\''
+	Ý	Y'\''
+	à	a`
+	á	a'\''
+	â	a^
+	ã	a~
+	è	e`
+	é	e'\''
+	ê	e^
+	ì	i`
+	í	i'\''
+	ò	o`
+	ó	o'\''
+	ô	o^
+	õ	o~
+	ù	u`
+	ú	u'\''
+	ý	y'\''
+	Ă	A(
+	ă	a(
+	Đ	DD
+	đ	dd
+	Ĩ	I~
+	ĩ	i~
+	Ũ	U~
+	ũ	u~
+' VARIANT1_bg='
+	Ъ	Y
+	ъ	y
+' VARIANT1_ua='
+	И	Y
+	и	y
+' REPLACE='?' MIME=us-ascii
+
+if [ "$FILTERM" = out ]
+then
+	NPOJED=
+else
+	NPOJED=1
+fi
+FORMAT=
+HTMLCHAR=
+POPRAWKI=
+for A in $ARG
+do
+	case "$A" in
+	(1)               NPOJED=;;
+	(html)            FORMAT=html;;
+	(htmldec|htmlhex) FORMAT=html; HTMLCHAR=${A#html};;
+	(tex)             FORMAT=tex;;
+	(*)
+		if [ -x "${0%/*}/../aux/argcharset/$A" ]
+		then
+			POPRAWKI=${POPRAWKI:+$POPRAWKI | }${0%/*}/../aux/argcharset/$A
+		fi
+		VARIANT=VARIANT_$A; APPROX="${!VARIANT} $APPROX"
+		VARIANT=VARIANT1_$A; APPROX1="${!VARIANT} $APPROX1"
+		;;
+	esac
+done
+
+if [ "$POPRAWKI" ]
+then
+	"$SHELL" -c "$POPRAWKI"
+else
+	cat
+fi |
+case "$FORMAT" in
+(html)
+	"${0%/*}/../aux/fixmeta" us-ascii |
+	if [ "$HTMLCHAR" ]
+	then
+		"${0%/*}/UTF8-html$HTMLCHAR"
+	else
+		trs -e '\}\[@&<>\] @' \
+			${NPOJED:+-e} ${NPOJED:+"$APPROX"} \
+			-e "$APPROX1" \
+			${NPOJED:+-f} ${NPOJED:+"${0%/*}/../aux/UTF8-ascii"} \
+			-f "${0%/*}/../aux/UTF8-ascii1" \
+			-e "\300\-\377 ${REPLACE:-?} \200\-\277 \!" |
+		trs -e '@@ @ @& & @< < @> > & &amp; < &lt; > &gt;'
+	fi
+	;;
+(tex)
+	trs -e '\}\[@\#$%&\\^_{|}~\] @' \
+		-f "${0%/*}/../aux/UTF8-tex" \
+		-e "$APPROX" \
+		-e "$APPROX1" \
+		-f "${0%/*}/../aux/UTF8-ascii" \
+		-f "${0%/*}/../aux/UTF8-ascii1" \
+		-e "\300\-\377 ${REPLACE:-?} \200\-\277 \!" |
+	trs -e '@@ @ @\# \# @$ $ @% % @& & @\\ \\ @^ ^ @_ _ @{ { @| | @} } @~ ~
+\# \\\# $ \\$ % \\% & \\& \\ $\\backslash$ ^ \\^{} _ \\_ { \\{ | $|$ } \\} ~ \\~{}'
+	;;
+(*)
+	trs ${NPOJED:+-e} ${NPOJED:+"$APPROX"} \
+		-e "$APPROX1" \
+		${NPOJED:+-f} ${NPOJED:+"${0%/*}/../aux/UTF8-ascii"} \
+		-f "${0%/*}/../aux/UTF8-ascii1" \
+		-e "\300\-\377 ${REPLACE:-?} \200\-\277 \!"
+	;;
+esac

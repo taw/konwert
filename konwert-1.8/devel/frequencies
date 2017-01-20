@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+
+open ZNAKI, shift;
+chomp ($_ = <ZNAKI>); @znaki = split //;
+close ZNAKI;
+
+while (<>) {foreach (split //) {$ile{$_}++}}
+
+foreach (@znaki) {$suma += $ile{$_}}
+$suma /= 100;
+
+print "\% @{[map {100 - int (100 - $ile{$_} / $suma)} @znaki]}\n @znaki\n";

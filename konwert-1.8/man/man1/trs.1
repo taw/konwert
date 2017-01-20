@@ -1,0 +1,206 @@
+.TH TRS 1 "12 Jul 1998" "Konwert" "Linux User's Manual"
+.SH NAME
+trs \- filter replacing strings
+.SH SYNOPSIS
+.B trs
+.RB [ \- [ r ] e ]
+.BI ' REPLACE_THIS
+.I WITH_THAT
+.RI [ AND_THIS
+.IR WITH_THAT ].\|.\|.\|\fB'
+.br
+.B trs
+.RB [ \- [ r ] f ]
+.I FILE
+.SH DESCRIPTION
+Copy stdin to stdout replacing every occurence of given strings with
+other ones. This is similar to
+.BR tr (1),
+but replaces strings, not only single chars.
+.PP
+Rules (separated by whitespace) can be given directly after
+.B \-e
+option, or can be read from
+.IR FILE .
+Argument not preceded by
+.B \-e
+or
+.B \-f
+is guessed to be a script when it contains some whitespace, or a filename
+otherwise.
+.PP
+Comments are allowed from
+.B #
+until the end of line. The character
+.B #
+in strings must be specified as 
+.BR \\\\\\\\# .
+.PP
+Standard C-like escapes
+.B \\\\a \\\\b \\\\e \\\\f \\\\n \\\\r \\\\t \\\\v \\\\\\\\
+.BI \\\\\\\\ nnn
+are recognized. In addition,
+.B \\\\s
+means a space character and
+.B \\\\!\|
+means an empty string.
+.PP
+Sets of acceptable characters at a given position can be specified
+between
+.B \\\\[
+and
+.BR \\\\] .
+ASCII ranges in sets can be shortly written as
+.IB FIRST \- LAST\fR.
+When a set consists of only a single range,
+.B \\\\[
+and
+.B \\\\]
+can be omitted.
+.PP
+When a part of the string to translate is enclosed in
+.BR \\\\\\\\{ .\|.\|.\| \\\\\\\\} ,
+only that part is replaced. Any text outside
+.BR \\\\\\\\{ .\|.\|.\| \\\\\\\\}
+serves as an assertion: a string is translated only if it is preceded by
+the given text and followed by another one.
+.B \\\\{
+at the beginning or
+.B \\\\}
+at the end of the string can be omitted. Text outside
+.BR \\\\\\\\{ .\|.\|.\| \\\\\\\\}
+is treated as untranslated.
+.PP
+Before the beginning of the file and after its end there are only
+.BR \\\\\\\\n 's.
+Thus, for example,
+.B \\\\n\\\\{.\\\\}\\\\n
+matches 
+.B .\|
+on a line by itself, including the first line, and the last one even
+without the
+.B \\\\n
+marker.
+.PP
+A fragment of the form
+.BI \\\\\\\\? x = N\fR,
+where
+.I x
+is a letter
+.BR A - Za - z
+and
+.I N
+is a digit
+.BR 0 - 9 ,
+contained in the target text sets the variable
+.I x
+to the value
+.I N
+when that rule succeeds. Similar fragment in the source text causes the
+given rule to be considered only if that variable has such value.
+Initially all variables have the value of
+.BR 0 .
+Several assignments or conditions can be present in one rule \- they are
+ANDed together.
+.SS OPTIONS
+.TP
+.B \-e
+Give the translation rules directly in the command line.
+.TP
+.B \-f
+Get them from the file specified.
+.TP
+.B \-r
+Reverse every rule. This affects only the next
+.B -e
+or
+.B -f
+option. Of course this doesn't have to give the reverse translation! Any
+rule containing any of
+.B \\\\{\\\\}\\\\[\\\\]\\\\{\\\\}\\\\\-
+is taken in only one direction. You may force any rule to be taken in
+only one direction by enclosing the string to translate in
+.BR \\\\\\\\{ .\|.\|.\| \\\\\\\\} .
+.TP
+.B \-\-help
+display help and exit
+.TP
+.B \-\-version
+output version information and exit
+.PP
+Multiple
+.B \-e
+or
+.B \-f
+options are allowed. All rules are loaded together then, and earlier
+ones have precedence.
+.SH EXAMPLE
+.nf
+$ echo Leeloo |trs -e 'el n e i i aqq o\\}\\n x o u'
+Linux
+.fi
+.SH DIFFERENCES FROM sed
+The main difference between
+.B trs
+and
+.B sed 's///g;
+.RB .\|.\|.\| '
+(excluding sed's regular expressions) is that sed takes every rule in
+the order specified and applies it to the whole line of translated file,
+whereas trs examines every position and tries all rules in this place
+first. In sed every next rule is fed with the text produced by the
+previous one, whereas in trs every piece of text can be translated at
+most once (if more than one rule matches at a given position, the one
+mentioned earlier wins). That's why sed isn't well suited for
+translating between character sets. On the other hand, tr translates
+only single bytes, so it can't be used for Unicode conversions, or TeX /
+SGML ways for specifying extended characters.
+.PP
+Another example:
+.nf
+$ echo 642 |trs -e '4 7 72 66 64 4'
+42
+$ echo 642 |sed 's/4/7/g; s/72/66/g; s/64/4/g'
+666
+.fi
+.PP
+The string to replace can be empty; there must be something outside
+.B \\\\{\\\\}
+then. In this special case only one such create-from-nothing rule can
+success at a given position. For example,
+.B \\\\}\\\\x80\\\\\-\\\\xFF @
+precedes every character with high byte set with
+.BR @ .
+The rule of the form
+.B some\\\\{ thing
+doesn't work at the end of a file.
+.SH "SEE ALSO"
+.BR tr (1),
+.BR konwert (1)
+.SH COPYRIGHT
+trs is a filter replacing strings. It forms part of the konwert package.
+.PP
+Copyright (c) 1998 Marcin 'Qrczak' Kowalczyk
+.PP
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+.PP
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+.PP
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+.SH AUTHOR
+.ft CW
+.nf
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \\__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-
+.fi
+.ft R

@@ -1,0 +1,45 @@
+#!/bin/bash -
+
+if [ "$FILTERM" = out ]
+then
+        NPOJED=
+else
+        NPOJED=1
+fi
+FORMAT=
+UTF8=
+for A in $ARG
+do
+	case "$A" in
+	(1)                   NPOJED=;;
+	(html)                FORMAT=html;;
+	(htmldec|htmlhex|tex) UTF8=1;;
+	(*)
+		if [ -x "${0%/*}/argcharset/$A" ]
+		then
+			UTF8=1
+		fi
+                VARIANT=VARIANT_$A; TRS="${!VARIANT} $TRS"
+		VARIANT=VARIANT1_$A; TRS1="${!VARIANT} $TRS1"
+		;;
+	esac
+done
+
+if [ "$UTF8" ]
+then
+	"${0%/*}/../filters/${1%-*}-UTF8" |"${0%/*}/../filters/UTF8-${1##*-}"
+else
+	case "$FORMAT" in
+	(html)
+		"${0%/*}/fixmeta" "${MIME:-x-unknown}" |
+		trs -e '\}\[@&<>\] @' \
+			${NPOJED:+-e} ${NPOJED:+"$TRS"} \
+			-e "$TRS1" |
+		trs -e '@@ @ @& & @< < @> > & &amp; < &lt; > &gt;'
+		;;
+	(*)
+		trs ${NPOJED:+-e} ${NPOJED:+"$TRS"} \
+			-e "$TRS1"
+		;;
+	esac
+fi

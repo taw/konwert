@@ -1,0 +1,114 @@
+#!/bin/bash -
+
+VARIANT_hr='
+	Ð	DJ
+	ð	dj
+' VARIANT_vi='
+	Â	A^
+	Ã	A(
+	Ð	DD
+	â	a^
+	ã	a(
+	ð	dd
+' TRS='
+	¤	CUR
+	­	\!
+' TRS1='
+	 	Ê
+	¡	„
+	¢	~
+	£	ü
+	¤	*
+	¥	»
+	¦	å
+	§	¤
+	¨	¬
+	©	á
+	ª	S
+	«	è
+	¬	
+	­	-
+	®	ë
+	¯	û
+	°	¡
+	±	ˆ
+	²	,
+	³	¸
+	´	'\''
+	µ	¼
+	¶	æ
+	·	ÿ
+	¸	,
+	¹	ä
+	º	s
+	»	é
+	¼	
+	½	"
+	¾	ì
+	¿	ý
+	À	Ù
+	Á	ç
+	Â	A
+	Ã	A
+	Ä	€
+	Å	½
+	Æ	Œ
+	Ç	C
+	È	‰
+	É	ƒ
+	Ê	¢
+	Ë	E
+	Ì	
+	Í	ê
+	Î	I
+	Ï	‘
+	Ð	D
+	Ñ	Á
+	Ò	Å
+	Ó	î
+	Ô	ï
+	Õ	Ì
+	Ö	…
+	×	x
+	Ø	Û
+	Ù	ñ
+	Ú	ò
+	Û	ô
+	Ü	†
+	Ý	ø
+	Þ	T
+	ß	§
+	à	Ú
+	á	‡
+	â	a
+	ã	a
+	ä	Š
+	å	¾
+	æ	
+	ç	c
+	è	‹
+	é	Ž
+	ê	«
+	ë	e
+	ì	ž
+	í	’
+	î	i
+	ï	“
+	ð	d
+	ñ	Ä
+	ò	Ë
+	ó	—
+	ô	™
+	õ	Î
+	ö	š
+	÷	Ö
+	ø	Þ
+	ù	ó
+	ú	œ
+	û	õ
+	ü	Ÿ
+	ý	ù
+	þ	t
+	ÿ	.
+\[€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ\] ?
+' MIME=x-macce "${0%/*}/../aux/charset-charset" iso2-macce

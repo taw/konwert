@@ -1,0 +1,10 @@
+#!/bin/bash -
+
+case $1 in
+(ascii)      echo "us-ascii";;
+(iso?|iso??) echo "iso-8859-${1#iso}";;
+(cp????)     echo "windows-${1#cp}";;
+(cp???)      echo "$1";;
+(koi8*)      echo "koi8-${1#koi8}";;
+(*)          echo "x-$1";;
+esac

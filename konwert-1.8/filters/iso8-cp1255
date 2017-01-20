@@ -1,0 +1,12 @@
+#!/bin/bash -
+
+TRS='
+	¤	CUR
+' TRS1='
+	¤	*
+	ª	x
+	¸	,
+	º	:
+	ß	_
+\[€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œŸ\] ?
+' MIME=windows-1255 "${0%/*}/../aux/charset-charset" iso8-cp1255

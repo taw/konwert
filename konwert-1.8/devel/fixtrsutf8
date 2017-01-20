@@ -1,0 +1,41 @@
+#!/usr/bin/perl
+
+sub popraw ($$)
+{
+	$_ = $_[1];
+	/([^\\]|\\[^[])*\\\[/g or return "$_[0]$_\n";
+	my $przed = $_[0] . substr ($_, 0, pos() - 2);
+	$_ = substr ($_, pos());
+	my %przedrostki = ();
+	until (/^\\\]/g)
+	{
+		if (/^()([^\\\200-\377]|\\.)/g
+		|| /^([\300-\337])([\200-\277])/g
+		|| /^([\340-\357][\200-\277])([\200-\277])/g)
+		{
+			$przedrostki{$1} .= $2;
+			$_ = substr ($_, pos());
+		}
+		else {die "Syntax error or bad UTF-8 at line $.\n"}
+	}
+	my $reszta = substr ($_, pos());
+	return map
+	{
+		popraw
+		(
+			"$przed$_" .
+			(
+				length $przedrostki{$_} == 1 ? $przedrostki{$_}
+				: "\\\[$przedrostki{$_}\\\]"
+			),
+				$reszta
+		)
+	}
+		keys %przedrostki
+}
+
+while (<>)
+{
+	chomp;
+	print /^#/ ? "$_\n" : popraw ("", $_);
+}

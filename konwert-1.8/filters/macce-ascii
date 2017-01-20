@@ -1,0 +1,172 @@
+#!/bin/bash -
+
+VARIANT_de='
+	€	AE
+	…	OE
+		UE
+		ae
+		oe
+		ue
+' VARIANT_vi='
+		E'\''
+		a'\''
+		e'\''
+	’	i'\''
+	—	o'\''
+		o^
+		o~
+		u'\''
+	อ	O~
+	็	A'\''
+	๊	I'\''
+	๎	O'\''
+	๏	O^
+	๒	U'\''
+	๘	Y'\''
+	๙	y'\''
+' TRS='
+	ค	S:
+	ฆ	P:
+	ง	ss
+	จ	(R)
+	ฉ	(c)
+	ช	(TM)
+	ญ	!=
+	ฒ	<=
+	ณ	>=
+	ท	SUM\s
+	ร	SQRT\s
+	ว	<<
+	ศ	>>
+	ษ	...
+	ั	--
+	ื	<>
+' TRS1='
+	€	A
+		A
+		a
+		E
+		A
+	…	O
+		U
+		a
+		a
+		C
+		a
+		c
+		C
+		c
+		e
+		Z
+		z
+	‘	D
+	’	i
+	“	d
+	”	E
+	•	e
+	–	E
+	—	o
+		e
+		o
+		o
+		o
+		u
+		E
+		e
+		u
+	 	+
+	ก	o
+	ข	E
+	ฃ	L
+	ค	S
+	ฅ	*
+	ฆ	P
+	ง	s
+	จ	R
+	ฉ	c
+	ซ	e
+	ฌ	"
+	ญ	!
+	ฎ	g
+	ฏ	I
+	ฐ	i
+	ฑ	I
+	ฒ	<
+	ณ	>
+	ด	i
+	ต	K
+	ถ	d
+	ท	S
+	ธ	l
+	น	L
+	บ	l
+	ป	L
+	ผ	l
+	ฝ	L
+	พ	l
+	ฟ	N
+	ภ	n
+	ม	N
+	ย	~
+	ร	V
+	ฤ	n
+	ล	N
+	ฦ	D
+	ว	<
+	ศ	>
+	ษ	.
+	ส	\s
+	ห	n
+	ฬ	O
+	อ	O
+	ฮ	o
+	ฯ	O
+	ะ	-
+	ั	-
+	า	"
+	ำ	"
+	ิ	`
+	ี	'\''
+	ึ	:
+	ุ	o
+	ู	R
+	ฺ	r
+	Û	R
+	Ü	<
+	Ý	>
+	Þ	r
+	฿	R
+	เ	r
+	แ	S
+	โ	,
+	ใ	"
+	ไ	s
+	ๅ	S
+	ๆ	s
+	็	A
+	่	T
+	้	t
+	๊	I
+	๋	Z
+	์	z
+	ํ	U
+	๎	O
+	๏	O
+	๐	u
+	๑	U
+	๒	U
+	๓	u
+	๔	U
+	๕	u
+	๖	U
+	๗	u
+	๘	Y
+	๙	y
+	๚	k
+	๛	Z
+	ü	L
+	ý	z
+	þ	G
+	ÿ	^
+\[ชื\] ?
+' MIME=us-ascii "${0%/*}/../aux/charset-charset" macce-ascii

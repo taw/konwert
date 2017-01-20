@@ -1,0 +1,8 @@
+#!/usr/bin/perl
+
+while (<>)
+{
+	if (/^\t(\S+)\t(\S+)$/ && !$bylo{$1}) {$trs .= $_; $bylo{$1} = 1}
+}
+
+print $trs;

@@ -1,0 +1,23 @@
+#!/bin/bash -
+
+POPRAWKI=
+for A in $ARG
+do
+	if [ -x "${0%/*}/../aux/argcharset/$A" ]
+	then
+		POPRAWKI=${POPRAWKI:+$POPRAWKI |}${0%/*}/../aux/argcharset/$A
+	fi
+done
+
+if [ "$POPRAWKI" ]
+then
+	"$SHELL" -c "$POPRAWKI"
+else
+	cat
+fi |
+trs -e '\}\[@\#$%&\\^_{|}~\] @' \
+    -f "${0%/*}/../aux/UTF8-tex" \
+    -f "${0%/*}/../aux/UTF8-ascii" \
+    -f "${0%/*}/../aux/UTF8-ascii1" |
+trs -e '@@ @ @\# \# @$ $ @% % @& & @\\ \\ @^ ^ @_ _ @{ { @| | @} } @~ ~
+\# \\\# $ \\$ % \\% & \\& \\ $\\backslash$ ^ \\^{} _ \\_ { \\{ | $|$ } \\} ~ \\~{}'

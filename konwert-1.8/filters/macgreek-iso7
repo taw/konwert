@@ -1,0 +1,147 @@
+#!/bin/bash -
+
+VARIANT_de='
+	€	AE
+	…	OE
+	†	UE
+	Š	ae
+	š	oe
+	Ÿ	ue
+' VARIANT_vi='
+	ƒ	E'\''
+	ˆ	a`
+	‰	a^
+	Ž	e'\''
+		e`
+		e^
+	™	o^
+		u`
+' TRS='
+		^1
+	“	(TM)
+	˜	%%
+	§	ss
+	¨	(R)
+	­	!=
+	²	<=
+	³	>=
+	Å	~=
+	É	...
+	Ï	oe
+' TRS1='
+	€	A
+		1
+	‚	²
+	ƒ	E
+	„	³
+	…	O
+	†	U
+	‡	µ
+	ˆ	a
+	‰	a
+	Š	a
+	‹	´
+	Œ	¨
+		c
+	Ž	e
+		e
+		e
+	‘	e
+	’	£
+	”	i
+	•	i
+	–	·
+	—	½
+	™	o
+	š	o
+	›	¦
+	œ	­
+		u
+	ž	u
+	Ÿ	u
+	 	+
+	¡	Ã
+	¢	Ä
+	£	È
+	¤	Ë
+	¥	Î
+	¦	Ð
+	§	s
+	¨	R
+	ª	Ó
+	«	Ú
+	¬	§
+	­	!
+	®	°
+	¯	·
+	°	Á
+	²	<
+	³	>
+	´	Y
+	µ	Â
+	¶	Å
+	·	Æ
+	¸	Ç
+	¹	É
+	º	Ê
+	»	Ì
+	¼	Ö
+	½	Û
+	¾	Ø
+	¿	Ù
+	À	Ü
+	Á	Í
+	Â	¬
+	Ã	Ï
+	Ä	Ñ
+	Å	~
+	Æ	Ô
+	Ç	«
+	È	»
+	É	.
+	Ê	 
+	Ë	Õ
+	Ì	×
+	Í	¶
+	Î	¸
+	Ï	o
+	Ð	-
+	Ñ	¯
+	Ò	"
+	Ó	"
+	Ô	`
+	Õ	'\''
+	Ö	:
+	×	¹
+	Ø	º
+	Ù	¼
+	Ú	¾
+	Û	Ý
+	Ü	Þ
+	Ý	ß
+	Þ	ü
+	ß	¿
+	à	ý
+	ã	ø
+	æ	ö
+	ç	ã
+	è	ç
+	ê	î
+	ë	ê
+	ì	ë
+	í	ì
+	î	í
+	ñ	þ
+	ò	ñ
+	õ	è
+	ö	ù
+	÷	ò
+	ø	÷
+	ù	õ
+	ú	æ
+	û	ú
+	ü	û
+	ý	À
+	þ	à
+\[“˜\] ?
+' MIME=iso-8859-7 "${0%/*}/../aux/charset-charset" macgreek-iso7

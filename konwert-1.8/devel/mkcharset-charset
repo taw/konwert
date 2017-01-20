@@ -1,0 +1,105 @@
+#!/usr/bin/perl
+
+$plik_charsetA_utf8 = shift;
+$plik_charsetB_utf8 = shift;
+
+foreach (map chr, 32 .. 126) {$charsetB_utf8{$_} = $_}
+if ($plik_charsetB_utf8 ne "ascii")
+{
+	open CHARSETB_UTF8, $plik_charsetB_utf8;
+	while (<CHARSETB_UTF8>)
+	{
+		$charsetB_utf8{$2} = $1
+			if /^\t(\S+)\t(\S+)$/ && !exists $charsetB_utf8{$2};
+	}
+	close CHARSETB_UTF8;
+}
+
+%{$utf8_charsetB[1]{""}} = %charsetB_utf8;
+
+open UTF8_CHARSET, shift;
+while (<UTF8_CHARSET>)
+{
+	@alt = split;
+	$utf8 = $alt[0];
+	@jest = ();
+	foreach (@alt)
+	{
+		$wariant = s/^((?:.|\\.)+)\\V(.+)$/$1/ ? $2 : "";
+		@znakiist = /[^\200-\377]|[\300-\377][\200-\277]+/g;
+		if (!grep {!exists $charsetB_utf8{$_}} @znakiist)
+		{
+			s/^((?:.|\\.)+)\\\}.*?$/$1/;
+			@znaki = /[^\200-\377]|[\300-\377][\200-\277]+/g;
+			$jeden = @znaki == 1 || /^\\[^!]$/;
+
+			unless
+			(
+				$jest[$jeden]{$wariant} ||
+				$jest[$jeden]{""} ||
+				$jest[1]{$wariant}
+			)
+			{
+				$utf8_charsetB[$jeden]{$wariant}{$utf8} =
+				join "", map {$charsetB_utf8{$_}} @znaki;
+
+				last if $jeden && $wariant eq "";
+				$jest[$jeden]{$wariant} = 1;
+			}
+		}
+	}
+}
+close UTF8_CHARSET;
+
+$zastap = $utf8_charsetB[1]{""}{"\357\277\275"};
+
+open CHARSETA_UTF8, $plik_charsetA_utf8;
+while (<CHARSETA_UTF8>)
+{
+	if (/^\t(\S+)\t(\S+)$/)
+	{
+		($A, $utf8) = ($1, $2);
+		foreach $jeden (0, 1)
+		{
+			foreach $wariant (keys %{$utf8_charsetB[$jeden]})
+			{
+				if (exists $utf8_charsetB[$jeden]{$wariant}{$utf8})
+				{
+					$charsetB_utf8[$jeden]{$wariant}
+					.= "\t$A\t$utf8_charsetB[$jeden]{$wariant}{$utf8}\n"
+					if $A ne $utf8_charsetB[$jeden]{$wariant}{$utf8}
+					|| $A ne $utf8_charsetB[1]{$wariant}{$utf8};
+				}
+			}
+		}
+		if (!exists $utf8_charsetB[1]{""}{$utf8})
+		{
+			if ($A =~ /^.|\\.$/)
+				{$brak .= $A}
+			else
+				{print "\t$A\t$zastap\n"}
+		}
+	}
+}
+close CHARSET1_UTF8;
+
+sub apostrofy ($)
+{
+	my ($tekst) = @_;
+	$tekst =~ s/'/'\\''/g;
+	return $tekst;
+}
+
+foreach $jeden (0, 1)
+{
+	foreach $wariant (sort grep {$_ ne ""} keys %{$charsetB_utf8[$jeden]})
+	{
+		print "VARIANT${\(\"\",\"1\")[$jeden]}_$wariant='\n",
+			apostrofy $charsetB_utf8[$jeden]{$wariant}, "' ";
+	}
+}
+
+print "TRS='\n", apostrofy $charsetB_utf8[0]{""},
+	"' TRS1='\n", apostrofy $charsetB_utf8[1]{""};
+print apostrofy "\\[$brak\\] $zastap\n" if $brak ne "";
+print "'";

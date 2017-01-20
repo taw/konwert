@@ -1,0 +1,140 @@
+#!/bin/bash -
+
+VARIANT_vi='
+	›	o~
+	Í	O~
+' TRS='
+	­	!=
+	²	<=
+	³	>=
+	·	SUM\s
+	Ã	SQRT\s
+	×	<>
+' TRS1='
+	€	Ä
+		A
+	‚	a
+	ƒ	É
+	„	¥
+	…	Ö
+	†	Ü
+	‡	á
+	ˆ	¹
+	‰	È
+	Š	ä
+	‹	è
+	Œ	Æ
+		æ
+	Ž	é
+		Ÿ
+	‘	Ï
+	’	í
+	“	ï
+	”	E
+	•	e
+	–	E
+	—	ó
+	˜	e
+	™	ô
+	š	ö
+	›	o
+	œ	ú
+		Ì
+	ž	ì
+	Ÿ	ü
+	 	†
+	¡	°
+	¢	Ê
+	£	L
+	¤	§
+	¥	•
+	¦	¶
+	§	ß
+	¨	®
+	ª	™
+	«	ê
+	¬	¨
+	­	!
+	®	g
+	¯	I
+	°	i
+	±	I
+	²	<
+	³	>
+	´	i
+	µ	K
+	¶	d
+	·	S
+	¸	³
+	¹	L
+	º	l
+	»	¼
+	¼	¾
+	½	Å
+	¾	å
+	¿	N
+	À	n
+	Á	Ñ
+	Â	¬
+	Ã	V
+	Ä	ñ
+	Å	Ò
+	Æ	D
+	Ç	«
+	È	»
+	É	…
+	Ê	 
+	Ë	ò
+	Ì	Õ
+	Í	O
+	Î	õ
+	Ï	O
+	Ð	–
+	Ñ	—
+	Ò	“
+	Ó	”
+	Ô	‘
+	Õ	’
+	Ö	÷
+	Ø	o
+	Ù	À
+	Ú	à
+	Û	Ø
+	Ü	‹
+	Ý	›
+	Þ	ø
+	ß	R
+	à	r
+	á	Š
+	â	‚
+	ã	„
+	ä	š
+	å	Œ
+	æ	œ
+	ç	Á
+	è	
+	é	
+	ê	Í
+	ë	Ž
+	ì	ž
+	í	U
+	î	Ó
+	ï	Ô
+	ð	u
+	ñ	Ù
+	ò	Ú
+	ó	ù
+	ô	Û
+	õ	û
+	ö	U
+	÷	u
+	ø	Ý
+	ù	ý
+	ú	k
+	û	¯
+	ü	£
+	ý	¿
+	þ	G
+	ÿ	¡
+\[×\] ?
+' MIME=windows-1250 "${0%/*}/../aux/charset-charset" macce-cp1250

@@ -1,0 +1,98 @@
+
+	KONWERT, version 1.8
+	-------
+
+Konwert is a package for conversion between various character encodings.
+
+The newest version of the package can be downloaded from
+<http://qrczak.home.ml.org/programy/linux/konwert/>.
+
+Copyright (c) 1998 Marcin 'Qrczak' Kowalczyk
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+
+	DOCUMENTATION
+
+Polish documentation is in the doc/pl directory.
+
+Known bugs in current version are in the doc/en/BUGS file.
+
+Changes in each version are described in the doc/en/CHANGES file.
+
+Plans for future are listed in the doc/en/TODO file.
+
+The package consists of the following components:
+
+The konwert program itself is an interface for various file filters.
+It allows filtering multiple files through multiple filters. Filters can
+be any executables. See the doc/en/konwert file for details.
+
+The trs program is the real engine converting character sets. It can
+replace given strings with another ones and not much more. See the
+doc/en/trs file for details.
+
+The filterm program filters the terminal innput or output, which can
+help e.g. when our terminal is unable to display non-ASCII characters or
+to enter them with keyboard. See the doc/en/filterm file for details.
+
+Some filters are provided, mainly for conversion between various
+character sets and encodings of extended characters. See the
+doc/en/filters file for details.
+
+New filters can be easily added. I've included some source files for
+filters, and scripts used to build those filters from them. See the
+doc/en/devel file for details.
+
+For information about sources of tables, thanks and how could you help
+me, see the doc/en/thanks file.
+
+
+	INSTALLATION
+
+Konwert runs under Linux, and probably under other Unices as well. Perl
+5.001 or later is required.
+
+If you are installing from sources:
+
+Run `make install' in the Konwert source directory.
+
+You can specify base directory other than the default /usr/local:
+`make install prefix=/usr' or whatever. This directory will be written
+into the installed bin/konwert script, which will search for its filters
+there. Files are installed under the subdirectories bin, share/konwert,
+lib/konwert, doc/konwert-1.8 and man of the base directory.
+
+The directory of perl interpreter will also be written into the
+installed scripts. If you want to use different perl than the one found
+by `which perl', `make install perl=/usr/bin/perl' (with the proper
+path).
+
+If the package is to be installed in some other place than the target
+one, `make prefix=...' will write the proper directory into scripts and
+`make install prefix=...' can then install into a different place.
+
+Changing this directory after building the package, or the perl path,
+requires `make clean' between.
+
+`make uninstall' does what it is supposed to. It requires the same
+prefix= option as `make install'.
+
+
+--
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

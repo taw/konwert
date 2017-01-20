@@ -1,0 +1,224 @@
+
+	DEVELOPMENT OF KONWERT FILTERS, AND HOW IT WORKS
+	------------------------------------------------
+
+The installation specifies the base directory for konwert, which
+defaults to /usr/local. konwert data files and auxiliary scripts go into
+its subdirectory share/konwert, which is divided as follows:
+
+filters - Executables from this directory are atomic filters for the
+konwert program. Most of them are trs, bash or perl scripts, or
+a combination of them.
+
+aux - Data and auxiliary scripts used by some filters. They are not
+called directly by konwert.
+
+devel - Some source files for filters, and scripts used to build those
+filters from them. They are not needed for normal use of the konwert
+program, but are useful for building new conversion tables, so they are
+also installed.
+
+The directory lib/konwert contains binary files, which should not go
+into share directory. They are pointed to by soft links from
+share/konwert instead.
+
+konwert passes arguments to its filters via the environment variable ARG
+rather than as normal program arguments. That is because most filters
+would treat these arguments as source files to thanslate instead of
+standard input. These arguments are separated by spaces (in konwert's
+invocation they are separated by `/').
+
+Have a look at the Makefile to see how specific filters are built. More
+details are found below.
+
+As a general rule, Makefile doesn't have the names of filters
+permanently written into it. It contains only rules to build them, and
+actual sets of processed files are created dynamically, basing on the
+contents of some source directories.
+
+When talking about character conversions, konwert's U format means UTF-8
+(Unicode). Every charset has a filter converting it to and from UTF-8.
+Most conversions to UTF-8 are simple trs scripts.
+
+trs doesn't need a particular word layout in its script - they only must
+be separated by whitespace. Some other conversion table management
+utilities, however, require the rules to be written on separate lines;
+each rule consists of a single TAB character, the string to translate,
+another TAB character, and the string which replaces the previous one.
+
+
+	MERGING CONVERSION TABLES
+
+Many character sets are based on another ones, changing only a few
+letters. The conversion tables of these charsets to UTF-8 are built by
+merging the definitions of changed letters with the original table.
+
+These differences comes from files in devel/mergewith* directories,
+where * specifies the base charset. For example,
+devel/mergewithcp437/mazovia-UTF8 containts letters from mazovia charset
+which differ from cp437. The script devel/mergetrs combines two or more
+tables together. Tables mentioned first have higher priority (it is
+important only when these tables get reversed).
+
+
+	TRS AND UTF-8
+
+The trs' \[...\] specification of the set of possible characters
+requires these characters to be single bytes. Unfortunately in UTF-8
+characters may be encoded as multiple bytes. The script devel/fixtrsutf8
+simplifies the preparation of the proper trs script which converts UTF-8
+even using \[...\].
+
+It takes the pseudo-trs script which contains UTF-8 characters within
+\[...\] and produces the one which will actually work. It moves common
+byte prefixes before \[...\], duplicating lines if necessary. The
+resulting file is not valid UTF-8, but it works with trs.
+
+
+	CONVERSIONS FROM UTF-8
+
+Conversions from UTF-8 are built completely automatically, based on the
+reverse translations and one big table describing the possibilities to
+replace characters with another ones. This table says that if
+a particular character is unavailable, it should be replaced by that one
+(or a string); if that one is still unavailable, then by another one;
+etc. The last possibility is always ASCII, which is assumed to be always
+valid (conversions to non-ASCII-based charsets can't be made this way).
+This table is stored in devel/UTF8-charset file and is entirely in
+UTF-8.
+
+The replacement may have `\}' with a sequence of characters attached.
+It will be then used only if all those characters are available, despite
+they are not present in the replacement. This is because some characters
+require different approximations, depending on the availability of some
+other characters.
+
+Most often, unavailable characters are replaced with ASCII
+approximations rather than some 8bit strings. Thus the conversion table
+from UTF-8 is built from three parts:
+
+* Characters perfectly available in the target charset (excluding
+  ASCII). This table is read from the file doing the reverse translation
+  (to UTF-8).
+
+* Characters which should be replaced with some 8bit strings. These and
+  only these are stored in the real filter from UTF-8.
+
+* Characters approximated with ASCII. This table is in aux/UTF8-ascii.
+  It describes also characters from previous parts (because it is common
+  for all charsets), but it is loaded after them, so translations of the
+  same characters have lower priority. This table is the first and the
+  last column of devel/UTF8-charset file.
+
+The script aux/UTF8-charset is used by nearly all conversions from
+UTF-8. It handles arguments passed by konwert in ARG variable and puts
+the proper tables together. Real filters from UTF-8 only call it with
+some arguments.
+
+The aux/argcharset directory contains some common filters, which are
+applied to the text being converted when the appropriate argument is
+given to the UTF8-charset filter (the argument is the name of the file
+from this directory).
+
+
+	DIRECT CONVERSIONS BETWEEN CHARSETS
+
+Between some pairs of charsets direct conversions are provided, in
+addition to the general conversion through the temporary format UTF-8.
+This speeds up the conversion (ant gives nothing else).
+
+Such filters are created automatically. In the the devel/charset-charset
+file there are only names of charsets, between which the conversions
+will be created. From the line containing more than a single word, the
+combinations of every word with each other are computed, but the words
+beginning or ending with `-' are taken in only one direction. For
+example if we have:
+
+iso2 cp1250 cp852 -ascii
+
+there will be created conversions iso2-cp1250, iso2-cp852, iso2-ascii,
+cp1250-iso2, cp1250-cp852, cp1250-ascii, cp852-iso2, cp852-cp1250, and
+cp852-ascii. The example cp1250-iso2 conversion will be created basing
+on the tables charsets/cp1250-UTF8, charsets/iso2-UTF8, and
+devel/UTF8-charset.
+
+Such filters use the common aux/charset-charset script. If, among the
+arguments of conversion, there are such that require the temporary
+format UTF-8, the conversion will be done as for the formats not having
+the direct conversion.
+
+
+	CHARSET AUTODETECTION - THE `any' CONVERSION
+
+The special any/LANGUAGE (e.g. any/pl) input format will detect the
+encoding automatically, basing on the frequencies of characters found in
+the text. Every language is associated with a set of possible encodings
+used for it and average frequencies of its letters (excluding ASCII
+letters). The expected frequencies of characters in each encoding are
+multiplied by the respective frequencies found in text being converted
+and added together. The encoding with the largest result is then used
+for conversion.
+
+The filters/any-UTF8 script fetches language information from the proper
+aux/any/* file (trying every ARG argument as language code - the set of
+possible languages is determined by the contents of this directory).
+
+The format of these files is simple: Every row consists of whitespace
+separated name of the encoding (as in filters/*-UTF8) and the
+representations of every character in that encoding. `-' instead means
+that the character will not be taken into account. These character
+representations are used only for encoding detection - the normal
+conversion is done eventually by the filters/*-UTF8 files.
+
+The special encoding with the name `%' contains only the frequencies of
+these characters (not necessarily in percents).
+
+The name of the encoding may consist of several conversions separated
+with `|'. The last one will have `-UTF8' appended and each will be taken
+from the filters directory.
+
+iso1 is not used here, as it is a subset of cp1252.
+
+The source files for aux/any/* are stored in the devel/any directory.
+The only difference is that some encoding names may be listed without
+their character representations. The second encoding, after the special
+`%', must be utf8, and it will be used to complete those encoding
+descriptions.
+
+If we have sample texts in a language, for making this statistics we can
+use the devel/whichletters and devel/frequencies scripts. The text has
+to be encuded using an 8-bit charset (e.g. ISO-8859-x, but not as UTF-8
+or SGML entities). `whichletters files... >l' search for characters with
+codes 128..255. We can now review them, deleting garbage ones. Then
+`frequencies l files... | konwert X-utf8 >f', where X denotes the
+charset, and add what is needed.
+
+The conversion filter/htmlchariso1-iso1 is used internally by some
+autodetected conversions. Is is similar to htmlchar-iso1, but goes
+directly to iso1 skipping utf8 and also converts &#128;...&#159;, which
+are incorrectly used by some HTML editors to represent extended
+characters from encodings different from ISO-8859-1.
+
+Currently supported languages are cs (Czech), de (German), el (Greek),
+eo (Esperanto), es (Spanish), fr (French), he (Hebrew), it (Italian),
+pl (Polish), pt (Portuguese), ru (Russian), and sv (Swedish).
+
+
+	ALIASES
+
+Some charsets are accessible under several names, e.g. cp1250 or wince
+or winlatin2. This is implemented by creation of hard links during
+installation, basing on the information from the devel/aliases file.
+
+
+	MAKING CONVERSION TABLES FROM OTHER FORMATS
+
+devel/hex-trs script converts tables in format of ftp.unicode.org into
+trs format. It is not used here, but provided for convenience.
+
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

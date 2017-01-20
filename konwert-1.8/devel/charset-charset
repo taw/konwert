@@ -1,0 +1,11 @@
+iso1 cp1252 cp437 cp850 mac -ascii
+iso2 cp1250 cp852 macce -ascii
+iso3 -ascii
+iso4 iso13 cp1257 cp775 -ascii
+iso5 koi8r cp1251 cp866 maccyr -ascii
+iso6 cp1256 cp864 -ascii
+iso7 cp1253 cp737 macgreek -ascii
+iso8 cp1255 cp862 -ascii
+iso9 cp1254 cp857 mactur -ascii
+iso10 -ascii
+cp1258 viscii viqri -ascii

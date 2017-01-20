@@ -1,0 +1,13 @@
+#!/bin/bash -
+
+if [ -f /etc/man.config ] && grep -q '^[^#]*-Tascii' /etc/man.config
+then
+	perl -pe '
+		s/^([^#]*-T)ascii/$1latin1/
+		and $_ .= "# (replaced -Tascii with -Tlatin1 by the Konwert package)\n"
+	' /etc/man.config >/etc/man.config.konwert
+	echo "\
+I've found -Tascii option in /etc/man.config, which probably means
+that you are unable to view man pages containing non-ASCII characters.
+You may want to replace it with /etc/man.config.konwert."
+fi

@@ -1,0 +1,91 @@
+#!/usr/bin/perl
+
+$charset_utf8 = shift;
+$utf8_charset = shift;
+
+foreach (map {chr} 32 .. 126) {$charset_utf8{$_} = $_}
+if ($charset_utf8 ne "ascii")
+{
+	open CHARSET_UTF8, $charset_utf8;
+	while (<CHARSET_UTF8>)
+	{
+		$charset_utf8{$2} = $1
+			if /^\t(\S+)\t(\S+)$/ && !exists $charset_utf8{$2};
+	}
+	close CHARSET_UTF8;
+}
+
+open UTF8_CHARSET, $utf8_charset;
+while (<UTF8_CHARSET>)
+{
+	@alt = split;
+	$utf8 = shift @alt;
+	next if exists $charset_utf8{$utf8};
+	@jest = ();
+	foreach (@alt)
+	{
+		$wariant = s/^((?:.|\\.)+)\\V(.+)$/$1/ ? $2 : "";
+		@znakiist = /[^\200-\377]|[\300-\377][\200-\277]+/g;
+		if (!grep {!exists $charset_utf8{$_}} @znakiist)
+		{
+			s/^((?:.|\\.)+)\\\}.*?$/$1/;
+			@znaki = /[^\200-\377]|[\300-\377][\200-\277]+/g;
+			$jeden = @znaki == 1 || /^\\[^!]$/;
+			unless
+			(
+				$jest[$jeden]{$wariant} ||
+				$jest[$jeden]{""} ||
+				$jest[1]{$wariant}
+			)
+			{
+				$utf8_charset[$jeden]{$wariant}{$utf8} =
+				join "", map {$charset_utf8{$_}} @znaki
+				if $wariant ne "" || /[\300-\377]/
+				|| $utf8 eq "\357\277\275";
+
+				last if $jeden && $wariant eq "";
+				$jest[$jeden]{$wariant} = 1;
+			}
+		}
+	}
+}
+close UTF8_CHARSET;
+
+$zastap = exists $charset_utf8{"\357\277\275"} ?
+	$charset_utf8{"\357\277\275"}
+:
+	$utf8_charset[1]{""}{"\357\277\275"};
+delete $utf8_charset[1]{""}{"\357\277\275"};
+
+sub wypisz (\%)
+{
+	my ($utf8_charset) = @_;
+	foreach $utf8 (sort keys %$utf8_charset)
+	{
+		$_ = "\t$utf8\t$$utf8_charset{$utf8}\n";
+		s/'/'\\''/g;
+		print;
+	}
+}
+
+foreach $jeden (0, 1)
+{
+	foreach $wariant (sort grep {$_ ne ""} keys %{$utf8_charset[$jeden]})
+	{
+		print "VARIANT${\(\"\",\"1\")[$jeden]}_$wariant='\n";
+		wypisz %{$utf8_charset[$jeden]{$wariant}};
+		print "' ";
+	}
+}
+
+if ($charset_utf8 ne "ascii")
+{
+	print "APPROX='\n";
+	wypisz %{$utf8_charset[0]{""}};
+	print "' APPROX1='\n";
+	wypisz %{$utf8_charset[1]{""}};
+	print "' ";
+}
+
+$zastap =~ s/'/'\\''/g;
+print "REPLACE='${zastap}'";

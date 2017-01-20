@@ -1,0 +1,13 @@
+% 4 2 1 1 2 1 22 24 1 8 9 31
+utf8 Ĉ Ĝ Ĥ Ĵ Ŝ Ŭ ĉ ĝ ĥ ĵ ŝ ŭ
+antauxcxap ^C ^G ^H ^J ^S ^U ^c ^g ^h ^j ^s ^u
+apostrofoj C' G' H' J' S' U' c' g' h' j' s' u'
+postcxap C^ G^ H^ J^ S^ U^ c^ g^ h^ j^ s^ u^
+hmetodo CH GH HH JH SH - ch gh hh jh sh -
+html &#264; &#284; &#292; &#308; &#348; &#364; &#265; &#285; &#293; &#309; &#349; &#365;
+html &#x108; &#x11C; &#x124; &#x134; &#x15C; &#x16C; &#x109; &#x11D; &#x125; &#x135; &#x15D; &#x16D;
+html &Ccirc; &Gcirc; &Hcirc; &Jcirc; &Scirc; &Ubreve; &ccirc; &gcirc; &hcirc; &jcirc; &scirc; &ubreve;
+iso3
+malapostrofoj C` G` H` J` S` U` c` g` h` j` s` u`
+qp-8bit|iso3 =C6 =D8 =A6 =AC =DE =DD =E6 =F8 =B6 =BC =FE =FD
+xmetodo CX GX HX JX SX UX cx gx hx jx sx ux

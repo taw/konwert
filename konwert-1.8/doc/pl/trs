@@ -1,0 +1,92 @@
+
+	TRS
+	---
+
+U¿ycie: trs [-[r]e] 'ZASTÊPUJ_TO TYM [A_TO TYM]...'
+        trs [-[r]f] PLIK
+
+Kopiuje stdin na stdout zastêpuj±c ka¿de wyst±pienie danych napisów
+innymi. Podobnie jak tr, ale zamienia napisy, a nie tylko pojedyncze
+znaki.
+
+Regu³y (oddzielone odstêpami) mog± byæ podane bezpo¶rednio po opcji -e
+albo mog± byæ przeczytane z PLIKU. Argument niepoprzedzony przez -e ani
+-f jest interpretowany jako skrypt, je¶li zawiera jakie¶ odstêpy, a jako
+nazwa pliku, je¶li nie zawiera.
+
+Komentarze mo¿na umieszczaæ od `#' do koñca linii. Znak `#' w napisach
+musi byæ zapisany jako `\#'.
+
+Mo¿na u¿ywaæ standardowych eskejpów jak w C: \a \b \e \f \n \r \t
+\v \\ \nnn. Dodatkowo \s oznacza spacjê, a \! - pusty ³añcuch.
+
+Mo¿na okre¶liæ zbiory dopuszczalnych znaków na danej pozycji pomiêdzy
+\[ a \]. Zakresy ASCII w zbiorach mog± byæ krótko zapisane jako
+PIERWSZY\-OSTATNI. Je¶li zbiór sk³ada siê tylko z pojedynczego zakresu,
+\[ i \] mog± byæ pominiête.
+
+Je¶li czê¶æ napisu do zast±pienia jest ujêta w \{...\}, to tylko ta
+czê¶æ jest zastêpowana. Tekst poza \{...\} pe³ni rolê warunku: napis
+jest t³umaczony tylko je¶li jest poprzedzony danym tekstem i za nim
+jest inny. \{ na pocz±tku albo \} na koñcu napisu mog± byæ pominiête.
+Tekst poza \{...\} jest traktowany jako nieprzet³umaczony.
+
+Przed pocz±tkiem pliku i poza jego koñcem s± tylko znaki \n. Na przyk³ad
+\n\{.\}\n znajduje `.' stoj±c± samodzielnie w linii, w³±czaj±c w to
+pierwsz± liniê, albo ostatni± nawet bez znacznika \n.
+
+Fragment postaci \?x=N, gdzie x jest liter± A-Za-z, a N jest cyfr± 0-9,
+zawarty w napisie docelowym przypisuje zmiennej x warto¶æ N, kiedy dana
+regu³a jest u¿yta. Taki fragment w napisie ¼ród³owym powoduje, ¿e dana
+regu³a jest brana pod uwagê tylko je¶li ta zmienna ma tak± warto¶æ.
+Pocz±tkowo wszystkie zmienne maj± warto¶æ 0. Mo¿e byæ wiele przypisañ
+lub warunków w jednej regule - warunki musz± byæ wtedy wszystkie
+prawdziwe i wykonywane s± wszystkie przypisania.
+
+Mo¿e byæ wiele opcji -e albo -f. Wszystkie regu³y s± wtedy ³adowane
+razem, przy czym wcze¶niejsze maj± pierwszeñstwo.
+
+Opcja -r oznacza odwrócenie ka¿dej regu³y i dotyczy tylko nastêpnej
+opcji -e albo -f. Oczywi¶cie to nie musi daæ odwrotnego t³umaczenia!
+Ka¿da regu³a zawieraj±ca które¶ z \{\}\[\]\{\}\- jest uwzglêdniana tylko
+w jednym kierunku. Mo¿na wymusiæ, ¿eby dowolna regu³a by³a uwzglêdniana
+tylko w jednym kierunku, umieszczaj±c napis do przet³umaczenia w \{...\}.
+
+Dodatkowo dostêpne s± nastêpuj±ce standardowe opcje:
+  --help      wy¶wietla ten opis i wychodzi
+  --version   wy¶wietla informacjê o wersji i wychodzi
+
+Przyk³ad:
+$ echo Leeloo |trs -e 'el n e i i aqq o\}\n x o u'
+Linux
+
+Podstawowa ró¿nica pomiêdzy trsem a `sed 's///g; ...'' (wy³±czaj±c
+sedowe wyra¿enia regularne) jest taka, ¿e sed patrzy na ka¿d± regu³ê
+w kolejno¶ci ich podania i stosuje j± do ca³ej linii filtrowanego pliku,
+podczas gdy trs bada ka¿d± pozycjê i próbuje wszystkich regu³ na tej
+pozycji najpierw. W sedzie ka¿da regu³a dostaje tekst wyprodukowany
+przez poprzedni±, a w trsie ka¿dy kawa³ek tekstu jest t³umaczony
+najwy¿ej raz (je¶li wiêcej ni¿ jedna regu³a pasuje na danej pozycji,
+regu³a wymieniona wcze¶niej wygrywa). W³a¶nie dlatego sed niezbyt nadaje
+siê do t³umaczenia miêdzy zestawami znaków. Z drugiej strony, tr
+t³umaczy tylko pojedyncze bajty, wiêc nie mo¿e byæ u¿yty do konwersji
+Unikodu ani TeXowych / SGMLowych sposobów zapisu rozszerzonych znaków.
+
+Inny przyk³ad:
+$ echo 642 |trs -e '4 7 72 66 64 4'
+42
+$ echo 642 |sed 's/4/7/g; s/72/66/g; s/64/4/g'
+666
+
+Napis do zamiany mo¿e byæ pusty; musi wtedy byæ co¶ poza \{\}. W tym
+szczególnym przypadku tylko jedna taka regu³a tworz±ca z niczego mo¿e
+byæ zastosowana na danej pozycji. Na przyk³ad `\}\x80\-\xFF @' poprzedza
+ka¿dy znak z ustawionym najwy¿szym bitem przez @. Regu³a postaci
+`co¶\{ tam' nie dzia³a na koñcu pliku.
+
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

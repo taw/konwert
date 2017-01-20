@@ -1,0 +1,40 @@
+#!/bin/bash -
+
+POPRAWKI=
+for A in $ARG
+do
+	case "$A" in
+	(*)
+		if [ -x "${0%/*}/../aux/argcharset/$A" ]
+		then
+			POPRAWKI=${POPRAWKI:+$POPRAWKI |}${0%/*}/../aux/argcharset/$A
+		fi
+	esac
+done
+
+if [ "$POPRAWKI" ]
+then
+	"$SHELL" -c "$POPRAWKI"
+else
+	cat
+fi |
+trs -e '
+	Ą	\e[1mA\e[22m
+	Ć	\e[1mC\e[22m
+	Ę	\e[1mE\e[22m
+	Ł	\e[1mL\e[22m
+	Ń	\e[1mN\e[22m
+	Ó	\e[1mO\e[22m
+	Ś	\e[1mS\e[22m
+	Ź	\e[1mZ\e[22m
+	Ż	\e[1mZ\e[22m
+	ą	\e[1ma\e[22m
+	ć	\e[1mc\e[22m
+	ę	\e[1me\e[22m
+	ł	\e[1ml\e[22m
+	ń	\e[1mn\e[22m
+	ó	\e[1mo\e[22m
+	ś	\e[1ms\e[22m
+	ź	\e[1mz\e[22m
+	ż	\e[1mz\e[22m
+' -f "${0%/*}/../aux/UTF8-ascii1"

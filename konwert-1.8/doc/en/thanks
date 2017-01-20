@@ -1,0 +1,102 @@
+
+	DEVELOPMENT OF THE PACKAGE
+	--------------------------
+
+
+        SOURCES OF TABLES
+
+Oh, there are many... I can't remember them all.
+
+Many Unicode tables of character sets, including SGML/HTML entities,
+were downloaded from <ftp://ftp.unicode.org/Public/MAPPINGS/>.
+
+Many tables of Polish character sets are based on kravietZ's
+<kravietz@pipeta.chemia.pk.edu.pk> Polish charsets converter ConvPL.
+The Kamenicky encoding is taken from the Ferdinand Prantl, Jr.'s
+<prantl@aip1.fsv.cvut.cz> Czech charsets converter cs2sc.
+
+The algorithm of encoding autodetection is based on kravietZ's Polish
+charsets detector QueryPL.
+
+The frequencies of letters in Polish language were computed from JTZ
+<http://www.jtz.org.pl/>, the Polish translation of Linux HOWTOs
+(1893 kB), Czech - Czech-HOWTO (75 kB), Esperanto -
+<http://www.esperanto.mv.ru/> (4708 kB), German and Russian - random
+texts in these languages found with Altavista
+<http://altavista.digital.com/> (60 kB each).
+
+The frequencies of letters of the following languages were sent by
+Gwidon S. Naskrent <naskrent@hoth.amu.edu.pl>: French - Candide,
+de Voltaire (190 kB), Italian - La Divina Commedia di Dante (550 kB),
+Spanish and Swedish - /usr/dict/*.words from Debian (800 kB each),
+Hebrew - Seforim haDivrei from <ftp://ftp.shamash.org/> (140 kB),
+Esperanto - Psau^moj from the Zamenhoff's Bible (450 kB).
+
+Many approximations of Unicode letters are based on the glyph pictures
+found at <http://charts.unicode.org/charts.html>. Some were also
+inspired by Lynx conversion tables.
+
+viscii, viqri, and enhanced cp1258 were taken from Mark Leisher's
+<mleisher@crl.nmsu.edu> csets.
+
+mnemonic and mnemonic1 were taken from glibc-2.0.7 sources.
+
+
+	THANKS
+
+Thanks to Grzegorz Grudzinski <gsg@lipa.mimuw.edu.pl> for spending much
+time answering my stupid questions.
+
+Thanks to Gwidon S. Naskrent <naskrent@hoth.amu.edu.pl> for discussions
+about charsets, encodings, fonts etc., bug reports, correcting my
+English, sending frequencies of letters in some languages, and man
+pages.
+
+Thanks to Yann Dirson <ydirson@a2points.com> for discussions, bug
+reports, help, and packaging Konwert for Debian.
+
+Thanks to Adam Twardoch <adam.twardoch@euv-frankfurt-o.de> for
+discussions about charsets, encodings, fonts etc.
+
+Thanks to Ziemek Borowski <ziembor@FAQ-bot.Ziembor.waw.pl> for help with
+packaging Konwert into RPM and pointing out some errors.
+
+Thanks to Juliusz Chroboczek <jec@dcs.ed.ac.uk> for ISO-8859-15,
+KOI8-RU, and Mark Leisher's <mleisher@crl.nmsu.edu> csets.
+
+The filterm idea is based on the Piotr Piatkowski's
+<kompas@uci.agh.edu.pl> similar program ttyconv aka ogonki
+<http://www.agh.edu.pl/ogonki/ttyconv.html>. The pseudo-terminal
+handling code is taken from the Linux program script. Also W. Richard
+Stevens' "UNIX Network Programming" book helped me.
+
+Thanks to the readers of news:pl.comp.ogonki and news:pl.comp.os.linux
+for discussions and help.
+
+Thanks to the authors of Linux, cat, bash, dosemu, gcc, grep, gzip, inn,
+less, lynx, make, mc, perl, pine, pppd, rpm, sed, sendmail, sort, suck,
+tar, uniq, wget... Life would be much harder without them.
+
+
+	HOW COULD YOU HELP ME?
+
+You are welcome to send me bug reports, improvements or other
+suggestions about trs, scripts, tables and other data - especially
+devel/UTF8-charset, devel/UTF8-tex, devel/any and devel/mime.
+
+If you want some new charset supported, please tell me - but only if you
+know that this charset is being used or there are texts coded in it.
+I have enough tables of hundreds of strange never-seen charsets, but
+don't know which of them are usable.
+
+If you want some new language supported by the `any' conversion, please
+tell me how can I get the frequencies of its letters (URLs of long texts
+in that language are welcome) and what charsets are being used for this
+language.
+
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

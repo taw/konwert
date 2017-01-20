@@ -1,0 +1,105 @@
+
+	KONWERT, wersja 1.8
+	-------
+
+Konwert jest pakietem s³u¿±cym do konwersji miêdzy ró¿nymi kodowaniami
+znaków.
+
+Najnowsz± wersjê pakietu mo¿na ¶ci±gn±æ
+z <http://qrczak.home.ml.org/programy/linux/konwert/>.
+
+Copyright (c) 1998 Marcin 'Qrczak' Kowalczyk
+
+Niniejszy program jest oprogramowaniem wolnodostêpnym; mo¿esz go
+rozprowadzaæ dalej i/lub modyfikowaæ na warunkach Powszechnej Licencji
+Publicznej GNU, wydanej przez Fundacjê Wolnodostêpnego Oprogramowania
+- wed³ug wersji 2-giej tej Licencji lub której¶ z pó¼niejszych wersji.
+
+Niniejszy program rozpowszechniany jest z nadziej±, i¿ bêdzie on
+u¿yteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domy¶lnej
+gwarancji PRZYDATNO¦CI HANDLOWEJ albo PRZYDATNO¦CI DO OKRE¦LONYCH
+ZASTOSOWAÑ. W celu uzyskania bli¿szych informacji - Powszechna
+Licencja Publiczna GNU.
+
+Z pewno¶ci± wraz z niniejszym programem otrzyma³e¶ te¿ egzemplarz
+Powszechnej Licencji Publicznej GNU; je¶li nie - napisz do Free
+Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+MA  02111-1307  USA
+
+
+	DOKUMENTACJA
+
+Dokumentacja po angielsku jest w katalogu doc/en.
+
+Znane b³êdy w bie¿±cej wersji s± w pliku doc/pl/BLEDY.
+
+Zmiany w poszczególnych wersjach s± opisane w pliku doc/pl/ZMIANY
+(po angielsku).
+
+Plany na przysz³o¶æ s± wypisane w pliku doc/pl/DO_ZROBIENIA
+(po angielsku).
+
+Pakiet sk³ada siê z nastêpuj±cych czê¶ci:
+
+Sam program konwert jest interfejsem do ró¿nych filtrów plików. Mo¿e
+filtrowaæ wiele plików przez wiele filtrów. Filtry mog± byæ dowolnymi
+plikami wykonywalnymi. Wiêcej szczegó³ów jest w pliku
+doc/pl/konwert.
+
+Program trs jest rzeczywistym mechanizmem konwertuj±cym zestawy znaków.
+Potrafi zastêpowaæ dane ³añcuchy innymi i niewiele wiêcej. Wiêcej
+szczegó³ów jest w pliku doc/pl/trs.
+
+Program filterm filtruje wej¶cie lub wyj¶cie terminala, co mo¿e pomóc
+np. gdy nasz terminal nie potrafi wy¶wietlaæ znaków spoza ASCII albo
+wprowadzaæ ich z klawiatury. Wiêcej szczegó³ów jest w pliku
+doc/pl/filterm.
+
+W pakiecie jest trochê filtrów, g³ównie konwertuj±cych miêdzy ró¿nymi
+zestawami znaków i sposobami zapisu rozszerzonych znaków. Wiêcej
+szczegó³ów jest w pliku doc/pl/filtry.
+
+£atwo mo¿na dodawaæ nowe filtry. Do³±czy³em trochê plików ¼ród³owych
+filtrów i skrypty s³u¿±ce do budowania z nich tych filtrów. Wiêcej
+szczegó³ów jest w pliku doc/pl/tworzenie.
+
+Informacje o ¼ród³ach tabel, podziêkowaniach i o tym, jak móg³by¶ mi
+pomóc, s± w pliku doc/pl/podziekowania.
+
+
+	INSTALACJA
+
+Konwert chodzi pod Linuxem i prawdopodobnie równie¿ pod innymi Unixami.
+Wymagany jest perl 5.001 albo nowszy.
+
+Je¶li instalujesz ze ¼róde³:
+
+Uruchom `make install' w katalogu ¼ród³owym Konwerta.
+
+Mo¿esz okre¶liæ inny katalog bazowy ni¿ domy¶lny /usr/local:
+`make install prefix=/usr' albo cokolwiek. Ten katalog bêdzie zapisany
+w instalowanym skrypcie bin/konwert, który bêdzie szuka³ w nim swoich
+filtrów. Pliki s± instalowane w podkatalogach katalogu bazowego bin,
+share/konwert, lib/konwert, doc/konwert-1.8 i man.
+
+Katalog interpretera perla równie¿ bêdzie zapisany w instalowanych
+skryptach. Je¶li chcesz u¿yæ innego perla ni¿ tego znalezionego przez
+`which perl', wykonaj `make install perl=/usr/bin/perl' (z w³a¶ciw±
+¶cie¿k±).
+
+Je¶li pakiet ma byæ instalowany w inne miejsce ni¿ docelowe,
+to `make prefix=...' wpisze odpowiedni katalog do skryptów,
+a `make install prefix=...' mo¿e wtedy zainstalowaæ gdzie indziej.
+
+Zmiana tego katalogu po skompilowaniu pakietu albo zmiana ¶cie¿ki do
+perla wymaga `make clean' pomiêdzy.
+
+`make uninstall' odinstalowuje pakiet. Wymaga tej samej opcji prefix=
+co `make install'.
+
+
+--
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-

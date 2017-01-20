@@ -1,0 +1,5 @@
+#!/usr/bin/trs -f
+
+	&	&amp;
+	<	&lt;
+	>	&gt;

@@ -1,0 +1,38 @@
+#!/usr/bin/perl
+
+$aliasy = shift;
+$filtry = shift;
+$katalog = shift;
+
+open ALIASY, $aliasy;
+foreach (<ALIASY>)
+{
+	s/#.*$//;
+	@F = split;
+	push @{$aliasy{$F[0]}}, @F[1 .. $#F] if @F > 1;
+}
+close ALIASY;
+
+opendir DIR, $filtry;
+foreach (readdir DIR)
+{
+	if (/^(.*)-(.*)$/)
+	{
+		foreach $a ($1, @{$aliasy{$1}})
+		{
+			foreach $b ($2, @{$aliasy{$2}})
+			{
+				link "$katalog/$1-$2", "$katalog/$a-$b"
+					if $a ne $1 || $b ne $2;
+			}
+		}
+	}
+	else
+	{
+		foreach $a (@{$aliasy{$_}})
+		{
+			link "$katalog/$_", "$katalog/$a";
+		}
+	}
+}
+closedir DIR;

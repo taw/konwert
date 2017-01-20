@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+
+if ($ARGV[0] eq "-1") {$pojed = 1; shift}
+
+open UTF8_CHARSET, shift;
+while (<UTF8_CHARSET>)
+{
+	@alt = split;
+	$utf8 = shift @alt;
+	next if $utf8 eq "\357\277\275";
+	foreach (@alt)
+	{
+		next if /^(.|\\.)+\\V/;
+		$znakiist = $_;
+		s/\\\}.*?$//;
+		@znaki = /[^\200-\377]|[\300-\377][\200-\277]+/g;
+		$jeden = @znaki == 1 || /^\\[^!]$/;
+		if ($znakiist !~ /[\300-\377]/ && (!$pojed || $jeden))
+		{
+			print "\t$utf8\t", @znaki, "\n" if $pojed || !$jeden;
+			last;
+		}
+	}
+}
+close UTF8_CHARSET;

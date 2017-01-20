@@ -1,0 +1,38 @@
+#!/usr/bin/perl -n
+
+s/([\xC0-\xDF])([\x80-\xBF])/
+sprintf "&#x%X;", ((ord ($1) & 0x1F) << 6
+                  | ord ($2) & 0x3F)
+/eg;
+
+s/([\xE0-\xEF])([\x80-\xBF])([\x80-\xBF])/
+sprintf "&#x%X;", ((ord ($1) & 0x0F) << 12
+                  |(ord ($2) & 0x3F) << 6
+                  | ord ($3) & 0x3F)
+/eg;
+
+s/([\xF0-\xF7])([\x80-\xBF])([\x80-\xBF])([\x80-\xBF])/
+sprintf "&#x%X;", ((ord ($1) & 0x07) << 18
+                 | (ord ($2) & 0x3F) << 12
+                 | (ord ($3) & 0x3F) << 6
+                 |  ord ($4) & 0x3F)
+/eg;
+
+s/([\xF8-\xFB])([\x80-\xBF])([\x80-\xBF])([\x80-\xBF])([\x80-\xBF])/
+sprintf "&#x%X;", ((ord ($1) & 0x03) << 24
+                 | (ord ($2) & 0x3F) << 18
+                 | (ord ($3) & 0x3F) << 12
+                 | (ord ($4) & 0x3F) << 6
+                 |  ord ($5) & 0x3F)
+/eg;
+
+s/([\xFC-\xFD])([\x80-\xBF])([\x80-\xBF])([\x80-\xBF])([\x80-\xBF])([\x80-\xBF])/
+sprintf "&#x%X;", ((ord ($1) & 0x01) << 30
+                 | (ord ($2) & 0x3F) << 24
+                 | (ord ($3) & 0x3F) << 18
+                 | (ord ($4) & 0x3F) << 12
+                 | (ord ($5) & 0x3F) << 6
+                 |  ord ($6) & 0x3F)
+/eg;
+
+print;

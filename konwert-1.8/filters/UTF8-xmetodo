@@ -1,0 +1,16 @@
+#!/bin/bash -
+
+APPROX= APPROX1= MIME=us-ascii "${0%/*}/../aux/UTF8-charset" -e '
+	Ĉ	CX
+	Ĝ	GX
+	Ĥ	HX
+	Ĵ	JX
+	Ŝ	SX
+	Ŭ	UX
+	ĉ	cx
+	ĝ	gx
+	ĥ	hx
+	ĵ	jx
+	ŝ	sx
+	ŭ	ux
+'

@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+
+while (<STDIN>)
+{
+	s/(<\s*META\s+
+		http-equiv\s*=\s*(?:"content-type"|content-type)\s+
+		content\s*=\s*"text\/html;\s*charset=)[^"]+("\s*>)
+		/$1$ARGV[0]$2/ix
+
+		if $ARGV[0];
+
+	print;
+}

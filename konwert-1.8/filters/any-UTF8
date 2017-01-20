@@ -1,0 +1,131 @@
+#!/usr/bin/perl
+
+($katalog = $0) =~ s|/[^/]*$||;
+
+# Konwersja any-test wypisuje tylko oznaczenie rozpoznanego standardu zamiast
+# konwersji. Konwersja any-test/all wypisuje tabelkê wspó³czynników zgodno¶ci
+# z poszczególnymi zestawami.
+if ($ARGV[0] eq "-test") {shift @ARGV; $test = 1;}
+
+# Szukamy jêzyka w argumentach i pliku z jego opisem:
+foreach (split " ", $ENV{ARG})
+{
+	if ($test && $_ eq "all") {$test = 2}
+	elsif (!$jest && open JEZYK, "$katalog/../aux/any/$_") {$jest = 1}
+}
+# Je¶li nie znale¼li¶my jêzyka, to przepuszczamy tekst bez zmian:
+unless ($jest)
+{
+	if ($test == 1)
+	{
+		print "-\n";
+	}
+	elsif ($test == 2)
+	{
+		print "Unknown or unspecified language\n";
+	}
+	else
+	{
+		print while <>;
+	}
+	exit;
+}
+
+# Odczytujemy dane o zestawach znaków w danym jêzyku:
+while (<JEZYK>)
+{
+	chomp;
+	@znaki = split;
+	$zestaw = shift @znaki;
+	# '%' zamiast zestawu oznacza czêsto¶ci wystêpowania znaków:
+	if ($zestaw eq '%') {@czestosci = @znaki}
+	else
+	{
+		push @zestawy, {ZESTAW => $zestaw, ZNAKI => [@znaki]};
+		# Znaki zliczamy dwoma sposobami:
+		# - Poszczególne bajty zliczamy tak czy siak, nie patrz±c na
+		#   to, które s± akurat potrzebne.
+		# - Znaki d³u¿sze ni¿ jeden bajt musimy zliczyæ osobno. Dla
+		#   szybko¶ci zapamiêtujemy je w osobnych tablicach, wzglêdem
+		#   pierwszego bajtu.
+		foreach (@znaki)
+		{
+			push @{$dlugie[ord]}, $_ if length > 1
+		}
+	}
+}
+close JEZYK;
+
+unless ($test)
+{
+	# Musimy przelecieæ tekst dwa razy - raz, ¿eby zliczyæ znaki, i drugi
+	# raz, ¿eby go skonwertowaæ. Podczas pierwszego przebiegu zapamiêtujemy
+	# wiêc test w tymczasowym pliku:
+	open TEMP, "+>/tmp/any-$$";
+	unlink "/tmp/any-$$";
+}
+# Zliczamy wyst±pienia poszczególnych bajtów (w @ile) i znaków d³u¿szych ni¿
+# jeden bajt (w %ile):
+while (<>)
+{
+	print TEMP $_ unless $test;
+	chomp;
+	my $i = 0;
+	foreach my $znak (split //)
+	{
+		$ile[ord $znak]++;
+		foreach my $znak (@{$dlugie[ord $znak]})
+		{
+			$ile{$znak}++ if substr ($_, $i, length $znak) eq $znak;
+		}
+	} continue {$i++}
+}
+
+# Wspó³czynnikiem zgodno¶ci dla danego zestawu znaków jest suma iloczynów
+# zaobserwowanych liczb wyst±pieñ i ¶rednich czêsto¶ci dla danego jêzyka
+# odczytanej z pliku z opisem jêzyka:
+$najlepiej = 0;
+$najlepszy = "-";
+foreach (@zestawy)
+{
+	my $pasuje = 0;
+	@znaki = @{$$_{ZNAKI}};
+	foreach (@czestosci)
+	{
+		$znak = shift @znaki;
+		$pasuje += (length $znak > 1 ? $ile{$znak} : $ile[ord $znak]) * $_
+			if $znak ne "-";
+	}
+	if ($test == 2) {$$_{PASUJE} = $pasuje}
+	if ($pasuje > $najlepiej)
+	{
+		$najlepiej = $pasuje;
+		$najlepszy = $$_{ZESTAW};
+	}
+}
+
+# Je¶li to by³ test, to tylko wypisujemy informacjê:
+if ($test == 1)
+{
+	print "$najlepszy\n";
+	exit;
+}
+elsif ($test == 2)
+{
+	foreach (sort {$$b{PASUJE} <=> $$a{PASUJE}} @zestawy)
+	{
+		printf "%10d: %s\n", $$_{PASUJE}, $$_{ZESTAW} if $$_{PASUJE};
+	}
+	exit;
+}
+
+seek TEMP, 0, 0;
+# Je¶li z ¿adnego zestawu nie pasowa³ ¿aden znak, to przepuszczamy plik bez
+# zmian:
+if ($najlepiej == 0) {print while <TEMP>; close TEMP; exit;}
+
+($najlepszy = "|$najlepszy-UTF8") =~ s/\|/|$katalog\//g;
+open WYNIK, $najlepszy;
+while (<TEMP>) {print WYNIK $_}
+close TEMP;
+close WYNIK;

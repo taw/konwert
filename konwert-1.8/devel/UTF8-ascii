@@ -1,0 +1,69 @@
+
+if [ "$FILTERM" = out ]
+then
+	NPOJED=
+else
+	NPOJED=1
+fi
+FORMAT=
+HTMLCHAR=
+POPRAWKI=
+for A in $ARG
+do
+	case "$A" in
+	(1)               NPOJED=;;
+	(html)            FORMAT=html;;
+	(htmldec|htmlhex) FORMAT=html; HTMLCHAR=${A#html};;
+	(tex)             FORMAT=tex;;
+	(*)
+		if [ -x "${0%/*}/../aux/argcharset/$A" ]
+		then
+			POPRAWKI=${POPRAWKI:+$POPRAWKI | }${0%/*}/../aux/argcharset/$A
+		fi
+		VARIANT=VARIANT_$A; APPROX="${!VARIANT} $APPROX"
+		VARIANT=VARIANT1_$A; APPROX1="${!VARIANT} $APPROX1"
+		;;
+	esac
+done
+
+if [ "$POPRAWKI" ]
+then
+	"$SHELL" -c "$POPRAWKI"
+else
+	cat
+fi |
+case "$FORMAT" in
+(html)
+	"${0%/*}/../aux/fixmeta" us-ascii |
+	if [ "$HTMLCHAR" ]
+	then
+		"${0%/*}/UTF8-html$HTMLCHAR"
+	else
+		trs -e '\}\[@&<>\] @' \
+			${NPOJED:+-e} ${NPOJED:+"$APPROX"} \
+			-e "$APPROX1" \
+			${NPOJED:+-f} ${NPOJED:+"${0%/*}/../aux/UTF8-ascii"} \
+			-f "${0%/*}/../aux/UTF8-ascii1" \
+			-e "\300\-\377 ${REPLACE:-?} \200\-\277 \!" |
+		trs -e '@@ @ @& & @< < @> > & &amp; < &lt; > &gt;'
+	fi
+	;;
+(tex)
+	trs -e '\}\[@\#$%&\\^_{|}~\] @' \
+		-f "${0%/*}/../aux/UTF8-tex" \
+		-e "$APPROX" \
+		-e "$APPROX1" \
+		-f "${0%/*}/../aux/UTF8-ascii" \
+		-f "${0%/*}/../aux/UTF8-ascii1" \
+		-e "\300\-\377 ${REPLACE:-?} \200\-\277 \!" |
+	trs -e '@@ @ @\# \# @$ $ @% % @& & @\\ \\ @^ ^ @_ _ @{ { @| | @} } @~ ~
+\# \\\# $ \\$ % \\% & \\& \\ $\\backslash$ ^ \\^{} _ \\_ { \\{ | $|$ } \\} ~ \\~{}'
+	;;
+(*)
+	trs ${NPOJED:+-e} ${NPOJED:+"$APPROX"} \
+		-e "$APPROX1" \
+		${NPOJED:+-f} ${NPOJED:+"${0%/*}/../aux/UTF8-ascii"} \
+		-f "${0%/*}/../aux/UTF8-ascii1" \
+		-e "\300\-\377 ${REPLACE:-?} \200\-\277 \!"
+	;;
+esac

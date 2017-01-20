@@ -1,0 +1,45 @@
+
+	KONWERT
+	-------
+
+U¿ycie: konwert FILTR [PLIK]... [-o WYNIK | -O]
+Jest to interfejs do ró¿nych konwersji kodowañ znaków.
+
+Konwert pozwala filtrowaæ wiele plików przez wiele filtrów. Filtruje
+podane PLIKI, albo stdin je¶li ¿adnych nie okre¶lono.
+
+  -o WYNIK    wyj¶cie idzie do tego pliku/katalogu zamiast na stdout
+  -O          ka¿dy plik ¼ród³owy jest zastêpowany swoim t³umaczeniem
+  --help      wy¶wietla ten opis i wychodzi
+  --version   wy¶wietla informacjê o wersji i wychodzi
+
+Przekierowanie wyj¶cia do jednego z plików ¼ród³owych przez -o albo >
+zamiast -O zniszczy ten plik! Opcja -O tworzy tymczasowy plik w /tmp
+i pó¼niej kopiuje go z powrotem na ¼ród³o.
+
+Prosty FILTR jest nazw± pliku wykonywalnego z katalogu
+~/.konwert/filters albo z ogólnosystemowego, normalnie
+/usr/share/konwert/filters. Taki program sam filtruje stdin na stdout.
+
+Regu³a filtrowania mo¿e byæ bradziej skomplikowana:
+
+`konwert FILTR1+FILTR2' znaczy `konwert FILTR1 |konwert FILTR2'.
+
+`konwert FORMAT1-FORMAT2', o ile taki filtr nie istnieje, próbuje
+znale¼æ wspólny FORMAT3, taki ¿e oba filtry FORMAT1-FORMAT3
+i FORMAT3-FORMAT1 istniej±.
+
+`konwert FILTR/ARG/...' przekazuje filtrowi argumenty. Argumenty mog±
+byæ te¿ podane tutaj: FORMAT1/ARG-FORMAT2. Znaczenie arguentów zale¿y od
+konkretnego filtru.
+
+`konwert '(KOMENDA ARG...)'' wykonuje dane polecenie szela. Jest to
+przydatne z opcjami -o albo -O. Komenda nie mo¿e zawieraæ ³añcucha `)+',
+który zakoñczy specyfikacjê tego filtru.
+
+
+-- 
+ __("<   Marcin Kowalczyk * qrczak@knm.org.pl http://qrczak.home.ml.org/
+ \__/       GCS/M d- s+:-- a21 C+++>+++$ UL++>++++$ P+++ L++>++++$ E->++
+  ^^                W++ N+++ o? K? w(---) O? M- V? PS-- PE++ Y? PGP->+ t
+QRCZAK                  5? X- R tv-- b+>++ DI D- G+ e>++++ h! r--%>++ y-
