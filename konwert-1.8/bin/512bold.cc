@@ -1,6 +1,6 @@
 
 #include <stdlib.h>
-#include <iostream.h>
+#include <iostream>
 
 #define NPAR 16
 
@@ -83,7 +83,7 @@ void update_pal()
     for (int i = 0; i < 8; i++)
     	if (zmien[i])
     	{
-	    cout << "\33]P" << hex[i] << normalny[nastare[i]];
+	    std::cout << "\33]P" << hex[i] << normalny[nastare[i]];
 	    zmien[i] = 0;
     	}
     zmiencos = 0;
@@ -93,7 +93,7 @@ void update_attr()
 {
     int attr = color;
     if (reverse) attr = (attr & 0x88) | (((attr >> 4) | (attr << 4)) & 0x77);
-    cout << 30 + kolory
+    std::cout << 30 + kolory
     (
 	(underline ? ulcolor :
 	intensity == 0 ? halfcolor :
@@ -141,7 +141,7 @@ void csi_m()
 	switch (par[i])
 	{
 	    case 0:	/* all attributes off */
-		cout << "0;";
+		std::cout << "0;";
 		default_attr();
 		update_attr();
 		break;
@@ -200,9 +200,9 @@ void csi_m()
 		    update_attr();
 		}
 		else
-		    cout << par[i];
+		    std::cout << par[i];
 	}
-	if (i != npar) cout << ';';
+	if (i != npar) std::cout << ';';
     }
     npar = -1;
 }
@@ -218,7 +218,7 @@ void setterm_command()
 		if (underline)
 		{
 		    update_attr();
-		    cout << "m\33[";
+		    std::cout << "m\33[";
 		}
 	    }
 	    break;
@@ -229,7 +229,7 @@ void setterm_command()
 		if (intensity == 0)
 		{
 		    update_attr();
-		    cout << "m\33[";
+		    std::cout << "m\33[";
 		}
 	    }
 	    break;
@@ -240,21 +240,21 @@ void setterm_command()
 		intensity == 0 ? halfcolor :
 		(color & 0x0F)) ^ (intensity == 2) * 8
 	    ) | (color & 0xF0);
-	    cout << 30 + (def_color & 0x07) << ';' << 40 + (def_color >> 4);
-	    if (def_color & 0x08) cout << ";1";
-	    cout << "m\33[8]\33[";
-	    if (def_color & 0x08) cout << "22;";
+	    std::cout << 30 + (def_color & 0x07) << ';' << 40 + (def_color >> 4);
+	    if (def_color & 0x08) std::cout << ";1";
+	    std::cout << "m\33[8]\33[";
+	    if (def_color & 0x08) std::cout << "22;";
 	    default_attr();
 	    update_attr();
-	    cout << 'm';
+	    std::cout << 'm';
 	    return;
     }
     for (int i = 0; i <= npar; i++)
     {
-	cout << par[i];
-	if (i < npar) cout << ';';
+	std::cout << par[i];
+	if (i < npar) std::cout << ';';
     }
-    cout << ']';
+    std::cout << ']';
 }
 
 void con_write (unsigned char c)
@@ -292,7 +292,7 @@ void con_write (unsigned char c)
 			save_cur();
 			break;
 		    case '8':
-		    	cout << "8\33[";
+		    	std::cout << "8\33[";
 			restore_cur();
 			c = 'm';
 			break;
@@ -341,13 +341,13 @@ void con_write (unsigned char c)
 		    }
 		    for (int i = 0; i <= npar; i++)
 		    {
-			cout << par[i];
-			if (i < npar) cout << ';';
+			std::cout << par[i];
+			if (i < npar) std::cout << ';';
 		    }
 		}
         }
     }
-    cout << c;
+    std::cout << c;
     if (zmiencos) update_pal();
 }
 
@@ -383,9 +383,9 @@ main()
 {
     licz_odleglosci();
     reset_terminal();
-    cout << "\30\33]R\33[0;"; update_attr(); cout << "m";
+    std::cout << "\30\33]R\33[0;"; update_attr(); std::cout << "m";
     update_pal();
     int c;
-    while ((c = cin.get()) != -1) con_write (c);
-    cout << "\30\33]R\33[0m";
+    while ((c = std::cin.get()) != -1) con_write (c);
+    std::cout << "\30\33]R\33[0m";
 }

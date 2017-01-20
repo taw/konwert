@@ -8,8 +8,8 @@
 //      ^^      http://qrczak.home.ml.org/
 
 #include <string.h>
-#include <iostream.h>
-#include <fstream.h>
+#include <iostream>
+#include <fstream>
 #include <sstream>
 #include <ctype.h>
 #include <unistd.h>

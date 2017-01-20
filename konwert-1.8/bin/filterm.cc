@@ -1,4 +1,5 @@
-#include <iostream.h>
+#include <iostream>
+#include <limits.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,7 +24,7 @@ struct winsize	win;
 
 void uzycie (int status)
 {
-    (status ? cerr : cout) << "\
+    (status ? std::cerr : std::cout) << "\
 Usage: " << nazwaprogramu << " INPUT OUTPUT [COMMAND [ARGS]]\n\
 Execute the specified COMMAND (default is the shell), filtering terminal\n\
 input and/or output.\n\
@@ -47,7 +48,7 @@ In addition, the following standard options are recognized:\n\
 
 void wersja()
 {
-    cout << "\
+    std::cout << "\
 filterm, version " WERSJA "\n\
 Copyright 1998 Marcin Kowalczyk <qrczak@knm.org.pl>\n\
 ";
@@ -69,7 +70,7 @@ void getmasterslave()
     int r;
     r = getpty();
     if (r==-1) { 
-        cerr << "Error opening pty\n";
+        std::cerr << "Error opening pty\n";
         exit (1);
     }
 

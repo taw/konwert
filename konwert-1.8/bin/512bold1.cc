@@ -1,5 +1,5 @@
 
-#include <iostream.h>
+#include <iostream>
 
 int kolory[2][8] = { { 0, 1, 2, 1, 4, 1, 2, 7 }, { 0, 5, 6, 6, 5, 5, 6, 3 } };
 
@@ -15,7 +15,7 @@ int color, intensity, underline, s_color, s_intensity, s_underline,
 
 void update_attr()
 {
-    cout << 30 + (underline ? ulcolor : intensity == 0 ? halfcolor :
+    std::cout << 30 + (underline ? ulcolor : intensity == 0 ? halfcolor :
 	kolory[intensity == 2][color & 0x0F])
 	<< ';' << 40 + kolory[0][color >> 4];
 }
@@ -54,7 +54,7 @@ void csi_m()
 	switch (par[i])
 	{
 	    case 0:	/* all attributes off */
-		cout << "0;";
+		std::cout << "0;";
 		default_attr();
 		update_attr();
 		break;
@@ -105,9 +105,9 @@ void csi_m()
 		    update_attr();
 		}
 		else
-		    cout << par[i];
+		    std::cout << par[i];
 	}
-	if (i != npar) cout << ';';
+	if (i != npar) std::cout << ';';
     }
     npar = -1;
 }
@@ -191,25 +191,25 @@ void con_write (unsigned char c)
 		    }
 		    for (int i = 0; i <= npar; i++)
 		    {
-			cout << par[i];
-			if (i < npar) cout << ';';
+			std::cout << par[i];
+			if (i < npar) std::cout << ';';
 		    }
 		}
         }
     }
-    cout << c;
+    std::cout << c;
 }
 
 main()
 {
     reset_terminal();
-    cout << "\33]P0000000\33]P1AA0000\33]P200AA00\33]P3FFFFFF"
+    std::cout << "\33]P0000000\33]P1AA0000\33]P200AA00\33]P3FFFFFF"
 	    "\33]P40000AA\33]P5FF55FF\33]P655FFFF\33]P7AAAAAA"
 	    "\33]P8000000\33]P9AA0000\33]PA00AA00\33]PBFFFFFF"
 	    "\33]PC0000AA\33]PDFF55FF\33]PE55FFFF\33]PFAAAAAA"
 	    "\33[0;";
-    update_attr(); cout << "m";
+    update_attr(); std::cout << "m";
     int c;
-    while ((c = cin.get()) != -1) con_write (c);
-    cout << "\33]R\33[0m";
+    while ((c = std::cin.get()) != -1) con_write (c);
+    std::cout << "\33]R\33[0m";
 }
