@@ -1,0 +1,64 @@
+#!/bin/bash -
+#
+# Wykorzystuje standardowe mozliwosci drukarki zgodnej ze standardem
+# EPSON do emulacji polskich znaczkow. Dziala na zasadzie sekwencji:
+#
+# <literka_podstawowa><cofnij>[w gore/dol]<znaczek ,`.>[w dol/gore]
+#
+# Sekwencje zostaly przetestowane na starej 9-iglowej drukarce
+# Star NL-10 we wszystkich jakosciach/czcionkach na niej dostepnych,
+# a takze w trybie NLQ.
+#
+# Wersja domyslna z parametrem 'nlq' wyglada lepiej w lepszej jakosci
+# czy rozdzielczosci wydruku, natomiast 'draft' w gorszej/nizszej.
+#
+# (c) by Grzegorz B. Prokopski 2003 <gadek@debian.org> licencja GPL2
+#
+
+# rozpoznajemy parametry ARG: domyslny 'nlq' i 'draft'
+P_WAY=nlq
+for A in $ARG; do
+	case $A in
+		nlq) P_WAY=nlq;;
+		draft) P_WAY=draft;;
+	esac
+done
+
+# domyslnie ustawiamy zmienne dla DRAFTu
+P_MOGN=\\b\\e\\112\\004,\\e\\152\\004
+P_MAKC=\\b\\'`'
+P_MKRP=\\b\\e\\152\\021.\\e\\112\\021
+P_DOGN=\\b\\e\\112\\004,\\e\\152\\004
+P_DAKC=\\b\\e\\152\\010\\'`'\\e\\112\\010
+P_DKRP=\\b\\e\\152\\027.\\e\\112\\027
+P_UKN=\\b/
+
+# zmieniamy dla NLQ
+if [ $P_WAY == nlq ]; then
+P_MAKC=\\b\\e\\152\\025,\\e\\112\\025
+P_MKRP=\\b\\e\\152\\023.\\e\\112\\023
+P_DAKC=\\b\\e\\152\\033,\\e\\112\\033
+P_DKRP=\\b\\e\\152\\031.\\e\\112\\031
+fi
+
+trs -e "
+		ą		a$P_MOGN
+		ć		c$P_MAKC
+		ę		e$P_MOGN
+		ł		l$P_UKN
+		ń		n$P_MAKC
+		ó		o$P_MAKC
+		ś		s$P_MAKC
+		ź		z$P_MAKC
+		ż		z$P_MKRP
+		Ą		A$P_DOGN
+		Ć		C$P_DAKC
+		Ę		E$P_DOGN
+		Ł		L$P_UKN
+		Ń		N$P_DAKC
+		Ó		O$P_DAKC
+		Ś		S$P_DAKC
+		Ź		Z$P_DAKC
+		Ż		Z$P_DKRP
+"
+

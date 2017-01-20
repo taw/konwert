@@ -200,6 +200,12 @@ rot13 - Gb wrfg qrzbafgenpwn ebg13.
 toupper, tolower - Zamienia tekst na du¿e / ma³e litery. Na razie tylko
 ASCII.
 
+prn7pl - Konwertuje polskie znaki na sekwencje sterujêce drukarki zgodnej
+z EPSON wykorzystuj±c jedynie podstawowe znaki 7-bitowe, cofaj±c g³owicê
+drukarki i drukuj±c na odpowiedniej wysoko¶ci ,.'` daj±ce w sumie pseudo-
+polskie znaki. Przyjmuje opcje: /nlq (domy¶lne) optymalizowane do drukarek
+o lepszej rozdzielczo¶ci i /draft - np. dla trybu draft 9-ig³ówki.
+
 
 	DODATKOWE FILTRY DLA FILTERMA
 

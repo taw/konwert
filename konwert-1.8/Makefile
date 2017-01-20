@@ -181,6 +181,9 @@ all: $(targets)
 
 ###############################################################################
 
+$(srcbindir)/filterm: $(srcbindir)/filterm.cc
+	$(CXX) $(CXXFLAGS) $< -lutil -o $@
+
 $(installbindir)/konwert: $(srcbindir)/konwert
 	sed 's|/usr/share/konwert/filters|$(filtersdir)|g' $< >$@
 	chmod +x $@

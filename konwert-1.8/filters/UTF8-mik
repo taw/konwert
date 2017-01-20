@@ -1,0 +1,3 @@
+APPROX='
+' APPROX1='
+' REPLACE='?' "${0%/*}/../aux/UTF8-charset" -rf "${0%/*}/../aux/charsets/mik"

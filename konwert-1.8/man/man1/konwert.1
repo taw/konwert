@@ -533,6 +533,17 @@ Guvf vf n qrzbafgengvba bs ebg13.
 .B tolower
 .PD
 Self-explanatory. Currently ASCII only.
+.TP
+.B prn7pl
+Converts polish chars to control sequences for EPSON-compatible
+printer. Using only 7-bit chars, backspacing printer's head and vertical
+positioning chars ,.'` it creates pseudo-polish gryphs. You can specify
+options:
+.B /nlq
+(default) which optimalizes output for better quality
+printers and
+.B /draft
+- useful for ex. for 9-nails printer.
 .SH FILES
 .TP
 .PD 0

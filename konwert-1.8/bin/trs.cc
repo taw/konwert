@@ -10,10 +10,13 @@
 #include <string.h>
 #include <iostream.h>
 #include <fstream.h>
-#include <strstream.h>
+#include <sstream>
 #include <ctype.h>
 #include <unistd.h>
+#include <stdlib.h>
 #define _(String) (String)
+
+using namespace std;
 
 #define WERSJA "1.8"
 #define WLKSLOWA 64*1024	// Maksymalna d³ugo¶æ s³owa do zamiany
@@ -133,7 +136,7 @@ int bufor::niekoniec (int i)
 
 struct zmienna
 {
-	int zmienna, wartosc;
+	int zmienna2, wartosc;
 	zmienna *nast;
 };
 
@@ -315,7 +318,7 @@ int rozwineskejpy (char *napis1, char *&napis2, int &dlug2, zmienna **zmienne,
 					)
 					{
 						*zmienne = new zmienna;
-						(*zmienne)->zmienna =
+						(*zmienne)->zmienna2 =
 							s1[0] >= 'A' && s1[0] <= 'Z' ?
 								s1[0] - 'A'
 							:
@@ -474,7 +477,7 @@ void czytajreguly (istream &f)
 
 void regulyzarg (char *s)
 {
-	istrstream f (s);
+	istringstream f (s);
 	czytajreguly (f);
 }
 
@@ -542,7 +545,7 @@ void trs ()
 					zmienna *z = r->warunki;
 					while (z)
 					{
-						if (zmienne[z->zmienna] != z->wartosc)
+						if (zmienne[z->zmienna2] != z->wartosc)
 							goto niepasuje;
 						z = z->nast;
 					}
@@ -572,7 +575,7 @@ void trs ()
 					z = r->zmienne;
 					while (z)
 					{
-						zmienne[z->zmienna] = z->wartosc;
+						zmienne[z->zmienna2] = z->wartosc;
 						z = z->nast;
 					}
 					goto zamienione;

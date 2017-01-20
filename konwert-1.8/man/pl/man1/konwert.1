@@ -52,7 +52,7 @@ Znaczenie arguentów zale¿y od konkretnego filtru.
 .PP
 .B konwert
 .BI '( "KOMENDA ARG\fR.\|.\|.\|" )'
-wykonuje dane polecenie szela. Jest to przydatne z opcjami
+wykonuje dane polecenie pow³oki. Jest to przydatne z opcjami
 .B \-o
 albo
 .BR \-O .
@@ -531,6 +531,17 @@ Gb wrfg qrzbafgenpwn ebg13.
 .B tolower
 .PD
 Zamienia tekst na du¿e / ma³e litery. Na razie tylko ASCII.
+.TP
+.B prn7pl
+Konwertuje polskie znaki na sekwencje sterujêce drukarki zgodnej
+z EPSON wykorzystuj±c jedynie podstawowe znaki 7-bitowe, cofaj±c g³owicê
+drukarki i drukuj±c na odpowiedniej wysoko¶ci ,.'` daj±ce w sumie pseudo-
+polskie znaki. Przyjmuje opcje:
+.B /nlq
+(domy¶lne) optymalizowane do drukarek
+o lepszej rozdzielczo¶ci i
+.B /draft
+- np. dla trybu draft 9-ig³ówki.
 .SH PLIKI
 .TP
 .PD 0

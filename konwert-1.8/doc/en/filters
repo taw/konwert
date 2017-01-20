@@ -194,6 +194,12 @@ rot13 - Guvf vf n qrzbafgengvba bs ebg13.
 
 toupper, tolower - Self-explanatory. Currently ASCII only.
 
+prn7pl - Converts polish chars to control sequences for EPSON-compatible
+printer. Using only 7-bit chars, backspacing printer's head and vertical
+positioning chars ,.'` it creates pseudo-polish gryphs. You can specify
+options: /nlq (default) which optimalizes output for better quality
+printers and /draft - useful for ex. for 9-nails printer.
+
 
 	ADDITIONAL FILTERS FOR FILTERM
 

@@ -10,16 +10,16 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <pty.h>
 
 #define WERSJA "1.8"
 
 char		*nazwaprogramu;
 char		*shell;
 int		master;
-int		slave;
+int		slave = -1;
 struct termios	tt;
 struct winsize	win;
-char		line[] = "/dev/ptyXX";
 
 void uzycie (int status)
 {
@@ -54,36 +54,31 @@ Copyright 1998 Marcin Kowalczyk <qrczak@knm.org.pl>\n\
     exit (0);
 }
 
-void getmaster()
+static char linedata[PATH_MAX];
+char *line = linedata;
+
+int getpty(void) {
+    if (openpty(&master, &slave, line, NULL, NULL)) {
+        return -1;
+    } return master;
+}
+
+
+void getmasterslave()
 {
-    char *pty = &line[strlen ("/dev/ptyp")];
-    for (char *bank = "pqrs"; *bank; bank++)
-    {
-	line[strlen ("/dev/pty")] = *bank;
-	*pty = '0';
-	struct stat stb;
-	if (stat (line, &stb) < 0) break;
-	for (char *cp = "0123456789abcdef"; *cp; cp++)
-	{
-	    *pty = *cp;
-	    if ((master = open (line, O_RDWR)) >= 0)
-	    {
-		char *tp = &line[strlen("/dev/")];
-		*tp = 't';
-		int ok = !access (line, R_OK|W_OK);
-		*tp = 'p';
-		if (ok)
-		{
-		    tcgetattr (0, &tt);
-		    ioctl (0, TIOCGWINSZ, (char *) &win);
-		    return;
-		}
-		close (master);
-	    }
-	}
+    int r;
+    r = getpty();
+    if (r==-1) { 
+        cerr << "Error opening pty\n";
+        exit (1);
     }
-    cerr << "Out of pty's\n";
-    exit (1);
+
+    tcgetattr (0, &tt);
+    ioctl (0, TIOCGWINSZ, (char *) &win);
+    tcsetattr (slave, TCSAFLUSH, &tt);
+    ioctl (slave, TIOCSWINSZ, (char *) &win);
+    setsid();
+    ioctl (slave, TIOCSCTTY, 0);
 }
 
 void terminalsurowy()
@@ -114,24 +109,8 @@ void konwert (char *filtr)
     exit (1);
 }
 
-void getslave()
-{
-    line[strlen ("/dev/")] = 't';
-    slave = open (line, O_RDWR);
-    if (slave < 0)
-    {
-	perror (line);
-	exit (1);
-    }
-    tcsetattr (slave, TCSAFLUSH, &tt);
-    ioctl (slave, TIOCSWINSZ, (char *) &win);
-    setsid();
-    ioctl (slave, TIOCSCTTY, 0);
-}
-
 void komenda (int argc, char *argv[])
 {
-    getslave();
     dup2 (slave, 0);
     dup2 (slave, 1);
     dup2 (slave, 2);
@@ -181,7 +160,7 @@ main (int argc, char *argv[])
     }
     if (argc < 3) uzycie (0);
 
-    getmaster();
+    getmasterslave();
     signal (SIGCHLD, koniec);
 
     if (strcmp (argv[2], "-"))
