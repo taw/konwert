@@ -181,8 +181,7 @@ all: $(targets)
 
 ###############################################################################
 
-$(srcbindir)/filterm: $(srcbindir)/filterm.cc
-	$(CXX) $(CXXFLAGS) $< -lutil -o $@
+$(srcbindir)/filterm: LDLIBS=-lutil
 
 $(installbindir)/konwert: $(srcbindir)/konwert
 	sed 's|/usr/share/konwert/filters|$(filtersdir)|g' $< >$@
