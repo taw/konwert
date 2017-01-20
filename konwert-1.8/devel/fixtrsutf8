@@ -31,7 +31,7 @@ sub popraw ($$)
 				$reszta
 		)
 	}
-		keys %przedrostki
+		sort keys %przedrostki
 }
 
 while (<>)
