@@ -591,6 +591,7 @@ void trs ()
 
 /******** PROGRAM G£ÓWNY *****************************************************/
 
+int
 main (int argc, char **argv)
 {
 /*
@@ -636,4 +637,6 @@ main (int argc, char **argv)
 			regulyzpliku (argv[optind]);
 
 	trs ();
+
+	return 0;
 }

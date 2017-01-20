@@ -379,7 +379,8 @@ void licz_odleglosci()
 	                      abs (normalny[i][2] - normalny[j][2]);
 }
 
-main()
+int
+main(void)
 {
     licz_odleglosci();
     reset_terminal();
@@ -388,4 +389,5 @@ main()
     int c;
     while ((c = std::cin.get()) != -1) con_write (c);
     std::cout << "\30\33]R\33[0m";
+    return 0;
 }

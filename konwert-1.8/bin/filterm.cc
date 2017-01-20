@@ -148,6 +148,7 @@ void koniec (int)
     exit (0);
 }
 
+int
 main (int argc, char *argv[])
 {
     nazwaprogramu = argv[0];
@@ -244,4 +245,6 @@ main (int argc, char *argv[])
     terminalsurowy();
     cat (0, input[1]);
     koniec (0);
+
+    return 0;
 }

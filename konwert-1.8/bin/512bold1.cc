@@ -200,7 +200,8 @@ void con_write (unsigned char c)
     std::cout << c;
 }
 
-main()
+int
+main(void)
 {
     reset_terminal();
     std::cout << "\33]P0000000\33]P1AA0000\33]P200AA00\33]P3FFFFFF"
@@ -212,4 +213,5 @@ main()
     int c;
     while ((c = std::cin.get()) != -1) con_write (c);
     std::cout << "\33]R\33[0m";
+    return 0;
 }
