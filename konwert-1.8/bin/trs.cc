@@ -88,7 +88,7 @@ Copyright 1998 Marcin Kowalczyk <qrczak@knm.org.pl>\n\
 	exit (0);
 }
 
-void blad (char *s)
+void blad (const char *s)
 {
 	cerr << nazwaprogramu << ": " << s << endl;
 	exit (1);
@@ -310,8 +310,8 @@ int rozwineskejpy (char *napis1, char *&napis2, int &dlug2, zmienna **zmienne,
 					if
 					(
 						(
-							s1[0] >= 'A' && s1[0] <= 'Z' ||
-							s1[0] >= 'a' && s1[0] <= 'z'
+							(s1[0] >= 'A' && s1[0] <= 'Z') ||
+							(s1[0] >= 'a' && s1[0] <= 'z')
 						) &&
 						s1[1] == '=' &&
 						s1[2] >= '0' && s1[2] <= '9'

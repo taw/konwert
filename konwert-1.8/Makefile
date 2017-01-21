@@ -184,7 +184,7 @@ all: $(targets)
 $(srcbindir)/filterm: LDLIBS=-lutil
 
 $(installbindir)/konwert: $(srcbindir)/konwert
-	sed 's|/usr/share/konwert/filters|$(filtersdir)|g' $< >$@
+	LC_ALL=C sed 's|/usr/share/konwert/filters|$(filtersdir)|g' $< >$@
 	chmod +x $@
 
 $(installsharedir)/%: %

@@ -11,7 +11,12 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+
+#if __APPLE__
+#include <util.h>
+#else
 #include <pty.h>
+#endif
 
 #define WERSJA "1.8"
 

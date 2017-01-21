@@ -191,12 +191,12 @@ void csi_m()
 	    default:
 		if (par[i] >= 30 && par[i] <= 37)
 		{
-		    color = (par[i] - 30) | color & 0xF0;
+		    color = (par[i] - 30) | (color & 0xF0);
 		    update_attr();
 		}
 		else if (par[i] >= 40 && par[i] <= 47)
 		{
-		    color = ((par[i] - 40) << 4) | color & 0x0F;
+		    color = ((par[i] - 40) << 4) | (color & 0x0F);
 		    update_attr();
 		}
 		else
