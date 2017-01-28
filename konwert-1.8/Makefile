@@ -11,6 +11,10 @@ version = 1.8
 SHELL = /bin/sh
 CXXFLAGS = -Wall -O2 -fomit-frame-pointer -pipe
 INSTALL = install
+# On Linux it also passed -d to keep hard links, which is nice
+# but not essential
+# OSX cp apparently doesn't have this option
+CP_dRf = cp -Rf
 
 prefix = /usr/local
 exec_prefix = $(prefix)
@@ -338,16 +342,16 @@ install: all
 	$(INSTALL) -m755 -s $(installbindir)/trs     $(bindir)
 	$(INSTALL) -m755    $(installbindir)/konwert $(bindir)
 	$(INSTALL) -m755 -s $(installbindir)/filterm $(bindir)
-	cp -dRf $(installfiltersdir)/* $(filtersdir)
+	$(CP_dRf) $(installfiltersdir)/* $(filtersdir)
 	$(perl) $(srcdeveldir)/mkaliases $(srcdeveldir)/aliases \
 		$(installfiltersdir) $(filtersdir)
-	cp -dRf $(installauxdir)/* $(auxdir)
+	$(CP_dRf) $(installauxdir)/* $(auxdir)
 	$(perl) $(srcdeveldir)/mkaliases $(srcdeveldir)/aliases \
 		$(installauxdir)/charsets $(auxdir)/charsets
-	cp -dRf $(installlibauxdir)/* $(libauxdir)
-	cp -dRf $(installdeveldir)/* $(develdir)
-	cp -dRf $(installdocdir)/* $(mydocdir)
-	cp -dRf $(installmandir)/* $(mandir)
+	$(CP_dRf) $(installlibauxdir)/* $(libauxdir)
+	$(CP_dRf) $(installdeveldir)/* $(develdir)
+	$(CP_dRf) $(installdocdir)/* $(mydocdir)
+	$(CP_dRf) $(installmandir)/* $(mandir)
 	if [ -z "$(nofixmanconfig)" ]; then $(srcauxdir)/fixmanconfig; fi
 
 ###############################################################################
