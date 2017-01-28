@@ -2,7 +2,7 @@
 #								#
 #  Konwert - conversion between various character encodings	#
 #								#
-#  Konwert - konwersje miêdzy ró¿nymi kodowaniami znaków  	#
+#  Konwert - konwersje miï¿½dzy rï¿½ï¿½nymi kodowaniami znakï¿½w  	#
 #								#
 #################################################################
 
@@ -25,7 +25,7 @@ mysharedir = $(sharedir)/konwert
 
 srcbindir = bin
 
-# Wykonywalne pliki z tego katalogu s± atomowymi filtrami:
+# Wykonywalne pliki z tego katalogu sï¿½ atomowymi filtrami:
 
 filtersdir = $(mysharedir)/filters
 srcfiltersdir = filters
@@ -37,8 +37,8 @@ libauxdir = $(mylibdir)/aux
 srcauxdir = aux
 srccharsetsdir = $(srcauxdir)/charsets
 
-# Programy i dane pomagaj±ce tworzyæ tablice konwersji (nie s± potrzebne do
-# u¿ywania konwertera):
+# Programy i dane pomagajï¿½ce tworzyï¿½ tablice konwersji (nie sï¿½ potrzebne do
+# uï¿½ywania konwertera):
 
 develdir = $(mysharedir)/devel
 libdeveldir = $(mylibdir)/devel
@@ -51,7 +51,7 @@ srcdocdir = doc
 mandir = $(prefix)/man
 srcmandir = man
 
-# Wersje z poprawionymi ¶cie¿kami w #!, gotowe do zainstalowania:
+# Wersje z poprawionymi ï¿½cieï¿½kami w #!, gotowe do zainstalowania:
 
 installdir = install
 installbindir = $(installdir)/bin
@@ -71,7 +71,7 @@ perl := $(shell which perl)
 
 ###############################################################################
 
-# Niektóre zestawy znaków powstaj± przez na³o¿enie ma³ej tablicy na inn±:
+# Niektï¿½re zestawy znakï¿½w powstajï¿½ przez naï¿½oï¿½enie maï¿½ej tablicy na innï¿½:
 
 mergewithwhat := $(patsubst $(srcdeveldir)/mergewith%,%, \
 	$(wildcard $(srcdeveldir)/mergewith*))
@@ -84,22 +84,22 @@ mergefiles := $(patsubst %,$(srccharsetsdir)/%,$(notdir $(srcmergefiles)))
 fixutf8files := $(patsubst $(srcdeveldir)/fixutf8/%,%, \
 	$(shell find $(srcdeveldir)/fixutf8 -type f))
 
-# Zestawy znaków zdefiniowane bezpo¶redni± tabel± konwersji na UTF-8:
+# Zestawy znakï¿½w zdefiniowane bezpoï¿½redniï¿½ tabelï¿½ konwersji na UTF-8:
 
 charsets := $(patsubst $(srccharsetsdir)/%,%, \
 	$(sort $(wildcard $(srccharsetsdir)/*) $(mergefiles)))
 
-# Konwersje zestawów znaków na UTF-8:
+# Konwersje zestawï¿½w znakï¿½w na UTF-8:
 
 charset_utf8files := $(patsubst %,$(srcfiltersdir)/%-UTF8,$(charsets))
 
-# Konwersje zestawów znaków z UTF-8 s± tworzone automatycznie, na podstawie
+# Konwersje zestawï¿½w znakï¿½w z UTF-8 sï¿½ tworzone automatycznie, na podstawie
 # konwersji odwrotnych (na UTF-8):
 
 utf8_charsetfiles := $(patsubst %,$(srcfiltersdir)/UTF8-%,$(charsets))
 
-# Pomiêdzy niektórymi parami zestawów znaków s± bezpo¶rednie konwersje,
-# oprócz konwersji przez tymczasowy format UTF-8.
+# Pomiï¿½dzy niektï¿½rymi parami zestawï¿½w znakï¿½w sï¿½ bezpoï¿½rednie konwersje,
+# oprï¿½cz konwersji przez tymczasowy format UTF-8.
 
 charset_charset := $(shell $(perl) -nae \
 	' \
@@ -119,13 +119,13 @@ charset_charset := $(shell $(perl) -nae \
 	' $(srcdeveldir)/charset-charset)
 charset_charsetfiles := $(patsubst %,$(srcfiltersdir)/%,$(charset_charset))
 
-# Opisy czêsto¶ci znaków w poszczególnych zestawach znaków ró¿nych jêzyków
+# Opisy czï¿½stoï¿½ci znakï¿½w w poszczegï¿½lnych zestawach znakï¿½w rï¿½ï¿½nych jï¿½zykï¿½w
 # - do automatycznego rozpoznawania standardu:
 
 anyfiles := $(patsubst $(srcdeveldir)/any/%,$(srcauxdir)/any/%, \
 	$(wildcard $(srcdeveldir)/any/*))
 
-# Wersje z poprawionymi #!/¶cie¿kami, gotowe do zainstalowania:
+# Wersje z poprawionymi #!/ï¿½cieï¿½kami, gotowe do zainstalowania:
 
 installfiles := \
 	$(installbindir)/konwert \
@@ -167,7 +167,7 @@ targets := \
 	$(anyfiles) \
 	$(installfiles)
 
-# Pliki, które mog± byæ utworzone, ale nie s± w³±czone do dystrybucji
+# Pliki, ktï¿½re mogï¿½ byï¿½ utworzone, ale nie sï¿½ wï¿½ï¿½czone do dystrybucji
 # ani kasowane przy `make clean':
 
 nodelete := \
@@ -327,6 +327,7 @@ $(anyfiles): \
 $(srcauxdir)/any/%: $(srcdeveldir)/any/% \
 $(patsubst %,$(srccharsetsdir)/%,$(charsets)) \
 $(srcdeveldir)/mkany
+	mkdir -p $(srcauxdir)/any
 	$(perl) $(srcdeveldir)/mkany $< >$@
 
 ###############################################################################
